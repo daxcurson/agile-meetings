@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition name="base.definition"
+        template="/WEB-INF/jsp/layout.jsp">
+        <put-attribute name="flash" value="/WEB-INF/jsp/flash.jsp" />
+        <put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+        <put-attribute name="scripts" value="/WEB-INF/jsp/scripts.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />
+        <put-attribute name="content" value="" />
+    </definition>
+    <definition name="menu" extends="base.definition">
+        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Menu/menu.jsp" />
+    </definition> 
+    <definition name="adios" extends="base.definition">
+        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Pages/adios.jsp" />
+    </definition>
+    <definition name="configuracion_index" extends="base.definition">
+        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Configuracion/index.jsp" />
+    </definition>
+    <definition name="error_mensajeError" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Error/mensajeError.jsp"/>
+    </definition>
+    <definition name="instalacion_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Instalacion/index.jsp" />
+    </definition>
+    <definition name="instalacion_user_add" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Instalacion/user_add.jsp" />
+    </definition>
+    <definition name="permisos_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/index.jsp"/>
+    </definition>
+    <definition name="permisos_listar_permisos" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/listar_permisos.jsp"/>
+    </definition>
+    <definition name="login" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/login.jsp" />
+    </definition>
+    <definition name="login_denied" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/denied.jsp" />
+    </definition>
+</tiles-definitions>
