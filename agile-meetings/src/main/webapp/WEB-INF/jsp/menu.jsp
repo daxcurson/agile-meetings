@@ -17,14 +17,11 @@
 				<sec:authorize access="hasRole('ROLE_PROYECTOS_MOSTRAR_MENU')">
 					<li><a href="${pageContext.request.contextPath}/personas/">Proyectos</a></li>
 				</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_PARTICIPANTES_MOSTRAR_MENU')">
-					<li><a href="${pageContext.request.contextPath}/inscripciones/">Participantes</a></li>
-				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_REUNIONES_MOSTRAR_MENU')">
 					<li><a href="${pageContext.request.contextPath}/reuniones/">Reuniones</a></li>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_CONFIGURACION_MOSTRAR_MENU')">
-					<li><a href="${pageContext.request.contextPath}/cursos/">Configuraci&oacute;n</a></li>
+					<li><a href="${pageContext.request.contextPath}/configuracion/">Configuraci&oacute;n</a></li>
 				</sec:authorize>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -42,7 +39,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="hasRole('ROLE_USER')">
 					<li>
-						<c:url value="${pageContext.request.contextPath}/j_spring_security_logout" var="logoutUrl"/>
+						<c:url value="/j_spring_security_logout" var="logoutUrl"/>
 						<a href="${logoutUrl}">Salir</a>
 					</li>
 				</sec:authorize>

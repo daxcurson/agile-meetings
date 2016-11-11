@@ -2,8 +2,13 @@ package agilemeetings.model;
 
 import javax.persistence.*;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import agilemeetings.model.validacion.PasswordsEqualConstraint;
+
 @Entity
 @Table(name="users")
+@PasswordsEqualConstraint(message = "Los passwords no coinciden")
 public class User
 {
 	/**
@@ -15,6 +20,7 @@ public class User
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotEmpty
 	private String username;
 	private String password;
 	@Transient

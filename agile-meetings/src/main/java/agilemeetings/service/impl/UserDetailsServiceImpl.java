@@ -2,13 +2,15 @@ package agilemeetings.service.impl;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import agilemeetings.dao.UserDAO;
 import agilemeetings.model.User;
+import agilemeetings.service.UserDetailsService;
 
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	static Logger log = Logger.getLogger(UserDetailsServiceImpl.class);
     private UserDAO userRepository;
@@ -36,4 +38,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     		throw new UsernameNotFoundException("User with login " + username + "  has not been found.");
     	}
     }
+	public User getById(long id) 
+	{
+		return userRepository.findById(id);
+	}
+	@Transactional
+	public void save(User user) 
+	{
+		// Vamos a grabar aqui algunos datos que
+		// no se graban de la interfaz
+		user.setEnabled(1);
+		userRepository.save(user);
+	}
+
 }

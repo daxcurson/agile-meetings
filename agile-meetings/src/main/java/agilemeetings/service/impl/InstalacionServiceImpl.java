@@ -10,7 +10,7 @@ import agilemeetings.model.User;
 import agilemeetings.service.GroupService;
 import agilemeetings.service.InstalacionService;
 import agilemeetings.service.PermissionService;
-import agilemeetings.service.UserService;
+import agilemeetings.service.UserDetailsService;
 
 @Service
 public class InstalacionServiceImpl implements InstalacionService
@@ -18,7 +18,7 @@ public class InstalacionServiceImpl implements InstalacionService
 	@Autowired
 	private GroupService groupService;
 	@Autowired
-	private UserService userService;
+	private UserDetailsService userService;
 	@Autowired
 	private PermissionService permissionService;
 	

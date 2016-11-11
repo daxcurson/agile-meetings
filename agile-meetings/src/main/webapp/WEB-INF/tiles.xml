@@ -20,6 +20,9 @@
     <definition name="configuracion_index" extends="base.definition">
         <put-attribute name="content" value="/WEB-INF/jsp/Vista/Configuracion/index.jsp" />
     </definition>
+    <definition name="configuracion_juegos" extends="base.definition">
+        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Configuracion/juegos.jsp" />
+    </definition>
     <definition name="error_mensajeError" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Error/mensajeError.jsp"/>
     </definition>
@@ -34,6 +37,23 @@
     </definition>
     <definition name="permisos_listar_permisos" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/listar_permisos.jsp"/>
+    </definition>
+    <definition name="users_add" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Users/add.jsp">
+		    	<put-attribute name="form_user" value="/WEB-INF/jsp/Vista/Users/form_user.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="users_edit" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Users/edit.jsp">
+	    		<put-attribute name="form_user" value="/WEB-INF/jsp/Vista/Users/form_user.jsp"/>
+    		</definition>
+   		</put-attribute>
+   	</definition>
+    <definition name="users_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/index.jsp"/>
     </definition>
     <definition name="login" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/login.jsp" />
