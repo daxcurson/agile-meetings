@@ -16,15 +16,18 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import agilemeetings.documentation.DescripcionClase;
+import agilemeetings.exceptions.UsuarioExistenteException;
 import agilemeetings.model.User;
 import agilemeetings.service.UserDetailsService;
 import agilemeetings.documentation.Descripcion;
 
 @Controller
 @RequestMapping("users")
+@SessionAttributes("user")
 @DescripcionClase("Usuarios")
 public class UsersController extends AppController
 {
@@ -48,7 +51,7 @@ public class UsersController extends AppController
 	}
 	private ModelAndView cargarFormUsuario(User user)
 	{
-		ModelAndView modelo=new ModelAndView("user_add");
+		ModelAndView modelo=new ModelAndView("users_add");
 		modelo.addObject("user",user);
 		return modelo;
 	}
@@ -66,9 +69,6 @@ public class UsersController extends AppController
 	User user,
 	BindingResult result,ModelMap model)
 	{
-		// Las modalidades venian separadas, tengo que ir e incorporarlas
-		// al curso que me acabo de traer.
-		//curso.setModalidades_disponibles(listaModalidades);
 		if(result.hasErrors())
 		{
 			List<ObjectError> lista_errores=result.getAllErrors();
@@ -82,9 +82,18 @@ public class UsersController extends AppController
 		}
 		else
 		{
-			userService.save(user);
-			model.addAttribute("message","Usuario agregado exitosamente");
-			return new ModelAndView("usuario_index");
+			ModelAndView modelo=new ModelAndView("users_index");
+			try
+			{
+				userService.save(user);
+				model.addAttribute("message","Usuario agregado exitosamente");
+			}
+			catch(UsuarioExistenteException e)
+			{
+				model.addAttribute("message","Ese nombre de usuario ya existe, por favor elija otro");
+				modelo=this.cargarFormUsuario(user);
+			}
+			return modelo;
 		}
 	}
 	@RequestMapping("/logindenied")

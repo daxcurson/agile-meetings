@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import agilemeetings.exceptions.UsuarioExistenteException;
 import agilemeetings.model.Group;
 import agilemeetings.model.User;
 import agilemeetings.service.GroupService;
@@ -31,7 +32,7 @@ public class InstalacionServiceImpl implements InstalacionService
 	 */
 	@Override
 	@Transactional
-	public void grabarUsuarioAdministrador(User user) 
+	public void grabarUsuarioAdministrador(User user) throws UsuarioExistenteException
 	{
 		// Los metodos del controller de permisos tienen hard-codeado que el
 		// ROLE_ADMIN puede entrar, aparte del rol que le 

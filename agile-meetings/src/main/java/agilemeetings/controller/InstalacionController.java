@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import agilemeetings.exceptions.UsuarioExistenteException;
 import agilemeetings.model.User;
 import agilemeetings.service.InstalacionService;
 
@@ -67,9 +68,24 @@ public class InstalacionController extends AppController
 		{
 			// El servicio de instalacion ya tiene el metodo necesario
 			// para realizar esto.
-			instalacionService.grabarUsuarioAdministrador(user);
-			model.addAttribute("message","Usuario grabado exitosamente");
-			return new ModelAndView("instalacion_index");
+			// Como se puede tirar una excepcion, vamos a asegurarnos que
+			// este metodo devuelva algo creando ahora el objeto de respuesta.
+			ModelAndView modelo=new ModelAndView("instalacion_index");
+			try
+			{
+				instalacionService.grabarUsuarioAdministrador(user);
+				model.addAttribute("message","Usuario grabado exitosamente");
+			}
+			catch(UsuarioExistenteException e)
+			{
+				// Si ya existe en usuario, ir a decirlo.
+				modelo=this.cargarFormUsuario(user);
+				model.addAttribute("message", "El usuario admin ya existe, imposible agregar otro");
+			}
+			finally
+			{
+			}
+			return modelo;
 		}
 	}
 }

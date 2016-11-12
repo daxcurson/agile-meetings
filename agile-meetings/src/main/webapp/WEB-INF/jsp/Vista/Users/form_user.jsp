@@ -8,6 +8,7 @@
 <form:input id="UserUsername" class="form-control" path="username"/>
 <form:errors path="username"/>
 </div>
+<form:errors path=""/>
 <div class="form-group">
 <form:label path="password">Clave</form:label>
 <form:input type="password" id="UserPassword" class="form-control" path="password"/>

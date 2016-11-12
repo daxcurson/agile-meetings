@@ -7,7 +7,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import agilemeetings.model.validacion.PasswordsEqualConstraint;
 
 @Entity
-@Table(name="users")
+@Table(name="users",uniqueConstraints = @UniqueConstraint(name = "username_uc"
+,columnNames = "username"))
 @PasswordsEqualConstraint(message = "Los passwords no coinciden")
 public class User
 {
@@ -21,6 +22,7 @@ public class User
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@NotEmpty
+	@Column(unique=true)
 	private String username;
 	private String password;
 	@Transient

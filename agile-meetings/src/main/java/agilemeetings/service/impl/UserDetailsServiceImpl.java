@@ -1,18 +1,23 @@
 package agilemeetings.service.impl;
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import agilemeetings.dao.UserDAO;
+import agilemeetings.exceptions.UsuarioExistenteException;
 import agilemeetings.model.User;
 import agilemeetings.service.UserDetailsService;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	static Logger log = Logger.getLogger(UserDetailsServiceImpl.class);
+	@Autowired
     private UserDAO userRepository;
 
     //required by cglib because I use class based aspect weaving
@@ -42,13 +47,25 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	{
 		return userRepository.findById(id);
 	}
-	@Transactional
-	public void save(User user) 
+	public void save(User user) throws UsuarioExistenteException
 	{
 		// Vamos a grabar aqui algunos datos que
 		// no se graban de la interfaz
 		user.setEnabled(1);
-		userRepository.save(user);
+		// Hay que encriptar el password antes de grabarlo!!!
+        BCryptPasswordEncoder pwe=new BCryptPasswordEncoder();
+        user.setPassword(pwe.encode(user.getPassword()));
+        user.setConfirm_password(user.getPassword());
+        try
+        {
+        	userRepository.save(user);
+        }
+        catch(ConstraintViolationException e)
+        {
+        	// Si se arroja esta excepcion, es porque el usuario ya existe.
+        	// Convertirla en la excepcion UsuarioExistente
+        	throw new UsuarioExistenteException();
+        }
 	}
 
 }
