@@ -4,7 +4,6 @@ import java.util.*;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import agilemeetings.model.Group;
 import agilemeetings.model.Permission;
@@ -30,9 +29,6 @@ public class AuthenticationUserDetails implements org.springframework.security.c
         this.login = user.getUsername();
         this.passwordHash = user.getPassword();
         this.enabled = (user.getEnabled()==1 ? true:false);
-        BCryptPasswordEncoder pwe=new BCryptPasswordEncoder();
-        String encodedPassword=pwe.encode("bien2encaminados");
-        log.trace("El password tiene que ser "+encodedPassword);
         // Convierto los permisos leidos de la base, para el grupo al que pertenece el usuario, en Authorities.
         Group g=user.getGroup();
         for(Permission p:g.getPermissions())

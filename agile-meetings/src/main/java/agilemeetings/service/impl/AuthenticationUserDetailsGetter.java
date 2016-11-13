@@ -1,11 +1,12 @@
 package agilemeetings.service.impl;
 
+import javax.persistence.NoResultException;
+
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.transaction.annotation.Transactional;
 
 import agilemeetings.dao.UserDAO;
 import agilemeetings.model.User;
@@ -23,18 +24,17 @@ public class AuthenticationUserDetailsGetter implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
     	log.trace("Estoy en AuthenticationUserDetailsGetter.loadUserByUsername, username pedido:"+username);
-        User user = userRepository.findByLogin(username);
-        throwExceptionIfNotFound(user, username);
-        return new AuthenticationUserDetails(user);
-    }
-
-    private void throwExceptionIfNotFound(User user, String username) {
-    	log.trace("Estoy en throwExceptionIfNotFound");
-    	if (user == null) {
+    	User user=null;
+    	try
+    	{
+    		user = userRepository.findByLogin(username);
+    	}
+    	catch(NoResultException e)
+    	{
     		throw new UsernameNotFoundException("User with login " + username + "  has not been found.");
     	}
+        return new AuthenticationUserDetails(user);
     }
 }

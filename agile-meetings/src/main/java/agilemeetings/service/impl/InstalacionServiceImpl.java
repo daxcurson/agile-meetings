@@ -1,10 +1,10 @@
 package agilemeetings.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import agilemeetings.exceptions.GrupoExistenteException;
 import agilemeetings.exceptions.UsuarioExistenteException;
 import agilemeetings.model.Group;
 import agilemeetings.model.User;
@@ -32,7 +32,7 @@ public class InstalacionServiceImpl implements InstalacionService
 	 */
 	@Override
 	@Transactional
-	public void grabarUsuarioAdministrador(User user) throws UsuarioExistenteException
+	public void grabarUsuarioAdministrador(User user) throws UsuarioExistenteException,GrupoExistenteException
 	{
 		// Los metodos del controller de permisos tienen hard-codeado que el
 		// ROLE_ADMIN puede entrar, aparte del rol que le 
@@ -52,10 +52,6 @@ public class InstalacionServiceImpl implements InstalacionService
 		permissionService.grantOrRevokePermission(adminGroup, "ROLE_ADMIN");
 		permissionService.grantOrRevokePermission(adminGroup, "ROLE_USER");
 		user.setGroup(adminGroup);
-		// Aca tenemos que encriptar la password!!!!
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String hashedPassword = passwordEncoder.encode(user.getPassword());
-		user.setPassword(hashedPassword);
 		userService.save(user);
 	}
 }

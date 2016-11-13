@@ -9,6 +9,7 @@
 <ul>
 <li><a href="${pageContext.request.contextPath}/configuracion/empresa">Configurar la Empresa</a></li>
 <li><a href="${pageContext.request.contextPath}/users/index">Administrar usuarios</a></li>
+<li><a href="${pageContext.request.contextPath}/groups/index">Administrar grupos</a></li>
 <li><a href="${pageContext.request.contextPath}/permisos/index">Administrar permisos</a></li>
 <li><a href="${pageContext.request.contextPath}/configuracion/juegos">Habilitar juegos</a></li>
 </ul>

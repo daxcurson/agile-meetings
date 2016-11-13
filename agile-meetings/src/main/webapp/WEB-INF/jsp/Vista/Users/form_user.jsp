@@ -8,6 +8,12 @@
 <form:input id="UserUsername" class="form-control" path="username"/>
 <form:errors path="username"/>
 </div>
+<div class="form-group">
+<form:label path="group" id="LabelUserGroup">Grupo</form:label>
+<form:select path="group" id="UserGroup" class="form-control">
+<form:options items="${grupos}" itemValue="id" itemLabel="descripcion" />
+</form:select>
+</div>
 <form:errors path=""/>
 <div class="form-group">
 <form:label path="password">Clave</form:label>

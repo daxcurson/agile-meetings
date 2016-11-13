@@ -59,6 +59,14 @@
 					<hibernateDialect>org.hibernate.dialect.MySQLDialect</hibernateDialect>
 				</configuration>
 			</plugin-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
@@ -67,6 +75,12 @@
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jsp-api</artifactId>
+			<version>8.0.36</version>
+			<scope>provided</scope>               
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -260,6 +274,11 @@
 			<id>repository.jboss.org-public</id>
 			<name>JBoss repository</name>
 			<url>https://repository.jboss.org/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>org.maven.central</id>
+			<name>Central Repository</name>
+			<url>http://central.maven.org/maven2/</url>
 		</repository>
 		<repository>
 			<id>repo.maven.apache.org</id>

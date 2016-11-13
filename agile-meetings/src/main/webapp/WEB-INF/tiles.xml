@@ -26,6 +26,23 @@
     <definition name="error_mensajeError" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Error/mensajeError.jsp"/>
     </definition>
+    <definition name="groups_add" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Grups/add.jsp">
+		    	<put-attribute name="form_user" value="/WEB-INF/jsp/Vista/Grupos/form_group.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="groups_edit" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Groups/edit.jsp">
+	    		<put-attribute name="form_group" value="/WEB-INF/jsp/Vista/Groups/form_group.jsp"/>
+    		</definition>
+   		</put-attribute>
+   	</definition>
+    <definition name="groups_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Groups/index.jsp"/>
+    </definition>
     <definition name="instalacion_index" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Instalacion/index.jsp" />
     </definition>

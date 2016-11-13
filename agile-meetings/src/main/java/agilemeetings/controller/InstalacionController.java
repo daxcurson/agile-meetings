@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import agilemeetings.exceptions.GrupoExistenteException;
 import agilemeetings.exceptions.UsuarioExistenteException;
 import agilemeetings.model.User;
 import agilemeetings.service.InstalacionService;
@@ -70,11 +71,16 @@ public class InstalacionController extends AppController
 			// para realizar esto.
 			// Como se puede tirar una excepcion, vamos a asegurarnos que
 			// este metodo devuelva algo creando ahora el objeto de respuesta.
-			ModelAndView modelo=new ModelAndView("instalacion_index");
+			ModelAndView modelo=new ModelAndView("redirect:/instalacion/index");
 			try
 			{
 				instalacionService.grabarUsuarioAdministrador(user);
 				model.addAttribute("message","Usuario grabado exitosamente");
+			}
+			catch(GrupoExistenteException e)
+			{
+				modelo=this.cargarFormUsuario(user);
+				model.addAttribute("message","El grupo admin ya existe, imposible agregar otro");
 			}
 			catch(UsuarioExistenteException e)
 			{
