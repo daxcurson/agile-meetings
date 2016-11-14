@@ -1,6 +1,8 @@
 package agilemeetings.service;
 
 
+import java.util.List;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,4 +15,5 @@ public interface UserDetailsService {
         throws UsernameNotFoundException, DataAccessException;
 	public void save(User user) throws UsuarioExistenteException;
 	public User getById(long id);
+	public List<User> listUsers();
 }

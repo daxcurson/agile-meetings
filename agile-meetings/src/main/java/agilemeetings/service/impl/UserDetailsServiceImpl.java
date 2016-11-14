@@ -1,4 +1,6 @@
 package agilemeetings.service.impl;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,4 +70,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 	}
 
+	@Override
+	public List<User> listUsers() 
+	{
+		return userRepository.listUsers();
+	}
 }

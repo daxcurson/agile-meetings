@@ -3,11 +3,16 @@ package agilemeetings.controller;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -44,7 +49,10 @@ public class UsersController extends AppController
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_USERS_MOSTRAR_MENU')")
 	public ModelAndView mostrarMenu()
 	{
-		return new ModelAndView("users_index");
+		ModelAndView modelo=new ModelAndView("users_index");
+		// Leemos los usuarios que hay.
+		modelo.addObject("users",userService.listUsers());
+		return modelo;
 	}
 
 	@RequestMapping("/login")
@@ -53,9 +61,18 @@ public class UsersController extends AppController
 		ModelAndView modelo=new ModelAndView("login");
 		return modelo;
 	}
-	private ModelAndView cargarFormUsuario(User user)
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response)
 	{
-		ModelAndView modelo=new ModelAndView("users_add");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null){    
+	        new SecurityContextLogoutHandler().logout(request, response, auth);
+	    }
+	    return "redirect:/pages/adios";
+	}
+	private ModelAndView cargarFormUsuario(String vista,User user)
+	{
+		ModelAndView modelo=new ModelAndView(vista);
 		modelo.addObject("user",user);
 		modelo.addObject("groups",groupService.listGroups());
 		return modelo;
@@ -64,7 +81,7 @@ public class UsersController extends AppController
 	@RequestMapping(value="/add",method=RequestMethod.GET)
 	public ModelAndView mostrarFormAgregar(Model model)
 	{
-		ModelAndView modelo=this.cargarFormUsuario(new User());
+		ModelAndView modelo=this.cargarFormUsuario("users_add",new User());
 		return modelo;
 	}
 	@Descripcion(value="Agregar usuario",permission="ROLE_USERS_AGREGAR")
@@ -82,7 +99,7 @@ public class UsersController extends AppController
 			{
 				log.trace("Error: "+i.next().toString());
 			}
-			ModelAndView modelo=this.cargarFormUsuario(user);
+			ModelAndView modelo=this.cargarFormUsuario("users_add",user);
 			return modelo;
 		}
 		else
@@ -96,7 +113,7 @@ public class UsersController extends AppController
 			catch(UsuarioExistenteException e)
 			{
 				model.addAttribute("message","Ese nombre de usuario ya existe, por favor elija otro");
-				modelo=this.cargarFormUsuario(user);
+				modelo=this.cargarFormUsuario("users_add",user);
 			}
 			return modelo;
 		}
@@ -108,7 +125,7 @@ public class UsersController extends AppController
 	{
 		// Busco el usuario y lo cargo en el formulario.
 		User user=userService.getById(userId);
-		ModelAndView modelo=this.cargarFormUsuario(user);
+		ModelAndView modelo=this.cargarFormUsuario("users_edit",user);
 		return modelo;
 	}
 	@Descripcion(value="Editar Usuario",permission="ROLE_USERS_EDIT")
@@ -126,7 +143,7 @@ public class UsersController extends AppController
 			{
 				log.trace("Error: "+i.next().toString());
 			}
-			ModelAndView modelo=this.cargarFormUsuario(user);
+			ModelAndView modelo=this.cargarFormUsuario("users_edit",user);
 			return modelo;
 		}
 		else
@@ -140,7 +157,7 @@ public class UsersController extends AppController
 			catch(UsuarioExistenteException e)
 			{
 				model.addAttribute("message","Ese nombre de usuario ya existe, por favor elija otro");
-				modelo=this.cargarFormUsuario(user);
+				modelo=this.cargarFormUsuario("users_edit",user);
 			}
 			return modelo;
 		}

@@ -11,7 +11,7 @@
 <div class="form-group">
 <form:label path="group" id="LabelUserGroup">Grupo</form:label>
 <form:select path="group" id="UserGroup" class="form-control">
-<form:options items="${grupos}" itemValue="id" itemLabel="descripcion" />
+<form:options items="${groups}" itemValue="id" itemLabel="groupName" />
 </form:select>
 </div>
 <form:errors path=""/>

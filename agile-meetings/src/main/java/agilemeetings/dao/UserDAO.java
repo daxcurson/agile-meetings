@@ -1,5 +1,7 @@
 package agilemeetings.dao;
 
+import java.util.List;
+
 import agilemeetings.model.User;
 
 public interface UserDAO 
@@ -10,4 +12,5 @@ public interface UserDAO
 	public User findByEmail(String email);
 	public User findByLoginOpenId(String loginOpenId);
 	public User findByFacebookId(Long facebookId);
+	public List<User> listUsers();
 }

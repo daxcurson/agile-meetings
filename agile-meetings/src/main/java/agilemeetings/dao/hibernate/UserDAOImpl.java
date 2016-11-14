@@ -1,5 +1,7 @@
 package agilemeetings.dao.hibernate;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +35,8 @@ public class UserDAOImpl implements UserDAO
 	@Override
 	public User findById(Long userId) 
 	{
-		log.trace("Estoy en UserDAO.findById");
-		return (User) sessionFactory.getCurrentSession().createQuery("from User where User.id"+userId).getSingleResult();
+		log.trace("Estoy en UserDAOImpl.findById");
+		return (User) sessionFactory.getCurrentSession().createQuery("from User where id="+userId).getSingleResult();
 	}
 
 	@Override
@@ -53,6 +55,14 @@ public class UserDAOImpl implements UserDAO
 	public User findByFacebookId(Long facebookId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> listUsers() 
+	{
+		log.trace("Estoy en UserDAOImpl.listUsers");
+		return (List<User>) sessionFactory.getCurrentSession().createQuery("from User").getResultList();
 	}
 
 }
