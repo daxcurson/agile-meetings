@@ -7,6 +7,7 @@
 <p>Bienvendo a la aplicaci&oacute;n Agile Meetings. Haga click en alguna de las siguientes opciones para continuar.</p>
 
 <ul>
+<li><a href="${pageContext.request.contextPath}/proyectos/index">Proyectos</a></li>
 <li><a href="${pageContext.request.contextPath}/reuniones/index">Reuniones</a></li>
 <li><a href="${pageContext.request.contextPath}/configuracion/index">Configuraci&oacute;n</a></li>
 </ul>

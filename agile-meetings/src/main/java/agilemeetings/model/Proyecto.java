@@ -35,7 +35,7 @@ public class Proyecto
 	mappedBy="proyecto",fetch=FetchType.LAZY)
 	private List<RolUsuario> miembros;
 	@OneToMany(targetEntity=Reunion.class,cascade={CascadeType.ALL},
-	mappedBy="projecto",fetch=FetchType.LAZY)
+	mappedBy="proyecto",fetch=FetchType.LAZY)
 	private List<Reunion> reuniones;
 	public Date getFecha_creacion() {
 		return fecha_creacion;

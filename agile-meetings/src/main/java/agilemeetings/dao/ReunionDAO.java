@@ -8,5 +8,6 @@ public interface ReunionDAO
 {
 	public List<Reunion> listarReuniones();
 	public Reunion getReunionById(int id);
-	public void save(Reunion reunion);
+	public void agregar(Reunion reunion);
+	public void grabar(Reunion reunion);
 }

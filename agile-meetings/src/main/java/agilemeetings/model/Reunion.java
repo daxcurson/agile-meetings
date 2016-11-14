@@ -28,6 +28,10 @@ public class Reunion
 	@ManyToOne
 	@JoinColumn(name="tipo_reunion_id")
 	private TipoReunion tipo_reunion;
+	private String asunto;
+	private String resumen;
+	private String acciones;
+	
 	public int getId() {
 		return id;
 	}
@@ -69,5 +73,23 @@ public class Reunion
 	}
 	public void setTipo_reunion(TipoReunion tipo_reunion) {
 		this.tipo_reunion = tipo_reunion;
+	}
+	public String getAsunto() {
+		return asunto;
+	}
+	public void setAsunto(String asunto) {
+		this.asunto = asunto;
+	}
+	public String getResumen() {
+		return resumen;
+	}
+	public void setResumen(String resumen) {
+		this.resumen = resumen;
+	}
+	public String getAcciones() {
+		return acciones;
+	}
+	public void setAcciones(String acciones) {
+		this.acciones = acciones;
 	}
 }

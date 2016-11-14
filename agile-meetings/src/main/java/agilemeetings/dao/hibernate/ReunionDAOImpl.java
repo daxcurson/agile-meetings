@@ -32,7 +32,13 @@ public class ReunionDAOImpl implements ReunionDAO
 	}
 	@Override
 	@Transactional
-	public void save(Reunion reunion) 
+	public void agregar(Reunion reunion) 
+	{
+		sessionFactory.getCurrentSession().saveOrUpdate(reunion);
+	}
+	@Override
+	@Transactional
+	public void grabar(Reunion reunion) 
 	{
 		sessionFactory.getCurrentSession().saveOrUpdate(reunion);
 	}

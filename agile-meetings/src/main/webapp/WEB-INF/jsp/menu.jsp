@@ -15,7 +15,7 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="${pageContext.request.contextPath}/menu">Pantalla Inicial</a></li>
 				<sec:authorize access="hasRole('ROLE_PROYECTOS_MOSTRAR_MENU')">
-					<li><a href="${pageContext.request.contextPath}/personas/">Proyectos</a></li>
+					<li><a href="${pageContext.request.contextPath}/proyectos/">Proyectos</a></li>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_REUNIONES_MOSTRAR_MENU')">
 					<li><a href="${pageContext.request.contextPath}/reuniones/">Reuniones</a></li>

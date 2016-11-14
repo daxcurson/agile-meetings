@@ -28,8 +28,8 @@
     </definition>
     <definition name="groups_add" extends="base.definition">
     	<put-attribute name="content">
-			<definition template="/WEB-INF/jsp/Vista/Grups/add.jsp">
-		    	<put-attribute name="form_user" value="/WEB-INF/jsp/Vista/Grupos/form_group.jsp"/>
+			<definition template="/WEB-INF/jsp/Vista/Groups/add.jsp">
+		    	<put-attribute name="form_group" value="/WEB-INF/jsp/Vista/Groups/form_group.jsp"/>
 	    	</definition>
     	</put-attribute>
     </definition>
@@ -54,6 +54,40 @@
     </definition>
     <definition name="permisos_listar_permisos" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/listar_permisos.jsp"/>
+    </definition>
+    <definition name="proyectos_add" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Grups/add.jsp">
+		    	<put-attribute name="form_proyecto" value="/WEB-INF/jsp/Vista/Proyectos/form_proyecto.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="proyectos_edit" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Proyectos/edit.jsp">
+	    		<put-attribute name="form_proyecto" value="/WEB-INF/jsp/Vista/Proyectos/form_proyecto.jsp"/>
+    		</definition>
+   		</put-attribute>
+   	</definition>
+    <definition name="proyectos_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Proyectos/index.jsp"/>
+    </definition>
+    <definition name="reuniones_add" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Reuniones/add.jsp">
+		    	<put-attribute name="form_reunion" value="/WEB-INF/jsp/Vista/Reuniones/form_reunion.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="reuniones_edit" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Groups/edit.jsp">
+	    		<put-attribute name="form_reunion" value="/WEB-INF/jsp/Vista/Reuniones/form_reunion.jsp"/>
+    		</definition>
+   		</put-attribute>
+   	</definition>
+    <definition name="reuniones_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Reuniones/index.jsp"/>
     </definition>
     <definition name="users_add" extends="base.definition">
     	<put-attribute name="content">
