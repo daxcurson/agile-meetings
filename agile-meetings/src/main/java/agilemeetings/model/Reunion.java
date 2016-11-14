@@ -17,8 +17,9 @@ public class Reunion
 	
 	private DateTime fecha_comienzo;
 	private DateTime fecha_fin;
-	
-	private List<RolUsuario> participantes;
+	@OneToMany(targetEntity=UsuarioReunion.class,cascade={CascadeType.ALL},
+	mappedBy="reunion")
+	private List<UsuarioReunion> participantes;
 	@ManyToOne
 	@JoinColumn(name="proyecto_id")
 	private Proyecto proyecto;
@@ -50,10 +51,10 @@ public class Reunion
 	public void setFecha_fin(DateTime fecha_fin) {
 		this.fecha_fin = fecha_fin;
 	}
-	public List<RolUsuario> getParticipantes() {
+	public List<UsuarioReunion> getParticipantes() {
 		return participantes;
 	}
-	public void setParticipantes(List<RolUsuario> participantes) {
+	public void setParticipantes(List<UsuarioReunion> participantes) {
 		this.participantes = participantes;
 	}
 	public Proyecto getProyecto() {
