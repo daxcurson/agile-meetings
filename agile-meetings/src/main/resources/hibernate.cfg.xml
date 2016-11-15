@@ -9,6 +9,15 @@
         <mapping class="agilemeetings.model.Group" />
         <mapping class="agilemeetings.model.Permission" />
         <mapping class="agilemeetings.model.User" />
+        <mapping class="agilemeetings.model.EstadoProyecto" />
+        <mapping class="agilemeetings.model.Juego" />
+        <mapping class="agilemeetings.model.JuegoReunion" />
+        <mapping class="agilemeetings.model.PermissionGranted" />
+        <mapping class="agilemeetings.model.Proyecto" />
+        <mapping class="agilemeetings.model.Rol" />
+        <mapping class="agilemeetings.model.RolUsuario" />
+        <mapping class="agilemeetings.model.TipoReunion" />
+        <mapping class="agilemeetings.model.UsuarioReunion" />
     </session-factory>
 	    
 </hibernate-configuration>
