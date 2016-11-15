@@ -14,6 +14,7 @@
         <mapping class="agilemeetings.model.JuegoReunion" />
         <mapping class="agilemeetings.model.PermissionGranted" />
         <mapping class="agilemeetings.model.Proyecto" />
+        <mapping class="agilemeetings.model.Reunion" />
         <mapping class="agilemeetings.model.Rol" />
         <mapping class="agilemeetings.model.RolUsuario" />
         <mapping class="agilemeetings.model.TipoReunion" />
