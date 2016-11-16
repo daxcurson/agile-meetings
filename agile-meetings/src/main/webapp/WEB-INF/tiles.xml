@@ -57,7 +57,7 @@
     </definition>
     <definition name="proyectos_add" extends="base.definition">
     	<put-attribute name="content">
-			<definition template="/WEB-INF/jsp/Vista/Grups/add.jsp">
+			<definition template="/WEB-INF/jsp/Vista/Proyectos/add.jsp">
 		    	<put-attribute name="form_proyecto" value="/WEB-INF/jsp/Vista/Proyectos/form_proyecto.jsp"/>
 	    	</definition>
     	</put-attribute>
@@ -81,7 +81,7 @@
     </definition>
     <definition name="reuniones_edit" extends="base.definition">
  		<put-attribute name="content">
-			<definition template="/WEB-INF/jsp/Vista/Groups/edit.jsp">
+			<definition template="/WEB-INF/jsp/Vista/Reuniones/edit.jsp">
 	    		<put-attribute name="form_reunion" value="/WEB-INF/jsp/Vista/Reuniones/form_reunion.jsp"/>
     		</definition>
    		</put-attribute>

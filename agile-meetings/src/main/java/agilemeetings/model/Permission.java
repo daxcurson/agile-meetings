@@ -2,6 +2,8 @@ package agilemeetings.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="group_permission")
 public class Permission 
@@ -34,6 +36,7 @@ public class Permission
 	/**
 	 * @return the group
 	 */
+	@JsonBackReference
 	public Group getGroup() {
 		return group;
 	}

@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="roles_usuarios")
 public class RolUsuario 
@@ -44,6 +46,7 @@ public class RolUsuario
 	public void setUsuario(User usuario) {
 		this.usuario = usuario;
 	}
+	@JsonBackReference
 	public Proyecto getProyecto() {
 		return proyecto;
 	}

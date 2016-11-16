@@ -1,6 +1,7 @@
 package agilemeetings.controller;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +27,7 @@ import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.ProyectoExistenteException;
 import agilemeetings.model.Proyecto;
+import agilemeetings.model.RolUsuario;
 import agilemeetings.service.ProyectoService;
 import agilemeetings.service.UserDetailsService;
 
@@ -54,6 +58,8 @@ public class ProyectosController extends AppController
 	private ModelAndView cargarFormProyecto(String vista,Proyecto proyecto)
 	{
 		ModelAndView modelo=new ModelAndView(vista);
+		modelo.addObject("proyecto",proyecto);
+		modelo.addObject("users",userService.listUsers());
 		return modelo;
 	}
 	
@@ -97,6 +103,21 @@ public class ProyectosController extends AppController
 			}
 			return modelo;
 		}
+	}
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_PROYECTOS_AGREGAR')")
+	@RequestMapping(value = "/agregar_miembro")
+	public @ResponseBody List<RolUsuario> agregarMiembro(
+			@RequestParam(value="user_id",required=true) Integer user_id,
+			@ModelAttribute("proyecto") Proyecto proyecto
+			)
+	{
+		if(proyecto.getMiembros()==null)
+			proyecto.setMiembros(new LinkedList<RolUsuario>());
+		RolUsuario r=new RolUsuario();
+		r.setUsuario(userService.getById(user_id));
+		r.setProyecto(proyecto);
+		proyecto.getMiembros().add(r);
+		return proyecto.getMiembros();
 	}
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_PROYECTOS_EDIT')")
 	@RequestMapping(value="/edit/{proyectoId}",method=RequestMethod.GET)
