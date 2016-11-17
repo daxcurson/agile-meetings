@@ -31,9 +31,9 @@ public class Proyecto
 	@JoinColumn(name="estado_id")
 	private EstadoProyecto estado;
 	private String nombre;
-	@OneToMany(targetEntity=RolUsuario.class,cascade={CascadeType.ALL},
+	@OneToMany(targetEntity=RolPersona.class,cascade={CascadeType.ALL},
 	mappedBy="proyecto",fetch=FetchType.LAZY)
-	private List<RolUsuario> miembros;
+	private List<RolPersona> miembros;
 	@OneToMany(targetEntity=Reunion.class,cascade={CascadeType.ALL},
 	mappedBy="proyecto",fetch=FetchType.LAZY)
 	private List<Reunion> reuniones;
@@ -73,10 +73,10 @@ public class Proyecto
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public List<RolUsuario> getMiembros() {
+	public List<RolPersona> getMiembros() {
 		return miembros;
 	}
-	public void setMiembros(List<RolUsuario> miembros) {
+	public void setMiembros(List<RolPersona> miembros) {
 		this.miembros = miembros;
 	}
 	public List<Reunion> getReuniones() {

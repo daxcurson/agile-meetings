@@ -27,9 +27,9 @@ import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.ProyectoExistenteException;
 import agilemeetings.model.Proyecto;
-import agilemeetings.model.RolUsuario;
+import agilemeetings.model.RolPersona;
+import agilemeetings.service.PersonaService;
 import agilemeetings.service.ProyectoService;
-import agilemeetings.service.UserDetailsService;
 
 @Controller
 @RequestMapping("proyectos")
@@ -39,7 +39,7 @@ public class ProyectosController extends AppController
 {
 	static Logger log = Logger.getLogger(ReunionesController.class);
 	@Autowired
-	private UserDetailsService userService;
+	private PersonaService personaService;
 	@Autowired
 	private ProyectoService proyectoService;
 	
@@ -59,7 +59,7 @@ public class ProyectosController extends AppController
 	{
 		ModelAndView modelo=new ModelAndView(vista);
 		modelo.addObject("proyecto",proyecto);
-		modelo.addObject("users",userService.listUsers());
+		modelo.addObject("personas",personaService.listarPersonas());
 		return modelo;
 	}
 	
@@ -106,15 +106,15 @@ public class ProyectosController extends AppController
 	}
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_PROYECTOS_AGREGAR')")
 	@RequestMapping(value = "/agregar_miembro")
-	public @ResponseBody List<RolUsuario> agregarMiembro(
-			@RequestParam(value="user_id",required=true) Integer user_id,
+	public @ResponseBody List<RolPersona> agregarMiembro(
+			@RequestParam(value="persona_id",required=true) Integer persona_id,
 			@ModelAttribute("proyecto") Proyecto proyecto
 			)
 	{
 		if(proyecto.getMiembros()==null)
-			proyecto.setMiembros(new LinkedList<RolUsuario>());
-		RolUsuario r=new RolUsuario();
-		r.setUsuario(userService.getById(user_id));
+			proyecto.setMiembros(new LinkedList<RolPersona>());
+		RolPersona r=new RolPersona();
+		r.setPersona(personaService.getPersonaById(persona_id));
 		r.setProyecto(proyecto);
 		proyecto.getMiembros().add(r);
 		return proyecto.getMiembros();

@@ -25,7 +25,6 @@ import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.ReunionExistenteException;
 import agilemeetings.model.Reunion;
 import agilemeetings.service.ReunionService;
-import agilemeetings.service.UserDetailsService;
 
 @Controller
 @RequestMapping("reuniones")
@@ -34,8 +33,6 @@ import agilemeetings.service.UserDetailsService;
 public class ReunionesController extends AppController
 {
 	static Logger log = Logger.getLogger(ReunionesController.class);
-	@Autowired
-	private UserDetailsService userService;
 	@Autowired
 	private ReunionService reunionService;
 	

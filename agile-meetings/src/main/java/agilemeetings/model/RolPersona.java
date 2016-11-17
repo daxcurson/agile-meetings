@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="roles_usuarios")
-public class RolUsuario 
+public class RolPersona 
 {
 	@Id
 	@Column(name="id")
@@ -23,8 +23,8 @@ public class RolUsuario
 	@JoinColumn(name="rol_id")
 	private Rol rol;
 	@ManyToOne
-	@JoinColumn(name="usuario_id")
-	private User usuario;
+	@JoinColumn(name="persona_id")
+	private Persona persona;
 	@ManyToOne
 	@JoinColumn(name="proyecto_id")
 	private Proyecto proyecto;
@@ -40,11 +40,11 @@ public class RolUsuario
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
-	public User getUsuario() {
-		return usuario;
+	public Persona getPersona() {
+		return persona;
 	}
-	public void setUsuario(User usuario) {
-		this.usuario = usuario;
+	public void setPersona(Persona usuario) {
+		this.persona = usuario;
 	}
 	@JsonBackReference
 	public Proyecto getProyecto() {
