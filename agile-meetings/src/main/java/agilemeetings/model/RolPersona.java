@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="roles_usuarios")
+@Table(name="roles_personas")
 public class RolPersona 
 {
 	@Id

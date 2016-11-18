@@ -10,11 +10,19 @@ del sistema. Luego podr&aacute; usar este usuario para crear configuraciones adi
 
 <form method="post" action="${pageContext.request.contextPath}/instalacion/user_add">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <label for="username">login:</label>
-            <input type="text" name="username"/>
-            <label for="password">password:</label>
-            <input type="password" name="password"/>
-            <label for="confirm_password">Confirme password:</label>
-            <input type="password" name="confirm_password"/>
+<div class="form-group">
+<label for="UserUsername">Login</label>
+<form:input id="UserUsername" class="form-control" path="username"/>
+<form:errors path="username"/>
+</div>
+<form:errors path=""/>
+<div class="form-group">
+<form:label path="password">Clave</form:label>
+<form:input type="password" id="UserPassword" class="form-control" path="password"/>
+</div>
+<div class="form-group">
+<form:label path="confirm_password">Confirmar Clave</form:label>
+<form:input type="password" id="UserConfirmPassword" class="form-control" path="confirm_password"/>
+</div>
         <input type="submit" value="Crear usuario"/>
 </form>

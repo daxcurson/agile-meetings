@@ -25,8 +25,6 @@ public class User
 	@Column(unique=true)
 	private String username;
 	private String password;
-	@NotEmpty
-	private String nombre;
 	@Transient
 	private String confirm_password;
 	private int enabled;
@@ -57,12 +55,6 @@ public class User
 	public void setPassword(String p)
 	{
 		password=p;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 	public Group getGroup()
 	{

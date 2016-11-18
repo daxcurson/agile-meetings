@@ -3,8 +3,8 @@ package agilemeetings.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="usuarios_reuniones")
-public class UsuarioReunion 
+@Table(name="personas_reuniones")
+public class PersonaReunion 
 {
 	@Id
 	@Column(name="id")
@@ -12,8 +12,8 @@ public class UsuarioReunion
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name="usuario_id")
-	private User usuario;
+	@JoinColumn(name="persona_id")
+	private Persona persona;
 	@ManyToOne
 	@JoinColumn(name="reunion_id")
 	private Reunion reunion;
@@ -23,11 +23,11 @@ public class UsuarioReunion
 	public void setId(int id) {
 		this.id = id;
 	}
-	public User getUsuario() {
-		return usuario;
+	public Persona getPersona() {
+		return persona;
 	}
-	public void setUsuario(User usuario) {
-		this.usuario = usuario;
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 	public Reunion getReunion() {
 		return reunion;
