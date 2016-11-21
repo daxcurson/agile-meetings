@@ -1,55 +1,54 @@
 package agilemeetings.infrastructure;
 
-//import java.lang.reflect.Field;
+import java.lang.reflect.Field;
 import java.sql.DriverManager;
 import java.sql.Driver;
 import java.sql.SQLException;
 import java.util.Enumeration;
-//import java.util.Timer;
+import java.util.Timer;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
+import com.mysql.jdbc.ConnectionImpl;
 
 public class JdbcListener implements ServletContextListener
 {
- private static final Logger LOG = Logger.getLogger(JdbcListener.class);
+	private static final Logger LOG=LogManager.getLogger(JdbcListener.class);
 
- public void contextDestroyed(ServletContextEvent sce)
- {
-	 cancelTimerThread();
-    deregisterJdbcDriver();
- }
+public void contextDestroyed(ServletContextEvent sce)
+{
+	cancelTimerThread();
+	deregisterJdbcDriver();
+}
 
- public void contextInitialized(ServletContextEvent sce)
- {
+public void contextInitialized(ServletContextEvent sce)
+{
+}
 
- }
-
- private void cancelTimerThread()
- {
-	 try
-	 {
-		// LOG.info(String.format("Abandoned connection thread shutdown..."));
-		// AbandonedConnectionCleanupThread.shutdown();
-		// LOG.info(String.format("Abandoned connection thread shutdown done"));
-		/* LOG.info(String.format("Is there a timer thread to stop?"));
-		 if (ConnectionImpl.class.getClassLoader() == getClass().getClassLoader()) 
-		 {
-			 LOG.info(String.format("Yes, there is, I'll stop it."));
-			 Field f = ConnectionImpl.class.getDeclaredField("cancelTimer");
-			 if(f!=null)
-			 {
-				 f.setAccessible(true);
-				 Timer timer = (Timer) f.get(null);
-				 if(timer!=null)
-					 timer.cancel();
-				 LOG.info(String.format("Timer stopped"));
-			 }
-			 else
-				 LOG.info(String.format("Timer not found"));
-		}*/
+private void cancelTimerThread()
+{
+	try
+	{
+		LOG.info(String.format("Is there a timer thread to stop?"));
+		if (ConnectionImpl.class.getClassLoader() == getClass().getClassLoader()) 
+		{
+			LOG.info(String.format("Yes, there is, I'll stop it."));
+			Field f = ConnectionImpl.class.getDeclaredField("cancelTimer");
+			if(f!=null)
+			{
+				f.setAccessible(true);
+				Timer timer = (Timer) f.get(null);
+				if(timer!=null)
+					timer.cancel();
+				LOG.info(String.format("Timer stopped"));
+			}
+			else
+				LOG.info(String.format("Timer not found"));
+		}
 	 }
 //	catch(IllegalAccessException e)
 //	 {

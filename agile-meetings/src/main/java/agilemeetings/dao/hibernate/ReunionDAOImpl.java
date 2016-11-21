@@ -2,6 +2,7 @@ package agilemeetings.dao.hibernate;
 
 import java.util.List;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import agilemeetings.model.Reunion;
 @Repository
 public class ReunionDAOImpl implements ReunionDAO
 {
-	static Logger log = Logger.getLogger(ReunionDAOImpl.class);
+	private static Logger log=LogManager.getLogger(ReunionDAOImpl.class);
 	@Autowired
 	private SessionFactory sessionFactory;
 

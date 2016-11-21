@@ -6,8 +6,10 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import agilemeetings.dao.EstadoProyectoDAO;
 import agilemeetings.dao.ProyectoDAO;
 import agilemeetings.exceptions.ProyectoExistenteException;
+import agilemeetings.model.EstadoProyecto;
 import agilemeetings.model.Proyecto;
 import agilemeetings.service.ProyectoService;
 
@@ -16,6 +18,8 @@ public class ProyectoServiceImpl implements ProyectoService
 {
 	@Autowired
 	private ProyectoDAO proyectoDAO;
+	@Autowired
+	private EstadoProyectoDAO estadoProyectoDAO;
 
 	@Override
 	public List<Proyecto> listarProyectos() 
@@ -47,5 +51,17 @@ public class ProyectoServiceImpl implements ProyectoService
 	public void grabar(Proyecto proyecto) throws ProyectoExistenteException 
 	{
 		proyectoDAO.grabar(proyecto);
+	}
+
+	@Override
+	public List<EstadoProyecto> listarEstadosProyecto() 
+	{
+		return estadoProyectoDAO.listarEstados();
+	}
+
+	@Override
+	public EstadoProyecto getEstadoProyectoById(int parseLong) 
+	{
+		return estadoProyectoDAO.getEstadoById(parseLong);
 	}
 }

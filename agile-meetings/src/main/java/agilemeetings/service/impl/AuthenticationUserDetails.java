@@ -2,6 +2,7 @@ package agilemeetings.service.impl;
 
 import java.util.*;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -21,7 +22,7 @@ public class AuthenticationUserDetails implements org.springframework.security.c
     private final String passwordHash;
     private final boolean enabled;
     private HashSet<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
-    static Logger log = Logger.getLogger(AuthenticationUserDetails.class);
+    private static Logger log=LogManager.getLogger(AuthenticationUserDetails.class);
 
     public AuthenticationUserDetails(User user) 
     {

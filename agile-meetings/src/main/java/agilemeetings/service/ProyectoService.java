@@ -3,6 +3,7 @@ package agilemeetings.service;
 import java.util.List;
 
 import agilemeetings.exceptions.ProyectoExistenteException;
+import agilemeetings.model.EstadoProyecto;
 import agilemeetings.model.Proyecto;
 
 public interface ProyectoService 
@@ -11,4 +12,6 @@ public interface ProyectoService
 	public List<Proyecto> listarProyectos();
 	public void agregar(Proyecto proyecto) throws ProyectoExistenteException;
 	public void grabar(Proyecto proyecto) throws ProyectoExistenteException;
+	public List<EstadoProyecto> listarEstadosProyecto();
+	public EstadoProyecto getEstadoProyectoById(int parseLong);
 }

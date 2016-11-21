@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -38,7 +39,7 @@ import agilemeetings.documentation.Descripcion;
 @DescripcionClase("Usuarios")
 public class UsersController extends AppController
 {
-	static Logger log = Logger.getLogger(UsersController.class);
+	private static Logger log=LogManager.getLogger(UsersController.class);
 	@Autowired
 	private UserDetailsService userService;
 	@Autowired

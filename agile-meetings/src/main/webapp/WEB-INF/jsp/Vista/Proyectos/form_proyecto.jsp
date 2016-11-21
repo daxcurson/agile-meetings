@@ -25,8 +25,8 @@
 </form:select>
 </div>
 <select name="miembros_proyecto" id="ProyectoMiembros">
-<c:forEach items="${users}" var="user">
-<option value="${user.id}"><c:out value="${user.nombre}"/></option>
+<c:forEach items="${personas}" var="persona">
+<option value="${persona.id}"><c:out value="${persona.nombre}"/></option>
 </c:forEach>
 </select>
 <input type="button" value="Agregar Miembro" id="BotonAgregarMiembro" />
@@ -37,7 +37,7 @@
 	<c:when test="${not empty miembros}">
 		<c:forEach items="${miembros}" var="modalidad">
 			<tr>
-			<td><c:out value="${user.nombre}" /></td>
+			<td><c:out value="${persona.nombre}" /></td>
 			<td>Rol</td>
 			</tr>
 		</c:forEach>

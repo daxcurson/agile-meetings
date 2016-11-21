@@ -1,6 +1,7 @@
 package agilemeetings.service.impl;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import agilemeetings.service.UserDetailsService;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-	static Logger log = Logger.getLogger(UserDetailsServiceImpl.class);
+	private static Logger log=LogManager.getLogger(UserDetailsServiceImpl.class);
 	@Autowired
     private UserDAO userRepository;
 

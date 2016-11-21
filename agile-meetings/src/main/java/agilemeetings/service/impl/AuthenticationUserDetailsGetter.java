@@ -2,6 +2,7 @@ package agilemeetings.service.impl;
 
 import javax.persistence.NoResultException;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +13,7 @@ import agilemeetings.dao.UserDAO;
 import agilemeetings.model.User;
 
 public class AuthenticationUserDetailsGetter implements UserDetailsService {
-	static Logger log = Logger.getLogger(AuthenticationUserDetailsGetter.class);
+	private static Logger log=LogManager.getLogger(AuthenticationUserDetailsGetter.class);
     private UserDAO userRepository;
 
     //required by cglib because I use class based aspect weaving

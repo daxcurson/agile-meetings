@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,7 +32,7 @@ import agilemeetings.service.GroupService;
 @DescripcionClase("Grupos")
 public class GroupsController extends AppController 
 {
-	static Logger log = Logger.getLogger(UsersController.class);
+	private static Logger log=LogManager.getLogger(GroupsController.class);
 	@Autowired
 	private GroupService groupService;
 

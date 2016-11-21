@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="personas")
@@ -19,8 +20,20 @@ public class Persona
 	@NotFound(action=NotFoundAction.IGNORE)
 	@JoinColumn(name="user_id")
 	private User user;
-	private int usuario_sistema;
+	private boolean usuario_sistema;
+	@NotEmpty
 	private String nombre;
+	private int habilitada;
+	
+	/**
+	 * Valores por defecto de persona. No es usuario del sistema y esta habilitada.
+	 */
+	public Persona()
+	{
+		this.usuario_sistema=false;
+		this.habilitada=1;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -33,10 +46,10 @@ public class Persona
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public int getUsuario_sistema() {
+	public boolean getUsuario_sistema() {
 		return usuario_sistema;
 	}
-	public void setUsuario_sistema(int usuario_sistema) {
+	public void setUsuario_sistema(boolean usuario_sistema) {
 		this.usuario_sistema = usuario_sistema;
 	}
 	public String getNombre() {
@@ -44,5 +57,11 @@ public class Persona
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public int getHabilitada() {
+		return habilitada;
+	}
+	public void setHabilitada(int habilitada) {
+		this.habilitada = habilitada;
 	}
 }

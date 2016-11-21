@@ -2,6 +2,7 @@ package agilemeetings.dao.hibernate;
 
 import java.util.List;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import agilemeetings.model.User;
 @Repository
 public class UserDAOImpl implements UserDAO
 {
-	static Logger log = Logger.getLogger(UserDAOImpl.class);
+	private static Logger log=LogManager.getLogger(UserDAOImpl.class);
 	@Autowired
 	private SessionFactory sessionFactory;
 

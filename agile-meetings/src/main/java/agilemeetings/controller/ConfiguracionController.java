@@ -1,8 +1,6 @@
 package agilemeetings.controller;
 
 import agilemeetings.documentation.*;
-
-import org.apache.log4j.Logger;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @DescripcionClase("Configuracion del sistema")
 public class ConfiguracionController extends AppController 
 {
-	static Logger log = Logger.getLogger(ConfiguracionController.class);
 
 	@PreAuthorize("isAuthenticated() and (hasRole('ROLE_ADMIN') or hasRole('ROLE_CONFIGURACION_MOSTRAR_MENU'))")
 	@RequestMapping({"/","/index"})

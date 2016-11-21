@@ -2,6 +2,7 @@ package agilemeetings.controller;
 
 import java.util.*;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,7 +26,7 @@ import agilemeetings.service.PermissionService;
 @RequestMapping("permisos")
 public class PermisosController extends AppController
 {
-	static Logger log = Logger.getLogger(PermisosController.class);
+	private static final Logger log=LogManager.getLogger(PermisosController.class);
 
 	private RequestMappingHandlerMapping handlerMapping;
 	@Autowired

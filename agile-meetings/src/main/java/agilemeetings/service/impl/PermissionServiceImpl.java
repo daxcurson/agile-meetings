@@ -5,7 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+//import org.apache.logging.log4j.LogManager;
+//import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,7 @@ import agilemeetings.service.PermissionService;
 @Service
 public class PermissionServiceImpl implements PermissionService
 {
-	static Logger log = Logger.getLogger(PermissionServiceImpl.class);
+	//private static Logger log=LogManager.getLogger(PermissionServiceImpl.class);
 
 	@Autowired
 	private GroupDAO groupRepository;

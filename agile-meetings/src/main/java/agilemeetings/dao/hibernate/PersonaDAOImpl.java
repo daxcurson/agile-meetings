@@ -2,6 +2,7 @@ package agilemeetings.dao.hibernate;
 
 import java.util.List;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import agilemeetings.model.Persona;
 @Repository
 public class PersonaDAOImpl implements PersonaDAO
 {
-	static Logger log = Logger.getLogger(PersonaDAOImpl.class);
+	private static Logger log=LogManager.getLogger(PersonaDAOImpl.class);
 	@Autowired
 	private SessionFactory sessionFactory;
 	@Override
@@ -35,6 +36,9 @@ public class PersonaDAOImpl implements PersonaDAO
 	@Transactional
 	public void agregar(Persona persona) 
 	{
+		// Si no va a ser usuario del sistema, fuerzo a que User sea nulo.
+		if(!persona.getUsuario_sistema())
+			persona.setUser(null);
 		sessionFactory.getCurrentSession().saveOrUpdate(persona);
 	}
 

@@ -1,19 +1,25 @@
 package agilemeetings.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +32,10 @@ import org.springframework.web.servlet.ModelAndView;
 import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.ProyectoExistenteException;
+import agilemeetings.model.EstadoProyecto;
 import agilemeetings.model.Proyecto;
 import agilemeetings.model.RolPersona;
+import agilemeetings.model.propertyeditor.EstadoProyectoEditor;
 import agilemeetings.service.PersonaService;
 import agilemeetings.service.ProyectoService;
 
@@ -37,12 +45,22 @@ import agilemeetings.service.ProyectoService;
 @DescripcionClase("Proyectos")
 public class ProyectosController extends AppController 
 {
-	static Logger log = Logger.getLogger(ReunionesController.class);
+	private static Logger log=LogManager.getLogger(ProyectosController.class);
+	
 	@Autowired
 	private PersonaService personaService;
 	@Autowired
 	private ProyectoService proyectoService;
 	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) 
+	{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		binder.registerCustomEditor(EstadoProyecto.class, new EstadoProyectoEditor(proyectoService));
+	}
+
 	@RequestMapping({"/","/index"})
 	@Descripcion(value="Listar proyectos",permission="ROLE_PROYECTOS_MOSTRAR_MENU")
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_PROYECTOS_MOSTRAR_MENU')")
@@ -60,6 +78,7 @@ public class ProyectosController extends AppController
 		ModelAndView modelo=new ModelAndView(vista);
 		modelo.addObject("proyecto",proyecto);
 		modelo.addObject("personas",personaService.listarPersonas());
+		modelo.addObject("estados",proyectoService.listarEstadosProyecto());
 		return modelo;
 	}
 	
