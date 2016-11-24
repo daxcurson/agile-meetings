@@ -8,7 +8,7 @@ Por favor seleccione un nombre de usuario y clave para el usuario administrador
 del sistema. Luego podr&aacute; usar este usuario para crear configuraciones adicionales.
 </p>
 
-<form method="post" action="${pageContext.request.contextPath}/instalacion/user_add">
+<form:form method="post" action="user_add" commandName="user">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 <div class="form-group">
 <label for="UserUsername">Login</label>
@@ -25,4 +25,4 @@ del sistema. Luego podr&aacute; usar este usuario para crear configuraciones adi
 <form:input type="password" id="UserConfirmPassword" class="form-control" path="confirm_password"/>
 </div>
         <input type="submit" value="Crear usuario"/>
-</form>
+</form:form>
