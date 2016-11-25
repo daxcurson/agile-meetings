@@ -17,6 +17,23 @@
     <definition name="adios" extends="base.definition">
         <put-attribute name="content" value="/WEB-INF/jsp/Vista/Pages/adios.jsp" />
     </definition>
+    <definition name="backlog_add" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/ProductBacklog/add.jsp">
+		    	<put-attribute name="form_backlog_item" value="/WEB-INF/jsp/Vista/ProductBacklog/form_backlog_item.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="backlog_edit" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/ProductBacklog/edit.jsp">
+	    		<put-attribute name="form_backlog_item" value="/WEB-INF/jsp/Vista/ProductBacklog/form_backlog_item.jsp"/>
+    		</definition>
+   		</put-attribute>
+   	</definition>
+    <definition name="backlog_listar" extends="base.definition">
+        <put-attribute name="content" value="/WEB-INF/jsp/Vista/ProductBacklog/listar.jsp" />
+    </definition>
     <definition name="configuracion_index" extends="base.definition">
         <put-attribute name="content" value="/WEB-INF/jsp/Vista/Configuracion/index.jsp" />
     </definition>

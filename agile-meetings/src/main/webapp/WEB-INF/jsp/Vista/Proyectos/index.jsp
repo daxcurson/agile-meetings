@@ -25,7 +25,9 @@
 <td>${proyecto.estado.nombre}</td>
 <td>${proyecto.fecha_comienzo}</td>
 <td>${proyecto.fecha_fin}</td>
-<td><a href="${pageContext.request.contextPath}/proyectos/edit/${proyecto.id}">Editar</a></td>
+<td><a href="${pageContext.request.contextPath}/proyectos/edit/${proyecto.id}">Editar</a> 
+<a href="${pageContext.request.contextPath}/backlog/listar/${proyecto.id}">Product Backlog</a>
+</td>
 </tr>
 </c:forEach>
 </table>

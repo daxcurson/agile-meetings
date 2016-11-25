@@ -4,14 +4,12 @@
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 
 <script type="text/javascript">
-<%@include file="/WEB-INF/jsp/Vista/Proyectos/buscar_miembros_roles.js" %>
 </script>
 
-<h1>Editar Proyecto</h1>
+<h1>Nuevo Item en el Backlog</h1>
 
-<form:form method="post" action="edit" commandName="proyecto">
+<form:form method="post" action="add" commandName="backlog_item">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	<form:input id="ProyectoId" class="form-control" path="id"/>
-	<tiles:insertAttribute name="form_proyecto"/>
-	<input type="submit" name="editar_proyecto" value="Editar Proyecto">
+	<tiles:insertAttribute name="form_backlog_item"/>
+	<input type="submit" name="agregar_backlog_item" value="Agregar Item al Backlog">
 </form:form>
