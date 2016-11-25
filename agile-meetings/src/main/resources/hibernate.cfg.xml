@@ -6,6 +6,7 @@
  
 <hibernate-configuration>
     <session-factory>
+    	<mapping class="agilemeetings.model.EstadoBacklogItem" />
         <mapping class="agilemeetings.model.EstadoProyecto" />
         <mapping class="agilemeetings.model.Group" />
         <mapping class="agilemeetings.model.Juego" />
@@ -14,6 +15,7 @@
         <mapping class="agilemeetings.model.PermissionGranted" />
         <mapping class="agilemeetings.model.Persona" />
         <mapping class="agilemeetings.model.PersonaReunion" />
+        <mapping class="agilemeetings.model.ProductBacklogItem"/>
         <mapping class="agilemeetings.model.Proyecto" />
         <mapping class="agilemeetings.model.Reunion" />
         <mapping class="agilemeetings.model.Rol" />

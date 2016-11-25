@@ -155,5 +155,4 @@ public class PersonasController extends AppController
 			return modelo;
 		}
 	}
-
 }

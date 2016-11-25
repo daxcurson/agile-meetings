@@ -10,7 +10,7 @@
 </div>
 <div class="form-group">
 <label for="BacklogItemDescripcion">Descripci&oacute;n</label>
-<form:input path="descripcion" id="BacklogItemDescripcion" class="form-control" />
+<form:input path="descripcion" id="BacklogItemDescripcion" class="form-control" type="textarea" />
 <form:errors path="descripcion"/>
 </div>
 <div class="form-group">

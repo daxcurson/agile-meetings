@@ -8,9 +8,9 @@
 
 <h1>Editar Item del Backlog</h1>
 
-<form:form method="post" action="edit" commandName="backlog_item">
+<form:form method="post" commandName="backlog_item">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	<form:input id="BacklogItemId" class="form-control" path="id"/>
+	<form:input type="hidden" id="BacklogItemId" class="form-control" path="id"/>
 	<tiles:insertAttribute name="form_backlog_item"/>
 	<input type="submit" name="editar_backlog_item" value="Editar Item del Backlog">
 </form:form>

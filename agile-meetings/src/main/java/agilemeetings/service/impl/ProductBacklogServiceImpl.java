@@ -42,4 +42,19 @@ public class ProductBacklogServiceImpl implements ProductBacklogService
 		backlogItem.setProyecto(p);
 		productBacklogDAO.save(backlogItem);
 	}
+	@Override
+	public EstadoBacklogItem getEstadoById(int id) 
+	{
+		return estadoBacklogItemDAO.getEstadoById(id);
+	}
+	@Override
+	public ProductBacklogItem getBacklogItemById(Integer backlogId) 
+	{
+		return productBacklogDAO.getItemById(backlogId);
+	}
+	@Override
+	public void grabarBacklogItem(ProductBacklogItem backlogItem) 
+	{
+		productBacklogDAO.update(backlogItem);
+	}
 }

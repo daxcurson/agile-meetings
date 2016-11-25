@@ -10,5 +10,8 @@ public interface ProductBacklogService
 {
 	public List<ProductBacklogItem> listarProductBacklog(Proyecto p);
 	public List<EstadoBacklogItem> getEstados();
+	public EstadoBacklogItem getEstadoById(int id);
 	public void agregar(ProductBacklogItem backlogItem, Integer proyectoId);
+	public ProductBacklogItem getBacklogItemById(Integer backlogId);
+	public void grabarBacklogItem(ProductBacklogItem backlogItem);
 }

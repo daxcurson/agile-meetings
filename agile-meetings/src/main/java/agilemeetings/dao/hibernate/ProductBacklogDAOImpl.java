@@ -2,9 +2,11 @@ package agilemeetings.dao.hibernate;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import agilemeetings.dao.ProductBacklogDAO;
 import agilemeetings.model.ProductBacklogItem;
@@ -18,7 +20,9 @@ public class ProductBacklogDAOImpl implements ProductBacklogDAO
 	@Override
 	public ProductBacklogItem getItemById(int id) 
 	{
-		return (ProductBacklogItem) sessionFactory.getCurrentSession().createQuery("from ProductBacklogItem where id="+id).getSingleResult();
+		ProductBacklogItem b=(ProductBacklogItem) sessionFactory.getCurrentSession().createQuery("from ProductBacklogItem where id="+id).getSingleResult();
+		Hibernate.initialize(b.getProyecto());
+		return b;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -29,9 +33,15 @@ public class ProductBacklogDAOImpl implements ProductBacklogDAO
 	}
 
 	@Override
-	public void save(ProductBacklogItem backlogItem) 
+	public void save(ProductBacklogItem backlogItem)
 	{
-		sessionFactory.getCurrentSession().saveOrUpdate(backlogItem);
+		sessionFactory.getCurrentSession().save(backlogItem);
+	}
+	@Override
+	@Transactional
+	public void update(ProductBacklogItem backlogItem) 
+	{
+		sessionFactory.getCurrentSession().merge(backlogItem);
 	}
 
 }

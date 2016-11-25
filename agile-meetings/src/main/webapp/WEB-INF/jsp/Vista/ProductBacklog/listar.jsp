@@ -18,10 +18,10 @@
 </tr>
 <c:forEach items="${backlog_items}" var="item">
 <tr>
-<td><c:out value="${proyecto.id}"/></td>
+<td><c:out value="${item.id}"/></td>
 <td>${item.fecha_creacion}</td>
 <td>${item.descripcion}</td>
-<td>${estado.estado.nombre}</td>
+<td>${item.estado.nombre}</td>
 <td><a href="${pageContext.request.contextPath}/backlog/edit/${item.id}">Editar</a></td>
 </tr>
 </c:forEach>
