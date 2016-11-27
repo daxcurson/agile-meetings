@@ -1,13 +1,13 @@
-package agilemeetings.service;
+package agilemeetings.dao;
 
 import java.util.List;
 
 import agilemeetings.model.Rol;
 
-public interface RolService 
+public interface RolDAO 
 {
-	public Rol getRolById(int id);
 	public List<Rol> listarRoles();
-	public void agregar(Rol rol);
+	public Rol getRolById(int id);
 	public void grabar(Rol rol);
+	public void agregar(Rol rol);
 }

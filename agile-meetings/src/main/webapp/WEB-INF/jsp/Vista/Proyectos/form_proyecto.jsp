@@ -32,13 +32,17 @@
 <input type="button" value="Agregar Miembro" id="BotonAgregarMiembro" />
 <div id="MiembrosProyecto">
 <table>
-<tr><th>Nombre</th><th>Rol</th></tr>
+<tr><th>Nombre</th><th>Rol</th><th>Acciones</th></tr>
 <c:choose>
-	<c:when test="${not empty miembros}">
-		<c:forEach items="${miembros}" var="modalidad">
+	<c:when test="${not empty proyecto.miembros}">
+		<c:forEach items="${proyecto.miembros}" var="rol_persona">
 			<tr>
-			<td><c:out value="${persona.nombre}" /></td>
-			<td>Rol</td>
+			<td><c:out value="${rol_persona.persona.nombre}" /></td>
+			<td><c:out value="${rol_persona.rol.nombre}"/></td>
+			<td class="miembro_proyecto" id="<c:out value="${rol_persona.id}"/>">
+			<img src="${pageContext.request.contextPath}/img/cross.png" onclick="quitar_miembro(<c:out value="${rol_persona.id}"/>)">
+			</td>
+
 			</tr>
 		</c:forEach>
 	</c:when>

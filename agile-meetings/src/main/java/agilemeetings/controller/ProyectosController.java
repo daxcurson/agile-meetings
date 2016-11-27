@@ -3,7 +3,6 @@ package agilemeetings.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -38,6 +37,7 @@ import agilemeetings.model.RolPersona;
 import agilemeetings.model.propertyeditor.EstadoProyectoEditor;
 import agilemeetings.service.PersonaService;
 import agilemeetings.service.ProyectoService;
+import agilemeetings.service.RolService;
 
 @Controller
 @RequestMapping("proyectos")
@@ -51,6 +51,8 @@ public class ProyectosController extends AppController
 	private PersonaService personaService;
 	@Autowired
 	private ProyectoService proyectoService;
+	@Autowired
+	private RolService rolService;
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder) 
@@ -130,11 +132,10 @@ public class ProyectosController extends AppController
 			@ModelAttribute("proyecto") Proyecto proyecto
 			)
 	{
-		if(proyecto.getMiembros()==null)
-			proyecto.setMiembros(new LinkedList<RolPersona>());
 		RolPersona r=new RolPersona();
 		r.setPersona(personaService.getPersonaById(persona_id));
 		r.setProyecto(proyecto);
+		r.setRol(rolService.getRolById(1));
 		proyecto.getMiembros().add(r);
 		return proyecto.getMiembros();
 	}

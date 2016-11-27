@@ -10,13 +10,13 @@
 </div>
 <div class="form-group">
 <label for="BacklogItemDescripcion">Descripci&oacute;n</label>
-<form:input path="descripcion" id="BacklogItemDescripcion" class="form-control" type="textarea" />
+<form:textarea cols="80" rows="10" path="descripcion" id="BacklogItemDescripcion" class="form-control" />
 <form:errors path="descripcion"/>
 </div>
 <div class="form-group">
 <label for="BacklogItemEstado">Estado</label>
 <form:select path="estado" id="BacklogItemEstado" class="form-control">
-<form:options items="${estados}" itemValue="id" itemLabel="nombre" />
+<form:options items="${estados_backlog_item}" itemValue="id" itemLabel="nombre" />
 </form:select>
 </div>
 </fieldset>

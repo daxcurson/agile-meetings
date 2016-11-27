@@ -1,6 +1,7 @@
 package agilemeetings.model;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,10 +34,11 @@ public class Proyecto
 	private String nombre;
 	@OneToMany(targetEntity=RolPersona.class,cascade={CascadeType.ALL},
 	mappedBy="proyecto",fetch=FetchType.LAZY)
-	private List<RolPersona> miembros;
+	private List<RolPersona> miembros=new LinkedList<RolPersona>();
 	@OneToMany(targetEntity=Reunion.class,cascade={CascadeType.ALL},
 	mappedBy="proyecto",fetch=FetchType.LAZY)
-	private List<Reunion> reuniones;
+	private List<Reunion> reuniones=new LinkedList<Reunion>();
+
 	public Date getFecha_creacion() {
 		return fecha_creacion;
 	}

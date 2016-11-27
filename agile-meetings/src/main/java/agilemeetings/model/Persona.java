@@ -6,6 +6,8 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="personas")
 public class Persona 
@@ -46,6 +48,7 @@ public class Persona
 	public void setUser(User user) {
 		this.user = user;
 	}
+	@JsonBackReference
 	public boolean getUsuario_sistema() {
 		return usuario_sistema;
 	}

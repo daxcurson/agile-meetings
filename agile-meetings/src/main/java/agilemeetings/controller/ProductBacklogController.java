@@ -81,7 +81,7 @@ public class ProductBacklogController extends AppController
 	{
 		ModelAndView modelo=new ModelAndView(vista);
 		modelo.addObject("backlog_item",item);
-		modelo.addObject("estados",backlogService.getEstados());
+		modelo.addObject("estados_backlog_item",backlogService.getEstados());
 		return modelo;
 	}
 	

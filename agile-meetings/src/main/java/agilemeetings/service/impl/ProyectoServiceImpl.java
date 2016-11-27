@@ -2,6 +2,7 @@ package agilemeetings.service.impl;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import agilemeetings.dao.ProyectoDAO;
 import agilemeetings.exceptions.ProyectoExistenteException;
 import agilemeetings.model.EstadoProyecto;
 import agilemeetings.model.Proyecto;
+import agilemeetings.model.RolPersona;
 import agilemeetings.service.ProyectoService;
 
 @Service
@@ -44,7 +46,11 @@ public class ProyectoServiceImpl implements ProyectoService
 	@Override
 	public Proyecto getProyectoById(int id) 
 	{
-		return proyectoDAO.getProyectoById(id);
+		Proyecto p=proyectoDAO.getProyectoById(id);
+		// Tengo que inicializar ahora la lista de miembros de este proyecto.
+		List<RolPersona> miembros=p.getMiembros();
+		Hibernate.initialize(miembros);
+		return p;
 	}
 
 	@Override

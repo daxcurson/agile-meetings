@@ -9,9 +9,9 @@
 
 <h1>Editar Proyecto</h1>
 
-<form:form method="post" action="edit" commandName="proyecto">
+<form:form method="post" commandName="proyecto">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	<form:input id="ProyectoId" class="form-control" path="id"/>
+	<form:input id="ProyectoId" type="hidden" class="form-control" path="id"/>
 	<tiles:insertAttribute name="form_proyecto"/>
 	<input type="submit" name="editar_proyecto" value="Editar Proyecto">
 </form:form>
