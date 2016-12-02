@@ -38,7 +38,10 @@ public class Proyecto
 	@OneToMany(targetEntity=Reunion.class,cascade={CascadeType.ALL},
 	mappedBy="proyecto",fetch=FetchType.LAZY)
 	private List<Reunion> reuniones=new LinkedList<Reunion>();
-
+	@OneToMany(targetEntity=Sprint.class,cascade={CascadeType.ALL},
+	mappedBy="proyecto",fetch=FetchType.LAZY)
+	private List<Sprint> sprints;
+	
 	public Date getFecha_creacion() {
 		return fecha_creacion;
 	}
@@ -86,5 +89,11 @@ public class Proyecto
 	}
 	public void setReuniones(List<Reunion> reuniones) {
 		this.reuniones = reuniones;
+	}
+	public List<Sprint> getSprints() {
+		return sprints;
+	}
+	public void setSprints(List<Sprint> sprints) {
+		this.sprints = sprints;
 	}
 }
