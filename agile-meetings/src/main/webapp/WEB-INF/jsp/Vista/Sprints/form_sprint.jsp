@@ -14,8 +14,13 @@
 <form:errors path="fecha_fin"/>
 </div>
 <div class="form-group">
-<label for="SprintDescripcion">Nombre</label>
-<form:input path="descripcion" id="SprintDescripcion" class="form-control" />
+<label for="SprintNombre">Nombre</label>
+<form:input path="nombre" id="SprintNombre" class="form-control" />
+<form:errors path="nombre"/>
+</div>
+<div class="form-group">
+<label for="SprintDescripcion">Descripci&oacute;n</label>
+<form:textarea cols="80" rows="10" path="descripcion" id="SprintDescripcion" class="form-control" />
 <form:errors path="descripcion"/>
 </div>
 <div class="form-group">

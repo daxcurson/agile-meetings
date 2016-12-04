@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="sprints")
 public class Sprint 
@@ -33,6 +35,9 @@ public class Sprint
 	private EstadoProyecto estado;
 	@OneToMany
 	private List<ItemSprint> items;
+	@NotEmpty
+	private String nombre;
+	@NotEmpty
 	private String descripcion;
 	
 	public int getId() {
@@ -58,6 +63,12 @@ public class Sprint
 	}
 	public void setItems(List<ItemSprint> items) {
 		this.items = items;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public Proyecto getProyecto() {
 		return proyecto;

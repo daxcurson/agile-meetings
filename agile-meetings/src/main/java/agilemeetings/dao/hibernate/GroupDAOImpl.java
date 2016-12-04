@@ -1,35 +1,25 @@
 package agilemeetings.dao.hibernate;
 
-import java.util.List;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import agilemeetings.dao.GroupDAO;
 import agilemeetings.model.Group;
 
 @Repository
-public class GroupDAOImpl implements GroupDAO
+public class GroupDAOImpl extends GenericDAOImpl<Group> implements GroupDAO
 {
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	@SuppressWarnings("unchecked")
+	private String selectAll="from Group";
+	private String selectOne="from Group where id=";
+	
 	@Override
-	public List<Group> listAllGroups() 
+	public String selectOne() 
 	{
-		return sessionFactory.getCurrentSession().createQuery("from Group").getResultList();
+		return this.selectOne;
 	}
 
 	@Override
-	public Group findGroupById(long id) 
+	public String selectAll() 
 	{
-		return (Group)sessionFactory.getCurrentSession().createQuery("from Group where id="+id).getSingleResult();
-	}
-
-	@Override
-	public void save(Group g) 
-	{
-		sessionFactory.getCurrentSession().saveOrUpdate(g);
+		return this.selectAll;
 	}
 }

@@ -1,43 +1,22 @@
 package agilemeetings.dao.hibernate;
 
-import java.util.List;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import agilemeetings.dao.UserDAO;
 import agilemeetings.model.User;
 
 @Repository
-public class UserDAOImpl implements UserDAO
+public class UserDAOImpl extends GenericDAOImpl<User> implements UserDAO
 {
 	private static Logger log=LogManager.getLogger(UserDAOImpl.class);
-	@Autowired
-	private SessionFactory sessionFactory;
 
 	@Override
 	public User findByLogin(String login) 
 	{
 		log.trace("Estoy en UserDAOImpl.findByLogin, login pedido:"+login);
 		return (User) sessionFactory.getCurrentSession().createQuery("from User where username='"+login+"'").getSingleResult();
-	}
-
-	@Override
-	@Transactional
-	public void save(User user) 
-	{
-		sessionFactory.getCurrentSession().saveOrUpdate(user);
-	}
-
-	@Override
-	public User findById(Long userId) 
-	{
-		log.trace("Estoy en UserDAOImpl.findById");
-		return (User) sessionFactory.getCurrentSession().createQuery("from User where id="+userId).getSingleResult();
 	}
 
 	@Override
@@ -58,12 +37,16 @@ public class UserDAOImpl implements UserDAO
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> listUsers() 
+	public String selectOne() 
 	{
-		log.trace("Estoy en UserDAOImpl.listUsers");
-		return (List<User>) sessionFactory.getCurrentSession().createQuery("from User").getResultList();
+		return "from User where id=";
+	}
+
+	@Override
+	public String selectAll() 
+	{
+		return "from User";
 	}
 
 }

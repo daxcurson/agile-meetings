@@ -84,12 +84,12 @@ public class PermissionServiceImpl implements PermissionService
 	@Override
 	public List<Group> listAllGroups() 
 	{
-		return groupRepository.listAllGroups();
+		return groupRepository.listAll();
 	}
 
 	@Override
 	public Group findGroupById(int id) 
 	{
-		return groupRepository.findGroupById(id);
+		return groupRepository.findById(id);
 	}
 }

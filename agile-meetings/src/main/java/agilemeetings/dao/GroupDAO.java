@@ -1,11 +1,7 @@
 package agilemeetings.dao;
 
-import java.util.List;
 import agilemeetings.model.*;
 
-public interface GroupDAO 
+public interface GroupDAO extends GenericDAO<Group>
 {
-	List<Group> listAllGroups();
-	Group findGroupById(long id);
-	void save(Group g);
 }
