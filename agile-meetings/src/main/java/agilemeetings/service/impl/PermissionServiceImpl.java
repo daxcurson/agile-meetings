@@ -38,7 +38,7 @@ public class PermissionServiceImpl implements PermissionService
 			while(i.hasNext() && !encontradoPermiso)
 			{
 				pp=i.next();
-				if(pp.getAuthority().equals(permission))
+				if(pp!=null && pp.getAuthority().equals(permission))
 				{
 					encontradoPermiso=true;
 				}
