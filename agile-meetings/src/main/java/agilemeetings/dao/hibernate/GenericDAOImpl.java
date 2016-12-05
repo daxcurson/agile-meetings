@@ -34,6 +34,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T>
 		sessionFactory.getCurrentSession().merge(object);
 	}
 	
+	@Transactional
 	public void create(T object)
 	{
 		sessionFactory.getCurrentSession().saveOrUpdate(object);		

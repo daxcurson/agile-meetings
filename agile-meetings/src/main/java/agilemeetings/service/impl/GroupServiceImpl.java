@@ -40,4 +40,9 @@ public class GroupServiceImpl implements GroupService
 	{
 		return groupDAO.listAll();
 	}
+	@Override
+	public void create(Group group) 
+	{
+		groupDAO.create(group);
+	}
 }

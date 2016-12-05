@@ -61,7 +61,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         user.setConfirm_password(user.getPassword());
         try
         {
-        	userRepository.create(user);
+        	userRepository.save(user);
         }
         catch(ConstraintViolationException e)
         {
@@ -70,10 +70,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         	throw new UsuarioExistenteException();
         }
 	}
-
 	@Override
 	public List<User> listUsers() 
 	{
 		return userRepository.listAll();
+	}
+
+	@Override
+	public void create(User user) {
+		// Vamos a grabar aqui algunos datos que
+		// no se graban de la interfaz
+		user.setEnabled(1);
+		// Hay que encriptar el password antes de grabarlo!!!
+        BCryptPasswordEncoder pwe=new BCryptPasswordEncoder();
+        user.setPassword(pwe.encode(user.getPassword()));
+        user.setConfirm_password(user.getPassword());
+       	userRepository.create(user);
 	}
 }

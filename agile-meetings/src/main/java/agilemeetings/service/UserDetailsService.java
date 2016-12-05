@@ -14,6 +14,7 @@ public interface UserDetailsService {
     public UserDetails loadUserByUsername(String username)
         throws UsernameNotFoundException, DataAccessException;
 	public void save(User user) throws UsuarioExistenteException;
+	public void create(User user);
 	public User getById(long id);
 	public List<User> listUsers();
 }
