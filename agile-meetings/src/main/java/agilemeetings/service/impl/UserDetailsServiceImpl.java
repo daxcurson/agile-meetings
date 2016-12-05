@@ -61,7 +61,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         user.setConfirm_password(user.getPassword());
         try
         {
-        	userRepository.save(user);
+        	userRepository.create(user);
         }
         catch(ConstraintViolationException e)
         {
