@@ -38,7 +38,7 @@ public class PermissionServiceImpl implements PermissionService
 			while(i.hasNext() && !encontradoPermiso)
 			{
 				pp=i.next();
-				if(pp!=null && pp.getAuthority().equals(permission))
+				if(pp.getAuthority().equals(permission))
 				{
 					encontradoPermiso=true;
 				}
@@ -84,12 +84,12 @@ public class PermissionServiceImpl implements PermissionService
 	@Override
 	public List<Group> listAllGroups() 
 	{
-		return groupRepository.listAll();
+		return groupRepository.listAllGroups();
 	}
 
 	@Override
 	public Group findGroupById(int id) 
 	{
-		return groupRepository.findById(id);
+		return groupRepository.findGroupById(id);
 	}
 }

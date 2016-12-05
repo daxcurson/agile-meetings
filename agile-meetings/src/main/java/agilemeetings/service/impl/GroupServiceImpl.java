@@ -19,7 +19,7 @@ public class GroupServiceImpl implements GroupService
 	@Override
 	public Group getById(long id) 
 	{
-		return groupDAO.findById(id);
+		return groupDAO.findGroupById(id);
 	}
 	@Override
 	public void save(Group group) throws GrupoExistenteException
@@ -38,11 +38,6 @@ public class GroupServiceImpl implements GroupService
 	@Override
 	public List<Group> listGroups() 
 	{
-		return groupDAO.listAll();
-	}
-	@Override
-	public void create(Group group) 
-	{
-		groupDAO.create(group);
+		return groupDAO.listAllGroups();
 	}
 }
