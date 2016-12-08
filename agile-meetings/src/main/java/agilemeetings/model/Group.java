@@ -1,6 +1,7 @@
 package agilemeetings.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -35,7 +36,7 @@ public class Group
 	
     @OneToMany(mappedBy="group",orphanRemoval=true)
     @Cascade({CascadeType.SAVE_UPDATE,CascadeType.DELETE})
-    private Set<Permission> permissions;
+    private Set<Permission> permissions=new HashSet<Permission>();
 
 	
 	public int getId()

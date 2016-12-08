@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script type="text/javascript">
-<%@include file="/WEB-INF/jsp/Vista/Proyectos/fechas_sprint.js" %>
+<%@include file="/WEB-INF/jsp/Vista/Proyectos/buscar_miembros_roles.js" %>
 </script>
 
 <fieldset>

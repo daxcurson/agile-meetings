@@ -74,6 +74,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public List<User> listUsers() 
 	{
-		return userRepository.listAll();
+		return userRepository.listUsers();
 	}
 }
