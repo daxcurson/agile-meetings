@@ -132,12 +132,44 @@ public class ProyectosController extends AppController
 			@ModelAttribute("proyecto") Proyecto proyecto
 			)
 	{
-		RolPersona r=new RolPersona();
-		r.setPersona(personaService.getPersonaById(persona_id));
-		r.setProyecto(proyecto);
-		r.setRol(rolService.getRolById(1));
-		proyecto.getMiembros().add(r);
+		// Si la persona ya existe como miembro del proyecto, ignorar este comando!!
+		List<RolPersona> miembros=proyecto.getMiembros();
+		boolean encontrado=false;
+		Iterator<RolPersona> iterator=miembros.iterator();
+		while(iterator.hasNext() && !encontrado)
+		{
+			RolPersona p=iterator.next();
+			if(p.getId()==persona_id)
+				encontrado=true;
+		}
+		if(!encontrado)
+		{
+			RolPersona r=new RolPersona();
+			r.setPersona(personaService.getPersonaById(persona_id));
+			r.setProyecto(proyecto);
+			r.setRol(rolService.getRolById(1));
+			proyecto.getMiembros().add(r);
+		}
 		return proyecto.getMiembros();
+	}
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_PROYECTOS_AGREGAR')")
+	@RequestMapping(value = "/quitar_miembro")
+	public @ResponseBody List<RolPersona> quitarMiembro(
+			@RequestParam(value="rol_id",required=true) Integer rol_id,
+			@ModelAttribute("proyecto") Proyecto proyecto
+			)
+	{
+		List<RolPersona> lista=proyecto.getMiembros();
+		// Vamos a excluir a los miembros del proyecto sabiendo sus id de usuarios,
+		// informados en rol_id.
+		Iterator<RolPersona> iterator=lista.iterator();
+		while(iterator.hasNext())
+		{
+			RolPersona i=iterator.next();
+			if(i.getPersona().getId()==rol_id)
+				iterator.remove();
+		}
+		return proyecto.getMiembros();		
 	}
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_PROYECTOS_EDIT')")
 	@RequestMapping(value="/edit/{proyectoId}",method=RequestMethod.GET)

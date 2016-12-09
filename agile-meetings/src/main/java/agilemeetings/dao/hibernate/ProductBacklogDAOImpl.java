@@ -44,4 +44,9 @@ public class ProductBacklogDAOImpl implements ProductBacklogDAO
 		sessionFactory.getCurrentSession().merge(backlogItem);
 	}
 
+	@Override
+	public void delete(ProductBacklogItem backlogItem) 
+	{
+		sessionFactory.getCurrentSession().delete(backlogItem);
+	}
 }

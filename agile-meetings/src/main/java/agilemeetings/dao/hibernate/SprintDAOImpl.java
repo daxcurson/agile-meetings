@@ -43,4 +43,5 @@ public class SprintDAOImpl implements SprintDAO
 	{
 		sessionFactory.getCurrentSession().merge(s);
 	}
+	
 }

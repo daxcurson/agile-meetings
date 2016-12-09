@@ -34,7 +34,9 @@ function tabla_miembros(miembros)
 	{
 		options+="<tr>"+
 		'<td>'+miembro.persona.nombre+"</td>"+
-		'<td>'+"Rol"+"</td>"+
+		'<td>'+miembro.rol.nombre+"</td>"+
+		'<td class="miembro_proyecto" id="'+miembro.persona.id+'"><img src="${pageContext.request.contextPath}/img/cross.png" onclick="quitar_miembro('+miembro.persona.id+')">'+
+		'</td>'+
 		'</tr>';
 	}
 	);

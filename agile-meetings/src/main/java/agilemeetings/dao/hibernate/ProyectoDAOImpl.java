@@ -42,8 +42,9 @@ public class ProyectoDAOImpl implements ProyectoDAO
 	}
 
 	@Override
+	@Transactional
 	public void grabar(Proyecto proyecto) 
 	{
-		sessionFactory.getCurrentSession().saveOrUpdate(proyecto);
+		sessionFactory.getCurrentSession().merge(proyecto);
 	}
 }

@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table(name="proyectos")
 public class Proyecto 
@@ -32,8 +34,9 @@ public class Proyecto
 	@JoinColumn(name="estado_id")
 	private EstadoProyecto estado;
 	private String nombre;
-	@OneToMany(targetEntity=RolPersona.class,cascade={CascadeType.ALL},
-	mappedBy="proyecto",fetch=FetchType.LAZY)
+	@OneToMany(targetEntity=RolPersona.class,
+	mappedBy="proyecto",fetch=FetchType.LAZY,orphanRemoval=true)
+	@Cascade(value={org.hibernate.annotations.CascadeType.ALL})
 	private List<RolPersona> miembros=new LinkedList<RolPersona>();
 	@OneToMany(targetEntity=Reunion.class,cascade={CascadeType.ALL},
 	mappedBy="proyecto",fetch=FetchType.LAZY)
