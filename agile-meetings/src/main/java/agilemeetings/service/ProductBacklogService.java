@@ -14,4 +14,5 @@ public interface ProductBacklogService
 	public void agregar(ProductBacklogItem backlogItem, Integer proyectoId);
 	public ProductBacklogItem getBacklogItemById(Integer backlogId);
 	public void grabarBacklogItem(ProductBacklogItem backlogItem);
+	public void borrarBacklogItem(ProductBacklogItem backlogItem);
 }

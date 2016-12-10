@@ -43,5 +43,12 @@ public class SprintDAOImpl implements SprintDAO
 	{
 		sessionFactory.getCurrentSession().merge(s);
 	}
+
+	@Override
+	@Transactional
+	public void borrar(Sprint s) 
+	{
+		sessionFactory.getCurrentSession().delete(s);
+	}
 	
 }

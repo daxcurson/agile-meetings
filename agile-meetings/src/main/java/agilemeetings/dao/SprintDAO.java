@@ -10,5 +10,5 @@ public interface SprintDAO
 	public Sprint getById(Integer sprintId);
 	public void grabar(Sprint s);
 	public void agregar(Sprint s);
-
+	public void borrar(Sprint s);
 }

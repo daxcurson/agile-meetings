@@ -57,4 +57,9 @@ public class ProductBacklogServiceImpl implements ProductBacklogService
 	{
 		productBacklogDAO.update(backlogItem);
 	}
+	@Override
+	public void borrarBacklogItem(ProductBacklogItem backlogItem) 
+	{
+		productBacklogDAO.delete(backlogItem);
+	}
 }

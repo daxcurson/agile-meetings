@@ -177,4 +177,29 @@ public class ProductBacklogController extends AppController
 			return modelo;
 		}
 	}
+	@Descripcion(value="Borrar Backlog Item",permission="ROLE_BACKLOG_DELETE")
+	@RequestMapping(value="/delete/{backlogId}",method=RequestMethod.GET)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_BACKLOG_DELETE')")
+	public ModelAndView confirmarBorradoProductBacklog(@PathVariable("backlogId") Integer backlogId,
+			BindingResult result,ModelMap model)
+	{
+		// Muestra una pantalla de confirmacion.
+		// Busco el usuario y lo cargo en el formulario.
+		ProductBacklogItem p=this.backlogService.getBacklogItemById(backlogId);
+		ModelAndView modelo=new ModelAndView("backlog_delete");
+		modelo.addObject("backlog_item",p);
+		return modelo;
+	}
+	@RequestMapping(value="/delete/{backlogId}",method=RequestMethod.POST)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_BACKLOG_DELETE')")
+	public ModelAndView borrarProductBacklog(@PathVariable("backlogId") Integer backlogId,
+			@Valid @ModelAttribute("backlog_item") ProductBacklogItem backlogItem,
+			BindingResult result,ModelMap model)
+	{
+		ModelAndView modelo=new ModelAndView("redirect:/backlog/listar/"+backlogItem.getProyecto().getId());
+		backlogService.borrarBacklogItem(backlogItem);
+		modelo.addObject("message","Backlog item borrado");
+		modelo.addObject("type","success");
+		return modelo;
+	}
 }
