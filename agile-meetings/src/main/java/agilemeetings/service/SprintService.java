@@ -2,6 +2,7 @@ package agilemeetings.service;
 
 import java.util.List;
 
+import agilemeetings.exceptions.SprintAsociadaException;
 import agilemeetings.model.Proyecto;
 import agilemeetings.model.Sprint;
 
@@ -11,4 +12,5 @@ public interface SprintService
 	public void agregar(Sprint sprint,Proyecto p);
 	public Sprint getSprintById(Integer sprintId);
 	public void grabar(Sprint sprint);
+	public void borrarSprint(Sprint sprint) throws SprintAsociadaException;
 }

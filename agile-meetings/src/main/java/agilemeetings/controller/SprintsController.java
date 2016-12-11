@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
+import agilemeetings.exceptions.SprintAsociadaException;
 import agilemeetings.model.EstadoProyecto;
 import agilemeetings.model.Proyecto;
 import agilemeetings.model.Sprint;
@@ -165,5 +166,50 @@ public class SprintsController extends AppController
 			//}
 			return modelo;
 		}
+	}
+	@Descripcion(value="Borrar Sprint",permission="ROLE_SPRINT_DELETE")
+	@RequestMapping(value="/delete/{sprintId}",method=RequestMethod.GET)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_SPRINT_DELETE')")
+	public ModelAndView confirmarBorradoSprint(@PathVariable("sprintId") Integer sprintId,
+			ModelMap model)
+	{
+		// Muestra una pantalla de confirmacion.
+		Sprint p=this.sprintService.getSprintById(sprintId);
+		ModelAndView modelo=new ModelAndView("sprint_delete");
+		modelo.addObject("sprint",p);
+		return modelo;
+	}
+	@RequestMapping(value="/delete/{backlogId}",method=RequestMethod.POST)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_SPRINT_DELETE')")
+	public ModelAndView borrarSprint(@PathVariable("sprintId") Integer sprintId,
+			@Valid @ModelAttribute("sprint") Sprint sprint,
+			BindingResult result,ModelMap model)
+	{
+		ModelAndView modelo=new ModelAndView("redirect:/sprints/listar/"+sprint.getProyecto().getId());
+		String message="Sprint borrado";
+		String type="success";
+		try 
+		{
+			sprintService.borrarSprint(sprint);
+		} 
+		catch (SprintAsociadaException e) 
+		{
+			e.printStackTrace();
+			message="Este sprint tiene items de backlog asociados. Borrelos primero";
+			type="error";
+		}
+		modelo.addObject("message",message);
+		modelo.addObject("type",type);
+		return modelo;
+	}
+	@Descripcion(value="Agregar items del product backlog a un Sprint",permission="ROLE_SPRINT_ABM")
+	@RequestMapping(value="/backlog/{sprintId}",method=RequestMethod.GET)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_SPRINT_ABM')")
+	public ModelAndView mostrarPantallaAsignacionProductBacklog(@PathVariable("sprintId") Integer sprintId)
+	{
+		Sprint s=sprintService.getSprintById(sprintId);
+		ModelAndView m=new ModelAndView("sprints_backlog");
+		m.addObject("sprint",s);
+		return m;
 	}
 }

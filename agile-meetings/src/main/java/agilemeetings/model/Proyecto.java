@@ -44,6 +44,9 @@ public class Proyecto
 	@OneToMany(targetEntity=Sprint.class,cascade={CascadeType.ALL},
 	mappedBy="proyecto",fetch=FetchType.LAZY)
 	private List<Sprint> sprints;
+	@OneToMany(targetEntity=ProductBacklogItem.class,mappedBy="proyecto",
+	fetch=FetchType.LAZY)
+	private List<ProductBacklogItem> productBacklog;
 	
 	public Date getFecha_creacion() {
 		return fecha_creacion;
@@ -98,5 +101,11 @@ public class Proyecto
 	}
 	public void setSprints(List<Sprint> sprints) {
 		this.sprints = sprints;
+	}
+	public List<ProductBacklogItem> getProductBacklog() {
+		return productBacklog;
+	}
+	public void setProductBacklog(List<ProductBacklogItem> productBacklog) {
+		this.productBacklog = productBacklog;
 	}
 }

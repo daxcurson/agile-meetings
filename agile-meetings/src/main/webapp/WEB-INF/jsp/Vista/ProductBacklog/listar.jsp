@@ -22,7 +22,10 @@
 <td>${item.fecha_creacion}</td>
 <td>${item.descripcion}</td>
 <td>${item.estado.nombre}</td>
-<td><a href="${pageContext.request.contextPath}/backlog/edit/${item.id}">Editar</a></td>
+<td>
+<a href="${pageContext.request.contextPath}/backlog/edit/${item.id}">Editar</a> 
+<a href="${pageContext.request.contextPath}/backlog/delete/${item.id}">Borrar</a>
+</td>
 </tr>
 </c:forEach>
 </table>

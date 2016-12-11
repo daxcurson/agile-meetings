@@ -3,6 +3,7 @@ package agilemeetings.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -23,12 +24,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.model.EstadoBacklogItem;
+import agilemeetings.model.ListboxItem;
 import agilemeetings.model.ProductBacklogItem;
 import agilemeetings.model.Proyecto;
 import agilemeetings.model.propertyeditor.EstadoBacklogItemEditor;
@@ -76,7 +79,26 @@ public class ProductBacklogController extends AppController
 		}
 		return modelo;
 	}
-	
+	@RequestMapping("/listar_ajax/{proyectoId}")
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_BACKLOG_LISTAR')")
+	public @ResponseBody List<ListboxItem> listarProductBacklogJson(@PathVariable("proyectoId") Integer proyectoId)
+	{
+		Proyecto p=proyectoService.getProyectoById(proyectoId);
+		
+		List<ListboxItem> list=new LinkedList<ListboxItem>();
+		// Ahora, obtengo la lista de backlog items del proyecto, y los
+		// voy cargando en la lista para informarla al pickList.
+		Iterator<ProductBacklogItem> i=p.getProductBacklog().iterator();
+		while(i.hasNext())
+		{
+			ProductBacklogItem pbitem=i.next();
+			ListboxItem item=new ListboxItem();
+			item.setId(pbitem.getId());
+			item.setText(pbitem.getTitulo());
+			list.add(item);
+		}
+		return list;
+	}
 	private ModelAndView cargarFormBacklogItem(String vista,ProductBacklogItem item)
 	{
 		ModelAndView modelo=new ModelAndView(vista);
@@ -181,7 +203,7 @@ public class ProductBacklogController extends AppController
 	@RequestMapping(value="/delete/{backlogId}",method=RequestMethod.GET)
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_BACKLOG_DELETE')")
 	public ModelAndView confirmarBorradoProductBacklog(@PathVariable("backlogId") Integer backlogId,
-			BindingResult result,ModelMap model)
+			ModelMap model)
 	{
 		// Muestra una pantalla de confirmacion.
 		// Busco el usuario y lo cargo en el formulario.

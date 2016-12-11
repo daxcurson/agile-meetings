@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import agilemeetings.dao.SprintDAO;
+import agilemeetings.exceptions.SprintAsociadaException;
 import agilemeetings.model.Proyecto;
 import agilemeetings.model.Sprint;
 import agilemeetings.service.SprintService;
@@ -40,5 +41,16 @@ public class SprintServiceImpl implements SprintService
 	public void grabar(Sprint sprint) 
 	{
 		sprintDAO.grabar(sprint);
+	}
+
+	@Override
+	public void borrarSprint(Sprint sprint) throws SprintAsociadaException 
+	{
+		// Hay que chequear que este sprint no tenga items de product backlog asociados
+		// antes de borrar.
+		if(sprint.getItems().size()>0)
+			throw new SprintAsociadaException();
+		else
+			sprintDAO.borrar(sprint);
 	}
 }

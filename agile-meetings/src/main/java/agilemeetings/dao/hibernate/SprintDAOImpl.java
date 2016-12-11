@@ -50,5 +50,4 @@ public class SprintDAOImpl implements SprintDAO
 	{
 		sessionFactory.getCurrentSession().delete(s);
 	}
-	
 }

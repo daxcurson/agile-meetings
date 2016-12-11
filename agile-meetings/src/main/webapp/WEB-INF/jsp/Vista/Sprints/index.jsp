@@ -25,7 +25,10 @@
 <td>${sprint.fecha_fin}</td>
 <td>${sprint.nombre}</td>
 <td>${sprint.estado.nombre}</td>
-<td><a href="${pageContext.request.contextPath}/sprints/edit/${sprint.id}">Editar</a></td>
+<td>
+<a href="${pageContext.request.contextPath}/sprints/edit/${sprint.id}">Editar</a>
+<a href="${pageContext.request.contextPath}/sprints/backlog/${sprint.id}">Backlog del Sprint</a>
+</td> 
 </tr>
 </c:forEach>
 </table>

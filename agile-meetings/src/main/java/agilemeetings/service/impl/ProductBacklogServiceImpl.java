@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import agilemeetings.dao.EstadoBacklogItemDAO;
 import agilemeetings.dao.ProductBacklogDAO;
@@ -58,6 +59,7 @@ public class ProductBacklogServiceImpl implements ProductBacklogService
 		productBacklogDAO.update(backlogItem);
 	}
 	@Override
+	@Transactional
 	public void borrarBacklogItem(ProductBacklogItem backlogItem) 
 	{
 		productBacklogDAO.delete(backlogItem);

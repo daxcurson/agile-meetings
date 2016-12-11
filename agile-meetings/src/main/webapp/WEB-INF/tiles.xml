@@ -24,6 +24,13 @@
 	    	</definition>
     	</put-attribute>
     </definition>
+	<definition name="backlog_delete" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/ProductBacklog/delete.jsp">
+				<put-attribute name="view_backlog_item" value="/WEB-INF/jsp/Vista/ProductBacklog/view_backlog_item.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
     <definition name="backlog_edit" extends="base.definition">
  		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/ProductBacklog/edit.jsp">
@@ -129,6 +136,16 @@
     	<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Sprints/add.jsp">
 		    	<put-attribute name="form_sprint" value="/WEB-INF/jsp/Vista/Sprints/form_sprint.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="sprints_backlog" extends="base.definition">
+        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Sprints/sprint_backlog.jsp"/>
+    </definition>
+    <definition name="sprints_delete" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Sprints/delete.jsp">
+		    	<put-attribute name="view_sprint" value="/WEB-INF/jsp/Vista/Sprints/view_sprint.jsp"/>
 	    	</definition>
     	</put-attribute>
     </definition>
