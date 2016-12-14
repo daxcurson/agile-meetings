@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
@@ -93,7 +94,7 @@ public class SprintsController extends AppController
 			@PathVariable("proyectoId") Integer proyectoId,
 			@Valid @ModelAttribute("sprint")
 	Sprint sprint,
-	BindingResult result,ModelMap model)
+	BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -113,7 +114,7 @@ public class SprintsController extends AppController
 			//{
 				Proyecto p=proyectoService.getProyectoById(proyectoId);
 				sprintService.agregar(sprint,p);
-				model.addAttribute("message","Sprint agregada exitosamente");
+				redirectAttributes.addFlashAttribute("message","Sprint agregada exitosamente");
 			//}
 			//catch(ReunionExistenteException e)
 			//{
@@ -138,7 +139,7 @@ public class SprintsController extends AppController
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_SPRINTS_EDIT')")
 	public ModelAndView editarSprint(@PathVariable("sprintId") Integer sprintId,
 			@Valid @ModelAttribute("sprint") Sprint sprint,
-			BindingResult result,ModelMap model)
+			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -157,7 +158,7 @@ public class SprintsController extends AppController
 			//try
 			//{
 				sprintService.grabar(sprint);
-				model.addAttribute("message","Sprint editado exitosamente");
+				redirectAttributes.addFlashAttribute("message","Sprint editado exitosamente");
 			//}
 			//catch(ReunionExistenteException e)
 			//{
@@ -183,7 +184,7 @@ public class SprintsController extends AppController
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_SPRINT_DELETE')")
 	public ModelAndView borrarSprint(@PathVariable("sprintId") Integer sprintId,
 			@Valid @ModelAttribute("sprint") Sprint sprint,
-			BindingResult result,ModelMap model)
+			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		ModelAndView modelo=new ModelAndView("redirect:/sprints/listar/"+sprint.getProyecto().getId());
 		String message="Sprint borrado";
@@ -198,8 +199,8 @@ public class SprintsController extends AppController
 			message="Este sprint tiene items de backlog asociados. Borrelos primero";
 			type="error";
 		}
-		modelo.addObject("message",message);
-		modelo.addObject("type",type);
+		redirectAttributes.addFlashAttribute("message",message);
+		redirectAttributes.addFlashAttribute("type",type);
 		return modelo;
 	}
 	@Descripcion(value="Agregar items del product backlog a un Sprint",permission="ROLE_SPRINT_ABM")

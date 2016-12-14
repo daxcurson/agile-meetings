@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
@@ -123,7 +124,7 @@ public class ProductBacklogController extends AppController
 			@PathVariable("proyectoId") Integer proyectoId,
 			@Valid @ModelAttribute("backlog_item")
 	ProductBacklogItem backlogItem,
-	BindingResult result,ModelMap model)
+	BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -142,7 +143,7 @@ public class ProductBacklogController extends AppController
 			try
 			{
 				backlogService.agregar(backlogItem,proyectoId);
-				model.addAttribute("message","Item agregado exitosamente");
+				redirectAttributes.addFlashAttribute("message","Item agregado exitosamente");
 			}
 			catch(Exception e)
 			{
@@ -167,7 +168,7 @@ public class ProductBacklogController extends AppController
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_BACKLOG_EDIT')")
 	public ModelAndView editarBacklogItem(@PathVariable("backlogId") Integer backlogId,
 			@Valid @ModelAttribute("backlog_item") ProductBacklogItem backlogItem,
-			BindingResult result,ModelMap model)
+			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -189,7 +190,7 @@ public class ProductBacklogController extends AppController
 				log.trace("Voy a grabar");
 				backlogService.grabarBacklogItem(backlogItem);
 				log.trace("Listo, grabe");
-				model.addAttribute("message","Item editado exitosamente");
+				redirectAttributes.addFlashAttribute("message","Item editado exitosamente");
 			}
 			catch(Exception e)
 			{

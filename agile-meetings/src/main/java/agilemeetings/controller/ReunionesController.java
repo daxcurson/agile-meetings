@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
@@ -66,7 +67,7 @@ public class ReunionesController extends AppController
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView agregarReunion(@Valid @ModelAttribute("reunion")
 	Reunion reunion,
-	BindingResult result,ModelMap model)
+	BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -85,7 +86,7 @@ public class ReunionesController extends AppController
 			try
 			{
 				reunionService.agregar(reunion);
-				model.addAttribute("message","Reunion agregada exitosamente");
+				redirectAttributes.addFlashAttribute("message","Reunion agregada exitosamente");
 			}
 			catch(ReunionExistenteException e)
 			{
@@ -110,7 +111,7 @@ public class ReunionesController extends AppController
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_REUNIONES_EDIT')")
 	public ModelAndView editarReunion(@PathVariable("proyectoId") Integer proyectoId,
 			@Valid @ModelAttribute("reunion") Reunion reunion,
-			BindingResult result,ModelMap model)
+			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -129,7 +130,7 @@ public class ReunionesController extends AppController
 			try
 			{
 				reunionService.grabar(reunion);
-				model.addAttribute("message","Proyecto editado exitosamente");
+				redirectAttributes.addFlashAttribute("message","Proyecto editado exitosamente");
 			}
 			catch(ReunionExistenteException e)
 			{

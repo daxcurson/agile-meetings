@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
@@ -96,7 +97,7 @@ public class ProyectosController extends AppController
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView agregarProyecto(@Valid @ModelAttribute("proyecto")
 	Proyecto proyecto,
-	BindingResult result,ModelMap model)
+	BindingResult result,ModelMap model, final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -115,7 +116,7 @@ public class ProyectosController extends AppController
 			try
 			{
 				proyectoService.agregar(proyecto);
-				model.addAttribute("message","Proyecto agregado exitosamente");
+				redirectAttributes.addFlashAttribute("message","Proyecto agregado exitosamente");
 			}
 			catch(ProyectoExistenteException e)
 			{
@@ -186,7 +187,8 @@ public class ProyectosController extends AppController
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_PROYECTOS_EDIT')")
 	public ModelAndView editarProyecto(@PathVariable("proyectoId") Integer proyectoId,
 			@Valid @ModelAttribute("proyecto") Proyecto proyecto,
-			BindingResult result,ModelMap model)
+			BindingResult result,ModelMap model,
+			final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -205,7 +207,7 @@ public class ProyectosController extends AppController
 			try
 			{
 				proyectoService.grabar(proyecto);
-				model.addAttribute("message","Proyecto editado exitosamente");
+				redirectAttributes.addFlashAttribute("message","Proyecto editado exitosamente");
 			}
 			catch(ProyectoExistenteException e)
 			{
