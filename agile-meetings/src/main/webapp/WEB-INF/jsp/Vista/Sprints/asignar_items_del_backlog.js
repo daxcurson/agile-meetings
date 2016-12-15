@@ -23,10 +23,20 @@ function cargar_items_backlog(proyecto_id)
 					leftTitle: "Product Backlog",
 					rightTitle: "Este Sprint"
 				});
-
 		$("#asignarItems").click(function () 
 		{
 			console.log(pick.getValues());
+			$.post("${pageContext.request.contextPath}${url}",
+			{
+				_csrf: "${_csrf.token}",
+				values: pick.getValues()
+			},
+			function(response) 
+			{
+				// Si el request tiene exito, no voy a necesitar hacer nada aqui...
+				// El sistema va a hacer un Redirect a la lista de sprints
+				// del proyecto.
+			}, 'json');
 		});
 	});
 }

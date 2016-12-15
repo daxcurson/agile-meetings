@@ -211,6 +211,18 @@ public class SprintsController extends AppController
 		Sprint s=sprintService.getSprintById(sprintId);
 		ModelAndView m=new ModelAndView("sprints_backlog");
 		m.addObject("sprint",s);
+		// Le mando mi url para que lo ponga incluido en el javascript que proceso!
+		m.addObject("url","/sprints/backlog/"+sprintId);
+		return m;
+	}
+	@RequestMapping(value="/backlog/{sprintId}",method=RequestMethod.POST)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_SPRINT_ABM')")
+	public ModelAndView procesarAsignacionProductBacklog(@PathVariable("sprintId") Integer sprintId,
+			@Valid @ModelAttribute("sprint") Sprint sprint,
+			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
+	{
+		ModelAndView m=new ModelAndView("redirect:/sprints/listar/"+sprint.getProyecto().getId());
+		
 		return m;
 	}
 }
