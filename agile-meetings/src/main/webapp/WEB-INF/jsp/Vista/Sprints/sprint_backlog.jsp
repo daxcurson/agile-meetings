@@ -15,6 +15,25 @@
 <p>De los items de product backlog del proyecto, seleccione aquellos que ser&aacute;n
 inclu&iacute;dos en este Sprint.</p>
 
-<div id="pickList"></div>
+<div id="pickList">
+	<div class='row'>
+		<div class='col-sm-5'>
+			<h2>Product Backlog</h2>
+			<select class='form-control pickListSelect pickData' multiple></select>
+		</div>
+		<div class='col-sm-2 pickListButtons'>
+			<button  class='pAdd btn btn-primary btn-sm'>Agregar</button>
+			<button  class='pAddAll btn btn-primary btn-sm'>Agregar Todo</button>
+			<button  class='pRemove btn btn-primary btn-sm'>Quitar</button>
+			<button  class='pRemoveAll btn btn-primary btn-sm'>Quitar todo</button>
+		</div>
+<form:form method="post" commandName="sprint_list">
+		<div class='col-sm-5'>
+			<h2>Sprint</h2>
+			<form:select path="items" multiple="true" class='form-control pickListSelect pickListResult' />
+		</div>
+	</div>
+</div>
 <br><br>
 <button class="btn btn-primary" id="asignarItems">Asignar Items</button>
+</form:form>

@@ -3,6 +3,7 @@ package agilemeetings.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -30,9 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.SprintAsociadaException;
-import agilemeetings.model.EstadoProyecto;
-import agilemeetings.model.Proyecto;
-import agilemeetings.model.Sprint;
+import agilemeetings.model.*;
 import agilemeetings.model.propertyeditor.EstadoProyectoEditor;
 import agilemeetings.service.ProyectoService;
 import agilemeetings.service.SprintService;
@@ -211,18 +212,26 @@ public class SprintsController extends AppController
 		Sprint s=sprintService.getSprintById(sprintId);
 		ModelAndView m=new ModelAndView("sprints_backlog");
 		m.addObject("sprint",s);
+		m.addObject("sprint_list",new SprintList());
 		// Le mando mi url para que lo ponga incluido en el javascript que proceso!
 		m.addObject("url","/sprints/backlog/"+sprintId);
 		return m;
 	}
 	@RequestMapping(value="/backlog/{sprintId}",method=RequestMethod.POST)
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_SPRINT_ABM')")
-	public ModelAndView procesarAsignacionProductBacklog(@PathVariable("sprintId") Integer sprintId,
+	public @ResponseBody ModelAndView procesarAsignacionProductBacklog(@PathVariable("sprintId") Integer sprintId,
 			@Valid @ModelAttribute("sprint") Sprint sprint,
+			@RequestParam("items") LinkedList<ListItem> items,
 			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		ModelAndView m=new ModelAndView("redirect:/sprints/listar/"+sprint.getProyecto().getId());
-		
+		log.trace("Recibi items");
+		Iterator<ListItem> i=items.iterator();
+		while(i.hasNext())
+		{
+			ListItem x=i.next();
+			log.trace("id="+x.getId()+",value="+x.getValue());
+		}
 		return m;
 	}
 }
