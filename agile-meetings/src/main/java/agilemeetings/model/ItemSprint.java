@@ -49,4 +49,15 @@ public class ItemSprint
 	public void setSprint(Sprint sprint) {
 		this.sprint = sprint;
 	}
+	@Override
+	public boolean equals(Object otro)
+	{
+		if(otro instanceof ItemSprint)
+		{
+			if(this.getItem().equals(((ItemSprint) otro).getItem()) && 
+					this.getSprint().equals(((ItemSprint) otro).getSprint()))
+				return true;
+		}
+		return false;
+	}
 }

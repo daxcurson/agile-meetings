@@ -70,4 +70,20 @@ public class ProductBacklogItem
 	public void setEstado(EstadoBacklogItem estado) {
 		this.estado = estado;
 	}
+	public boolean equals(Object otro)
+	{
+		if(
+				otro instanceof ProductBacklogItem &&
+				this.getDescripcion().equals(((ProductBacklogItem)otro).getDescripcion())
+				&&
+				this.getTitulo().equals(((ProductBacklogItem)otro).getTitulo())
+				&&
+				this.getEstado().equals(((ProductBacklogItem)otro).getEstado())
+				&&
+				this.getFecha_creacion().equals(((ProductBacklogItem)otro).getFecha_creacion())
+		)
+			return true;
+		else
+			return false;
+	}
 }

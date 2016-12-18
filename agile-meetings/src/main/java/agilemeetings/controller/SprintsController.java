@@ -3,7 +3,6 @@ package agilemeetings.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -11,6 +10,7 @@ import javax.validation.Valid;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -35,6 +35,8 @@ import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.SprintAsociadaException;
 import agilemeetings.model.*;
 import agilemeetings.model.propertyeditor.EstadoProyectoEditor;
+import agilemeetings.model.propertyeditor.ProductBacklogItemEditor;
+import agilemeetings.service.ProductBacklogService;
 import agilemeetings.service.ProyectoService;
 import agilemeetings.service.SprintService;
 
@@ -49,14 +51,38 @@ public class SprintsController extends AppController
 	private SprintService sprintService;
 	@Autowired
 	private ProyectoService proyectoService;
+	@Autowired
+	private ProductBacklogService productBacklogService;
 
 	@InitBinder
     public void initBinder(WebDataBinder binder) 
 	{
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
+		binder.registerCustomEditor(ProductBacklogItem.class, new ProductBacklogItemEditor(productBacklogService));
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 		binder.registerCustomEditor(EstadoProyecto.class, new EstadoProyectoEditor(proyectoService));
+		binder.registerCustomEditor(List.class, "to_items", new CustomCollectionEditor(List.class)
+				{
+			protected Object convertElement(Object element) {
+				if (element instanceof ItemSprint) {
+					System.out.println("Converting from ItemSprint to ItemSprint: " + element);
+					return element;
+				}
+				if (element instanceof String) {
+					// Recibo id de product backlog. Si este item ya esta asignado a este
+					// sprint, no hago nada. Si no, tengo que crearlo.
+					ProductBacklogItem staff=productBacklogService.getBacklogItemById(Integer.parseInt((String) element));
+					System.out.println("Looking up staff for id " + element + ": " + staff);
+					ItemSprint i=new ItemSprint();
+					i.setItem(staff);
+					return i;
+				}
+				System.out.println("Don't know what to do with: " + element);
+				return null;
+			}
+				}
+				);
 	}
 
 	@RequestMapping("/listar/{proyectoId}")
@@ -212,7 +238,9 @@ public class SprintsController extends AppController
 		Sprint s=sprintService.getSprintById(sprintId);
 		ModelAndView m=new ModelAndView("sprints_backlog");
 		m.addObject("sprint",s);
-		m.addObject("sprint_list",new SprintList());
+		// Tengo que pedir el product backlog de este proyecto.
+		List<ProductBacklogItem> p=productBacklogService.listarProductBacklog(s.getProyecto());
+		m.addObject("product_backlog",p);
 		// Le mando mi url para que lo ponga incluido en el javascript que proceso!
 		m.addObject("url","/sprints/backlog/"+sprintId);
 		return m;
@@ -221,16 +249,16 @@ public class SprintsController extends AppController
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_SPRINT_ABM')")
 	public @ResponseBody ModelAndView procesarAsignacionProductBacklog(@PathVariable("sprintId") Integer sprintId,
 			@Valid @ModelAttribute("sprint") Sprint sprint,
-			@RequestParam("items") LinkedList<ListItem> items,
+			@RequestParam("to_items") List<ProductBacklogItem> items,
 			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		ModelAndView m=new ModelAndView("redirect:/sprints/listar/"+sprint.getProyecto().getId());
 		log.trace("Recibi items");
-		Iterator<ListItem> i=items.iterator();
+		Iterator<ProductBacklogItem> i=items.iterator();
 		while(i.hasNext())
 		{
-			ListItem x=i.next();
-			log.trace("id="+x.getId()+",value="+x.getValue());
+			ProductBacklogItem x=i.next();
+			log.trace("id="+x.getId()+", value="+x.getTitulo());
 		}
 		return m;
 	}

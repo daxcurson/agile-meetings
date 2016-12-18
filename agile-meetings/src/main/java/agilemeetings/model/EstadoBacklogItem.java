@@ -33,4 +33,13 @@ public class EstadoBacklogItem
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	public boolean equals(Object otro)
+	{
+		if(
+			this.getNombre().equals(((EstadoBacklogItem)otro).getNombre())
+		)
+			return true;
+		else
+			return false;
+	}
 }

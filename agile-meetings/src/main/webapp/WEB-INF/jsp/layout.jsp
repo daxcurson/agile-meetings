@@ -21,7 +21,7 @@
     <link href="${pageContext.request.contextPath}/css/jquery-ui.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
   </head>
 
   <body>
