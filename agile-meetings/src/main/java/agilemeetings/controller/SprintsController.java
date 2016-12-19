@@ -236,29 +236,45 @@ public class SprintsController extends AppController
 	public ModelAndView mostrarPantallaAsignacionProductBacklog(@PathVariable("sprintId") Integer sprintId)
 	{
 		Sprint s=sprintService.getSprintById(sprintId);
-		ModelAndView m=new ModelAndView("sprints_backlog");
-		m.addObject("sprint",s);
 		// Tengo que pedir el product backlog de este proyecto.
 		List<ProductBacklogItem> p=productBacklogService.listarProductBacklog(s.getProyecto());
-		m.addObject("product_backlog",p);
 		// Le mando mi url para que lo ponga incluido en el javascript que proceso!
-		m.addObject("url","/sprints/backlog/"+sprintId);
+		return this.cargarPantallaAsignacionProductBacklog(s, p);
+	}
+	private ModelAndView cargarPantallaAsignacionProductBacklog(Sprint s,List<ProductBacklogItem> l)
+	{
+		ModelAndView m=new ModelAndView("sprints_backlog");
+		m.addObject("sprint",s);
+		m.addObject("product_backlog",l);
+		m.addObject("url","/sprints/backlog/"+s.getId());
 		return m;
 	}
 	@RequestMapping(value="/backlog/{sprintId}",method=RequestMethod.POST)
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_SPRINT_ABM')")
 	public @ResponseBody ModelAndView procesarAsignacionProductBacklog(@PathVariable("sprintId") Integer sprintId,
 			@Valid @ModelAttribute("sprint") Sprint sprint,
-			@RequestParam("to_items") List<ProductBacklogItem> items,
+			@RequestParam(value="to_items",required=false) List<ProductBacklogItem> items,
 			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		ModelAndView m=new ModelAndView("redirect:/sprints/listar/"+sprint.getProyecto().getId());
-		log.trace("Recibi items");
-		Iterator<ProductBacklogItem> i=items.iterator();
-		while(i.hasNext())
+		// Si la lista esta vacia, dar un mensaje de error.
+		if(items==null || items.isEmpty())
 		{
-			ProductBacklogItem x=i.next();
-			log.trace("id="+x.getId()+", value="+x.getTitulo());
+			model.addAttribute("message","El sprint no tiene items asignados");
+			model.addAttribute("type","danger");
+			List<ProductBacklogItem> p=productBacklogService.listarProductBacklog(sprint.getProyecto());
+			m=this.cargarPantallaAsignacionProductBacklog(sprint,p);
+		}
+		else
+		{
+			log.trace("Recibi items");
+			Iterator<ProductBacklogItem> i=items.iterator();
+			while(i.hasNext())
+			{
+				ProductBacklogItem x=i.next();
+				log.trace("id="+x.getId()+", value="+x.getTitulo());
+			}
+			sprintService.asignarProductBacklogItems(sprint, items);
 		}
 		return m;
 	}

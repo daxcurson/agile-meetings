@@ -27,7 +27,7 @@ public class SprintDAOImpl implements SprintDAO
 	@Override
 	public Sprint getById(Integer sprintId) 
 	{
-		Sprint b=(Sprint) sessionFactory.getCurrentSession().createQuery("from Sprint where id="+sprintId).getSingleResult();
+		Sprint b=(Sprint) sessionFactory.getCurrentSession().createQuery("select s from Sprint s join fetch s.items where s.id="+sprintId).getSingleResult();
 		Hibernate.initialize(b.getProyecto());
 		return b;
 	}

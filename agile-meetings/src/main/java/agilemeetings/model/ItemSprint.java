@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 @Entity
 @Table(name="items_sprint")
 /**
@@ -20,6 +23,8 @@ import javax.persistence.Table;
  */
 public class ItemSprint 
 {
+	private static Logger log=LogManager.getLogger(ItemSprint.class);
+
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +57,7 @@ public class ItemSprint
 	@Override
 	public boolean equals(Object otro)
 	{
+		log.trace("Me estan preguntando si yo, con item de id "+this.getItem().getId()+" soy igual al ItemSprint que tiene un item con id "+((ItemSprint)otro).getItem().getId());
 		if(otro instanceof ItemSprint)
 		{
 			if(this.getItem().equals(((ItemSprint) otro).getItem()) && 
