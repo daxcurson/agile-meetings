@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -34,7 +36,8 @@ public class Sprint
 	@ManyToOne
 	@JoinColumn(name="estado_id")
 	private EstadoProyecto estado;
-	@OneToMany(mappedBy="sprint",fetch=FetchType.LAZY,orphanRemoval=true)
+	@OneToMany(targetEntity=ItemSprint.class,mappedBy="sprint",fetch=FetchType.LAZY,orphanRemoval=true)
+	@Cascade({CascadeType.ALL})
 	private List<ItemSprint> items;
 	@NotEmpty
 	private String nombre;

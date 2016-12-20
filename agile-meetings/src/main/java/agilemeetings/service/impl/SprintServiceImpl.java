@@ -87,24 +87,25 @@ public class SprintServiceImpl implements SprintService
 				i.setItem(item);
 				if(!itemsActuales.contains(item))
 				{
-					log.trace("No esta incluido, hay que grabarlo");
+					log.trace("No esta incluido, hay que grabarlo. Sprint id:"+i.getSprint().getId()+", item id:"+i.getItem().getId());
 					itemsActuales.add(i);
 				}
 			}
 			// Ahora, si el item esta asignado al sprint pero no viene en la lista
 			// de items, hay que sacarlo.
 			log.trace("Ahora voy al reves y busco si a itemsActuales le sobran items");
-			Iterator<ItemSprint> iteratorSprint=itemsActuales.iterator();
-			while(iteratorSprint.hasNext())
+			Iterator<ItemSprint> iteratorItemsActuales=itemsActuales.iterator();
+			while(iteratorItemsActuales.hasNext())
 			{
-				ItemSprint i=iteratorSprint.next();
-				log.trace("En el sprint ya existe el item de id "+i.getItem().getId()+", esta contenido en la lista?");
+				ItemSprint i=iteratorItemsActuales.next();
+				log.trace("En el sprint ya existe el item de id "+i.getItem().getId()+", si no esta en la lista, hay que sacarlo");
 				if(!listaItems.contains(i.getItem()))
 				{
 					log.trace("No, no esta contenido, hay que borrarlo");
-					iteratorSprint.remove();
+					iteratorItemsActuales.remove();
 				}
 			}
+			sprint.setItems(itemsActuales);
 		}
 		sprintDAO.grabar(sprint);
 	}
