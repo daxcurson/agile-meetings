@@ -67,6 +67,7 @@ public class ReunionesController extends AppController
 		ModelAndView modelo=new ModelAndView(vista);
 		List<Proyecto> proyectos=proyectoService.listarProyectos();
 		modelo.addObject("proyectos",proyectos);
+		modelo.addObject("reunion",reunion);
 		return modelo;
 	}
 	

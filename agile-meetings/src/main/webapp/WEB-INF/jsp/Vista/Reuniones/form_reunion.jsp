@@ -7,6 +7,7 @@
 		<label for="proyecto">Proyecto</label>
 		<form:select path="proyecto" id="ReunionProyecto" class="form-control">
 		<form:options items="${proyectos}" itemValue="id" itemLabel="nombre" />
+		<form:errors path="proyecto"/>
 		</form:select>
 	</div>
 	<div class="form-group">
@@ -21,7 +22,7 @@
 	</div>
 	<div class="form-group">
 		<label for="resumen">Resumen de la Reuni&oacute;n</label>
-		<form:textarea cols="80" rows="10" path="resumen" id="ReunionResumen" class="formcontrol" />
+		<form:textarea cols="80" rows="10" path="resumen" id="ReunionResumen" class="form-control" />
 		<form:errors path="resumen"/>
 	</div>
 </fieldset>
