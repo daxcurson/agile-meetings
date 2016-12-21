@@ -3,6 +3,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 
+<h1>Agregar reuni&oacute;n</h1>
+
 <form:form method="post" action="add" commandName="reunion">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	<tiles:insertAttribute name="form_reunion"/>
