@@ -11,4 +11,5 @@ public interface ReunionService
 	public List<Reunion> listarReuniones();
 	public void agregar(Reunion reunion) throws ReunionExistenteException;
 	public void grabar(Reunion reunion) throws ReunionExistenteException;
+	public List<Reunion> listarReunionesProyecto(int proyectoId);
 }

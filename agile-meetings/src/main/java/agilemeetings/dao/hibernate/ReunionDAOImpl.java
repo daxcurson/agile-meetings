@@ -43,4 +43,10 @@ public class ReunionDAOImpl implements ReunionDAO
 	{
 		sessionFactory.getCurrentSession().saveOrUpdate(reunion);
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Reunion> listarReunionesProyecto(int proyectoId) 
+	{
+		return (List<Reunion>) sessionFactory.getCurrentSession().createQuery("from Reunion where proyecto_id="+proyectoId).getResultList();
+	}
 }

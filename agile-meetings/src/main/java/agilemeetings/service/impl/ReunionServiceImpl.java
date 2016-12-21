@@ -21,6 +21,11 @@ public class ReunionServiceImpl implements ReunionService
 		return reunionDAO.listarReuniones();
 	}
 	@Override
+	public List<Reunion> listarReunionesProyecto(int proyectoId)
+	{
+		return reunionDAO.listarReunionesProyecto(proyectoId);
+	}
+	@Override
 	public Reunion getReunionById(Integer reunionId) 
 	{
 		return reunionDAO.getReunionById(reunionId);

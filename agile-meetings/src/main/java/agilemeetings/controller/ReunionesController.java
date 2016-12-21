@@ -25,7 +25,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.ReunionExistenteException;
+import agilemeetings.model.Proyecto;
 import agilemeetings.model.Reunion;
+import agilemeetings.service.ProyectoService;
 import agilemeetings.service.ReunionService;
 
 @Controller
@@ -37,7 +39,8 @@ public class ReunionesController extends AppController
 	private static Logger log=LogManager.getLogger(ReunionesController.class);
 	@Autowired
 	private ReunionService reunionService;
-	
+	@Autowired
+	private ProyectoService proyectoService;
 	@RequestMapping({"/","/index"})
 	@Descripcion(value="Listar reuniones",permission="ROLE_REUNIONES_MOSTRAR_MENU")
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_REUNIONES_MOSTRAR_MENU')")
@@ -49,9 +52,21 @@ public class ReunionesController extends AppController
 		modelo.addObject("reuniones",reunionService.listarReuniones());
 		return modelo;
 	}
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_REUNIONES_MOSTRAR_MENU')")
+	@RequestMapping(value="/listar/{proyectoId}",method=RequestMethod.GET)
+	public ModelAndView listarReunionesProyecto(@PathVariable("proyectoId") Integer proyectoId)
+	{
+		// Leo las reuniones que hubieron para que aparezcan
+		// en la pantalla indice.
+		ModelAndView modelo=new ModelAndView("reuniones_index");
+		modelo.addObject("reuniones",reunionService.listarReunionesProyecto(proyectoId));
+		return modelo;
+	}
 	private ModelAndView cargarFormReunion(String vista,Reunion reunion)
 	{
 		ModelAndView modelo=new ModelAndView(vista);
+		List<Proyecto> proyectos=proyectoService.listarProyectos();
+		modelo.addObject("proyectos",proyectos);
 		return modelo;
 	}
 	

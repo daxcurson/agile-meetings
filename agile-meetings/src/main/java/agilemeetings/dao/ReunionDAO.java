@@ -10,4 +10,5 @@ public interface ReunionDAO
 	public Reunion getReunionById(int id);
 	public void agregar(Reunion reunion);
 	public void grabar(Reunion reunion);
+	public List<Reunion> listarReunionesProyecto(int proyectoId);
 }

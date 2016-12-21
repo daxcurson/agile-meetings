@@ -5,7 +5,9 @@
 <fieldset>
 	<div class="form-group">
 		<label for="proyecto">Proyecto</label>
-		
+		<form:select path="proyecto" id="ReunionProyecto" class="form-control">
+		<form:options items="${proyectos}" itemValue="id" itemLabel="nombre" />
+		</form:select>
 	</div>
 	<div class="form-group">
 		<label for="fecha_comienzo">Fecha de Comienzo</label>
