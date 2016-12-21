@@ -35,10 +35,16 @@ public class EstadoBacklogItem
 	}
 	public boolean equals(Object otro)
 	{
-		if(
-			this.getNombre().equals(((EstadoBacklogItem)otro).getNombre())
-		)
-			return true;
+		if(otro instanceof EstadoBacklogItem)
+		{
+			EstadoBacklogItem o=(EstadoBacklogItem)otro;
+			if(
+				o.getNombre().equals(this.getNombre())
+			)
+				return true;
+			else
+				return false;
+		}
 		else
 			return false;
 	}

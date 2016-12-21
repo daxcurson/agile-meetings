@@ -45,7 +45,11 @@ inclu&iacute;dos en este Sprint.</p>
     </div>
 
     <div class="col-xs-5">
-        <select name="to_items" id="multiselect_to" class="form-control" size="8" multiple="multiple"></select>
+        <select name="to_items" id="multiselect_to" class="form-control" size="8" multiple="multiple">
+        	<c:forEach items="${sprint.items}" var="item">
+        		<option value="<c:out value="${item.item.id}"/>"><c:out value="${item.item.titulo}"/></option>
+        	</c:forEach>
+        </select>
     </div>
 </div>
 <input type="submit" name="submit" value="Modificar Sprint Backlog">

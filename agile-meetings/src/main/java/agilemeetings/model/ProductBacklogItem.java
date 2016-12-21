@@ -17,6 +17,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="product_backlog_items")
 public class ProductBacklogItem 
 {
+	//private static Logger log=LogManager.getLogger(ProductBacklogItem.class);
+
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,17 +74,22 @@ public class ProductBacklogItem
 	}
 	public boolean equals(Object otro)
 	{
-		if(
-				otro instanceof ProductBacklogItem &&
-				this.getDescripcion().equals(((ProductBacklogItem)otro).getDescripcion())
+		if(otro instanceof ProductBacklogItem)
+		{
+			ProductBacklogItem o=(ProductBacklogItem)otro;
+			if(
+				o.getDescripcion().equals(this.getDescripcion())
 				&&
-				this.getTitulo().equals(((ProductBacklogItem)otro).getTitulo())
+				o.getTitulo().equals(this.getTitulo())
 				&&
-				this.getEstado().equals(((ProductBacklogItem)otro).getEstado())
+				o.getEstado().equals(this.getEstado())
 				&&
-				this.getFecha_creacion().equals(((ProductBacklogItem)otro).getFecha_creacion())
-		)
-			return true;
+				o.getFecha_creacion().equals(this.getFecha_creacion())
+			)
+				return true;
+			else
+				return false;
+		}
 		else
 			return false;
 	}

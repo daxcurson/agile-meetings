@@ -81,11 +81,11 @@ public class SprintServiceImpl implements SprintService
 			while(iterator.hasNext())
 			{
 				ProductBacklogItem item=iterator.next();
-				log.trace("En listaItems vino el item de id "+item.getId()+", esta contenido en itemsActuales?");
+				log.trace("En listaItems vino el item "+item.getTitulo()+" de id "+item.getId()+", esta contenido en itemsActuales?");
 				ItemSprint i=new ItemSprint();
 				i.setSprint(sprint);
 				i.setItem(item);
-				if(!itemsActuales.contains(item))
+				if(!itemsActuales.contains(i))
 				{
 					log.trace("No esta incluido, hay que grabarlo. Sprint id:"+i.getSprint().getId()+", item id:"+i.getItem().getId());
 					itemsActuales.add(i);

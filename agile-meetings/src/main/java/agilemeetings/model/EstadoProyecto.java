@@ -33,4 +33,17 @@ public class EstadoProyecto
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	@Override
+	public boolean equals(Object otro)
+	{
+		EstadoProyecto o=(EstadoProyecto)otro;
+		if(
+				o.getNombre().equals(this.getNombre())
+		)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
 }

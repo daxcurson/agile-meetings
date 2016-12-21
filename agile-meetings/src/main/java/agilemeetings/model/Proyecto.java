@@ -108,4 +108,25 @@ public class Proyecto
 	public void setProductBacklog(List<ProductBacklogItem> productBacklog) {
 		this.productBacklog = productBacklog;
 	}
+	@Override
+	public boolean equals(Object otro)
+	{
+		Proyecto o=(Proyecto)otro;
+		if(
+			(o.getEstado()==null && this.getEstado()==null) || (o.getEstado()!=null && this.getEstado()!=null && o.getEstado().equals(this.getEstado()))
+			&&
+			(o.getFecha_comienzo()==null && this.getFecha_comienzo()==null) || (o.getFecha_comienzo()!=null && this.getFecha_comienzo()!=null && o.getFecha_comienzo().equals(this.getFecha_comienzo()))
+			&&
+			(o.getFecha_fin()==null && this.getFecha_fin()==null) || (o.getFecha_fin()!=null && this.getFecha_fin()!=null && o.getFecha_fin().equals(this.getFecha_fin()))
+			&&
+			(o.getFecha_creacion()==null && this.getFecha_creacion()==null) || (o.getFecha_creacion()!=null && this.getFecha_creacion()!=null && o.getFecha_creacion().equals(this.getFecha_creacion()))
+			&&
+			(o.getNombre()==null && this.getNombre()==null) || (o.getNombre()!=null && this.getNombre()!=null && o.getNombre().equals(this.getNombre()))
+		)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
 }

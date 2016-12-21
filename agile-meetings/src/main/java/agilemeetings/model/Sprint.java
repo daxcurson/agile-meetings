@@ -92,4 +92,28 @@ public class Sprint
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	@Override
+	public boolean equals(Object otro)
+	{
+		// Una sprint va a ser igual a otra si tiene sus valores iguales.
+		Sprint o=(Sprint) otro;
+		if(
+			o.getDescripcion().equals(this.getDescripcion())
+			&&
+			o.getEstado().equals(this.getEstado())
+			&&
+			o.getFecha_comienzo().equals(this.getFecha_comienzo())
+			&&
+			o.getFecha_fin().equals(this.getFecha_fin())
+			&&
+			o.getNombre().equals(this.getNombre())
+			&&
+			o.getProyecto().equals(this.getProyecto())
+				)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
 }

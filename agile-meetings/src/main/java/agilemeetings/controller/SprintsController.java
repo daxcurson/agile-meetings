@@ -244,6 +244,21 @@ public class SprintsController extends AppController
 	private ModelAndView cargarPantallaAsignacionProductBacklog(Sprint s,List<ProductBacklogItem> l)
 	{
 		ModelAndView m=new ModelAndView("sprints_backlog");
+		// Bien, resulta que el sprint ya puede tener items del product backlog.
+		// En ese caso, vamos a filtrar aquellos items del product backlog que ya esten
+		// en el sprint.
+		Iterator<ProductBacklogItem> iteratorProductBacklog=l.iterator();
+		while(iteratorProductBacklog.hasNext())
+		{
+			ProductBacklogItem item=iteratorProductBacklog.next();
+			ItemSprint i=new ItemSprint();
+			i.setItem(item);
+			i.setSprint(s);
+			if(s.getItems().contains(i))
+			{
+				iteratorProductBacklog.remove();
+			}
+		}
 		m.addObject("sprint",s);
 		m.addObject("product_backlog",l);
 		m.addObject("url","/sprints/backlog/"+s.getId());
@@ -275,6 +290,8 @@ public class SprintsController extends AppController
 				log.trace("id="+x.getId()+", value="+x.getTitulo());
 			}
 			sprintService.asignarProductBacklogItems(sprint, items);
+			redirectAttributes.addFlashAttribute("message","Backlog del Sprint editado satisfactoriamente");
+			redirectAttributes.addFlashAttribute("type","success");
 		}
 		return m;
 	}
