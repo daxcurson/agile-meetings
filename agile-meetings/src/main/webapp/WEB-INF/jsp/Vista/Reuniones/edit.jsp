@@ -5,7 +5,7 @@
 
 <h1>Editar reuni&oacute;n</h1>
 
-<form:form method="post" action="edit" commandName="proyecto">
+<form:form method="post" action="edit" commandName="reunion">
 	<form:input id="ReunionId" class="form-control" path="id"/>
 	<tiles:insertAttribute name="form_reunion"/>
 	<input type="submit" name="editar_reunion" value="Editar Reunion">

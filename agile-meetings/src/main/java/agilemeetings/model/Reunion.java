@@ -1,10 +1,12 @@
 package agilemeetings.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-import org.joda.time.DateTime;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="reuniones")
@@ -14,9 +16,9 @@ public class Reunion
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	private DateTime fecha_comienzo;
-	private DateTime fecha_fin;
+	@NotNull
+	private Date fecha_comienzo;
+	private Date fecha_fin;
 	@OneToMany(targetEntity=PersonaReunion.class,cascade={CascadeType.ALL},
 	mappedBy="reunion")
 	private List<PersonaReunion> participantes;
@@ -29,6 +31,7 @@ public class Reunion
 	@ManyToOne
 	@JoinColumn(name="tipo_reunion_id")
 	private TipoReunion tipo_reunion;
+	@NotEmpty
 	private String asunto;
 	private String resumen;
 	private String acciones;
@@ -39,16 +42,16 @@ public class Reunion
 	public void setId(int id) {
 		this.id = id;
 	}
-	public DateTime getFecha_comienzo() {
+	public Date getFecha_comienzo() {
 		return fecha_comienzo;
 	}
-	public void setFecha_comienzo(DateTime fecha_comienzo) {
+	public void setFecha_comienzo(Date fecha_comienzo) {
 		this.fecha_comienzo = fecha_comienzo;
 	}
-	public DateTime getFecha_fin() {
+	public Date getFecha_fin() {
 		return fecha_fin;
 	}
-	public void setFecha_fin(DateTime fecha_fin) {
+	public void setFecha_fin(Date fecha_fin) {
 		this.fecha_fin = fecha_fin;
 	}
 	public List<PersonaReunion> getParticipantes() {

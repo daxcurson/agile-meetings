@@ -36,12 +36,17 @@ public class EstadoProyecto
 	@Override
 	public boolean equals(Object otro)
 	{
-		EstadoProyecto o=(EstadoProyecto)otro;
-		if(
-				o.getNombre().equals(this.getNombre())
-		)
+		if(otro instanceof EstadoProyecto)
 		{
-			return true;
+			EstadoProyecto o=(EstadoProyecto)otro;
+			if(
+					o.getNombre().equals(this.getNombre())
+			)
+			{
+				return true;
+			}
+			else
+				return false;
 		}
 		else
 			return false;

@@ -217,4 +217,13 @@ public class ProyectosController extends AppController
 			return modelo;
 		}
 	}
+	@RequestMapping(value="/listar_miembros/{proyectoId}",method=RequestMethod.GET)
+	@PreAuthorize("isAuthenticated() and (hasRole('ROLE_REUNIONES_AGREGAR'))")
+	public @ResponseBody List<RolPersona> listarMiembrosProyecto(@PathVariable("proyectoId") Integer proyectoId)
+	{
+		// Voy a extraer, derechito como viene, la lista de personas y sus roles,
+		// pero voy a asegurarme que Hibernate me traiga la lista de miembros del proyecto.
+		Proyecto p=proyectoService.getProyectoById(proyectoId);
+		return p.getMiembros();
+	}
 }

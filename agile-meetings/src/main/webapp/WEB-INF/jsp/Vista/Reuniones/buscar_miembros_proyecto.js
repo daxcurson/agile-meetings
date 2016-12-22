@@ -5,6 +5,12 @@ $(document).ready(function()
 		buttonImage: "${pageContext.request.contextPath}/img/cal.gif",
 		buttonText: "Calendario"
 		});
+	// convierto el selector multiple en un Chosen!
+	$("#ReunionParticipantes").chosen(
+			{
+				no_results_text: "No hay resultados"
+			}
+			);
 	// Agrego Datepickers a las fechas de comienzo y fin de curso.
 	$("#ReunionFechaComienzo").datepicker({ dateFormat: "yy-mm-dd" });
 	accionBuscarMiembrosProyecto();
@@ -29,6 +35,7 @@ function accionBuscarMiembrosProyecto()
 			if(miembros!== null)
 			{
 				populateMiembrosList(miembros);
+				$("#ReunionParticipantes").trigger("chosen:updated");
 			}
 		});
 	}
@@ -39,12 +46,12 @@ function accionBuscarMiembrosProyecto()
  * @param miembros
  * @returns
  */
-function populateMiembrosList(miembros)
+function populateMiembrosList(rolPersonas)
 {
 	var options="";
-	$.each(miembros,function(miembro)
+	$.each(rolPersonas,function(index,rolPersona)
 	{
-		options+="<option value="+miembro.id+">"+miembro.nombre+"</option>"
+		options+="<option value="+rolPersona.persona.id+">"+rolPersona.persona.nombre+"</option>"
 	}
 	);
 	$("#ReunionParticipantes").html(options);

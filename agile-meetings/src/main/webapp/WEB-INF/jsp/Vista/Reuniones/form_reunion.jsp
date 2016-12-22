@@ -5,6 +5,8 @@
 <script type="text/javascript">
 <%@include file="/WEB-INF/jsp/Vista/Reuniones/buscar_miembros_proyecto.js" %>
 </script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chosen.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/chosen.jquery.js"></script>
 
 <fieldset>
 	<div class="form-group">
@@ -23,7 +25,7 @@
 	</div>
 	<div class="form-group">
 		<label for="participantes">Participantes</label>
-		<form:select path="participantes" id="ReunionParticipantes" class="form-control" multiple="true">
+		<form:select data-placeholder="Elija miembros..." path="participantes" id="ReunionParticipantes" class="form-control" multiple="true">
 		</form:select>
 		<form:errors path="participantes"/>
 	</div>	
