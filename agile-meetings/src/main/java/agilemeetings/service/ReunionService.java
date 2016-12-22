@@ -15,4 +15,5 @@ public interface ReunionService
 	public List<Reunion> listarReunionesProyecto(int proyectoId);
 	public List<TipoReunion> listarTiposReunion();
 	public TipoReunion getTipoReunionById(int id);
+	public void borrar(int reunionId);
 }

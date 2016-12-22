@@ -8,7 +8,7 @@
 <a href="${pageContext.request.contextPath}/proyectos/add">Nuevo Proyecto</a>
 </p>
 
-<table>
+<table class="table">
 <tr>
 <th>Id</th>
 <th>Nombre</th>

@@ -193,6 +193,7 @@ public class ReunionesController extends AppController
 	public ModelAndView borrarReunion(@PathVariable("reunionId") Integer reunionId)
 	{
 		ModelAndView modelo=new ModelAndView("redirect:/reuniones/index");
+		reunionService.borrar(reunionId);
 		return modelo;
 	}
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_REUNIONES_VIEW')")
@@ -201,6 +202,7 @@ public class ReunionesController extends AppController
 	public ModelAndView verReunion(@PathVariable("reunionId") Integer reunionId)
 	{
 		ModelAndView modelo=new ModelAndView("reuniones_view");
+		modelo.addObject("reunion",reunionService.getReunionById(reunionId));
 		return modelo;
 	}
 }

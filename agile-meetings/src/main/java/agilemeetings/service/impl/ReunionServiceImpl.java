@@ -90,4 +90,9 @@ public class ReunionServiceImpl implements ReunionService
 	{
 		return tipoReunionDAO.getById(id);
 	}
+	@Override
+	public void borrar(int id)
+	{
+		reunionDAO.borrar(id);
+	}
 }

@@ -9,7 +9,7 @@
 <a href="${pageContext.request.contextPath}/sprints/${proyecto.id}/add">Nueva Sprint</a>
 </p>
 
-<table>
+<table class="table">
 <tr>
 <th>Id</th>
 <th>Fecha comienzo</th>

@@ -8,7 +8,7 @@
 <a href="${pageContext.request.contextPath}/reuniones/add">Nueva Reuni&oacute;n</a>
 </p>
 
-<table>
+<table class="table">
 <tr>
 <th>Id</th>
 <th>Fecha</th>
@@ -22,7 +22,9 @@
 <td>${reunion.fecha_comienzo}</td>
 <td>${reunion.asunto}</td>
 <td>${reunion.proyecto.nombre}</td>
-<td><a href="${pageContext.request.contextPath}/reuniones/edit/${reunion.id}">Editar</a></td>
+<td><a href="${pageContext.request.contextPath}/reuniones/view/${reunion.id}">Ver</a> 
+<a href="${pageContext.request.contextPath}/reuniones/delete/${reunion.id}">Borrar</a>
+</td>
 </tr>
 </c:forEach>
 </table>

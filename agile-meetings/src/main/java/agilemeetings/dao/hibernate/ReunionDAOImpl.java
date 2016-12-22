@@ -49,4 +49,9 @@ public class ReunionDAOImpl implements ReunionDAO
 	{
 		return (List<Reunion>) sessionFactory.getCurrentSession().createQuery("from Reunion where proyecto_id="+proyectoId).getResultList();
 	}
+	@Override
+	public void borrar(int id) 
+	{
+		sessionFactory.getCurrentSession().delete(id);
+	}
 }

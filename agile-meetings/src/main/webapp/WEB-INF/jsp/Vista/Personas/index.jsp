@@ -14,7 +14,7 @@ si estos son usuarios del sistema. Para definir grupos y permisos, haga
 click <a href="${pageContext.request.contextPath}/users/index">aqu&iacute;</a>.
 </p>
 
-<table>
+<table class="table">
 <tr>
 <th>Id</th>
 <th>Nombre</th>

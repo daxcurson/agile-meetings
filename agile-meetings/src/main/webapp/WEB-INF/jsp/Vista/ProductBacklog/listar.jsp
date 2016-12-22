@@ -8,7 +8,7 @@
 <a href="${pageContext.request.contextPath}/backlog/${proyecto.id}/add">Nuevo Backlog Item</a>
 </p>
 
-<table>
+<table class="table">
 <tr>
 <th>Id</th>
 <th>Fecha Creaci&oacute;n</th>
