@@ -17,7 +17,7 @@
 		</div>
 		<div class="checkbox">
 			<label>
-				<input type="checkbox" name="_spring_security_remember_me" checked>Recordarme
+				<input type="checkbox" name="remember-me" checked>Recordarme
 			</label>
 		</div>
 	</fieldset>

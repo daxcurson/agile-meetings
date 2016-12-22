@@ -125,10 +125,17 @@
 			/>
 		<security:csrf token-repository-ref="tokenRepository"/>
 		<security:headers disabled="true"/>
+		<!-- Agregamos Remember me -->
+		<security:remember-me token-validity-seconds="1209600" 
+		remember-me-parameter="remember-me" data-source-ref="dataSource" />
 	</security:http>
 	<bean id="tokenRepository"
 		class="org.springframework.security.web.csrf.CookieCsrfTokenRepository"
 		p:cookieHttpOnly="false">
+	</bean>
+	<bean id="savedRequestAwareAuthenticationSuccessHandler"
+		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+		<property name="targetUrlParameter" value="targetUrl" />
 	</bean>
 	<!-- authentication manager and password hashing -->
 	<security:authentication-manager alias="authenticationManager">
