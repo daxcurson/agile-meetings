@@ -4,6 +4,7 @@ import java.util.List;
 
 import agilemeetings.exceptions.ReunionExistenteException;
 import agilemeetings.model.Reunion;
+import agilemeetings.model.TipoReunion;
 
 public interface ReunionService 
 {
@@ -12,4 +13,5 @@ public interface ReunionService
 	public void agregar(Reunion reunion) throws ReunionExistenteException;
 	public void grabar(Reunion reunion) throws ReunionExistenteException;
 	public List<Reunion> listarReunionesProyecto(int proyectoId);
+	public List<TipoReunion> listarTiposReunion();
 }

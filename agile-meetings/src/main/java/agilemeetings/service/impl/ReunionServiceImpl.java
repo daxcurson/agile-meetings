@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import agilemeetings.dao.ReunionDAO;
+import agilemeetings.dao.TipoReunionDAO;
 import agilemeetings.exceptions.ReunionExistenteException;
 import agilemeetings.model.Reunion;
+import agilemeetings.model.TipoReunion;
 import agilemeetings.service.ReunionService;
 
 @Service
@@ -15,6 +17,8 @@ public class ReunionServiceImpl implements ReunionService
 {
 	@Autowired
 	private ReunionDAO reunionDAO;
+	@Autowired
+	private TipoReunionDAO tipoReunionDAO;
 	@Override
 	public List<Reunion> listarReuniones() 
 	{
@@ -40,5 +44,9 @@ public class ReunionServiceImpl implements ReunionService
 	{
 		reunionDAO.grabar(reunion);
 	}
-	
+	@Override
+	public List<TipoReunion> listarTiposReunion() 
+	{
+		return tipoReunionDAO.listarTiposReunion();
+	}
 }

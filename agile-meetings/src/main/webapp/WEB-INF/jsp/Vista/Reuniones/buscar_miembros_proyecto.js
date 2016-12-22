@@ -1,0 +1,51 @@
+$(document).ready(function()
+{
+	$.datepicker.setDefaults({
+		showOn: "both",
+		buttonImage: "${pageContext.request.contextPath}/img/cal.gif",
+		buttonText: "Calendario"
+		});
+	// Agrego Datepickers a las fechas de comienzo y fin de curso.
+	$("#ReunionFechaComienzo").datepicker({ dateFormat: "yy-mm-dd" });
+	accionBuscarMiembrosProyecto();
+});
+/**
+ * Si se eligio el proyecto, buscar sus miembros, para que aparezcan en un
+ * select multiple y se puedan elegir de ahi.
+ * @returns
+ */
+function accionBuscarMiembrosProyecto()
+{
+	if($("#ReunionProyecto").val().length!=0)
+	{
+		// Ir al sistema y consultar que miembros tiene este proyecto, para
+		// agregarlos en el Select.
+		var url="${pageContext.request.contextPath}/proyectos/listar_miembros/"+$("#ReunionProyecto").val();
+		$.getJSON(url,
+		{
+		},
+		function(miembros)
+		{
+			if(miembros!== null)
+			{
+				populateMiembrosList(miembros);
+			}
+		});
+	}
+}
+/**
+ * Recibe la lista de miembros del proyecto y los carga en el Select de los miembros,
+ * que es un select multiple.
+ * @param miembros
+ * @returns
+ */
+function populateMiembrosList(miembros)
+{
+	var options="";
+	$.each(miembros,function(miembro)
+	{
+		options+="<option value="+miembro.id+">"+miembro.nombre+"</option>"
+	}
+	);
+	$("#ReunionParticipantes").html(options);
+}

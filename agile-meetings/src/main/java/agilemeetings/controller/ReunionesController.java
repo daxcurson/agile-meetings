@@ -27,6 +27,7 @@ import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.ReunionExistenteException;
 import agilemeetings.model.Proyecto;
 import agilemeetings.model.Reunion;
+import agilemeetings.model.TipoReunion;
 import agilemeetings.service.ProyectoService;
 import agilemeetings.service.ReunionService;
 
@@ -66,7 +67,9 @@ public class ReunionesController extends AppController
 	{
 		ModelAndView modelo=new ModelAndView(vista);
 		List<Proyecto> proyectos=proyectoService.listarProyectos();
+		List<TipoReunion> tipos_reunion=reunionService.listarTiposReunion();
 		modelo.addObject("proyectos",proyectos);
+		modelo.addObject("tipos_reunion",tipos_reunion);
 		modelo.addObject("reunion",reunion);
 		return modelo;
 	}
