@@ -143,10 +143,11 @@ public class UsersController extends AppController
 	public String logout(HttpServletRequest request, HttpServletResponse response)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    if (auth != null){    
-	        new SecurityContextLogoutHandler().logout(request, response, auth);
-	    }
-	    return "redirect:/pages/adios";
+		if (auth != null)
+		{
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "redirect:/pages/adios";
 	}
 	private ModelAndView cargarFormUsuario(String vista,User user)
 	{
