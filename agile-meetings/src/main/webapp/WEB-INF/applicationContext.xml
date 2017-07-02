@@ -98,11 +98,14 @@
 
 		<!-- intercepted urls -->
 		<security:intercept-url pattern="/users/login" access="permitAll" />
+		<security:intercept-url pattern="/users/logindenied" access="permitAll" />
 		<security:intercept-url pattern="/j_spring_security_check" access="permitAll" />
+		<security:intercept-url pattern="/pages/adios" access="permitAll" />
 		<security:intercept-url pattern="/pages/**" access="permitAll" />
 		<security:intercept-url pattern="/css/**" access="permitAll" />
 		<security:intercept-url pattern="/img/**" access="permitAll" />
 		<security:intercept-url pattern="/js/**" access="permitAll" />
+		<security:intercept-url pattern="/fonts/**" access="permitAll" />
 		<security:intercept-url pattern="/instalacion/**" access="permitAll" />
 		<security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		<security:session-management session-fixation-protection="migrateSession" />
