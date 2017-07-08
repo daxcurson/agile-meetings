@@ -13,6 +13,7 @@ public interface ReunionService
 	public void agregar(Reunion reunion) throws ReunionExistenteException;
 	public void grabar(Reunion reunion) throws ReunionExistenteException;
 	public List<Reunion> listarReunionesProyecto(int proyectoId);
+	public List<Reunion> listarReunionesParticipadasPersona(int personaId);
 	public List<TipoReunion> listarTiposReunion();
 	public TipoReunion getTipoReunionById(int id);
 	public void borrar(int reunionId);

@@ -89,12 +89,15 @@
     <definition name="personas_edit" extends="base.definition">
  		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Personas/edit.jsp">
-	    		<put-attribute name="form_reunion" value="/WEB-INF/jsp/Vista/Personas/form_persona.jsp"/>
+	    		<put-attribute name="form_persona" value="/WEB-INF/jsp/Vista/Personas/form_persona.jsp"/>
     		</definition>
    		</put-attribute>
    	</definition>
     <definition name="personas_index" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Personas/index.jsp"/>
+    </definition>
+    <definition name="personas_mis_reuniones" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Personas/mis_reuniones.jsp"/>
     </definition>
     <definition name="proyectos_add" extends="base.definition">
     	<put-attribute name="content">

@@ -62,7 +62,14 @@ public class PersonasController extends AppController
 		modelo.addObject("personas",personaService.listarPersonas());
 		return modelo;
 	}
-	
+	@RequestMapping("/mis_reuniones")
+	@Descripcion(value="Mostrar la lista de reuniones donde participa la persona",permission="ROLE_PERSONAS_MIS_REUNIONES")
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_PERSONAS_MIS_REUNIONES')")
+	public ModelAndView mostrarListaReuniones()
+	{
+		ModelAndView modelo=new ModelAndView("personas_mis_reuniones");
+		return modelo;
+	}
 	private ModelAndView cargarFormPersona(String vista,Persona persona)
 	{
 		ModelAndView modelo=new ModelAndView(vista);
@@ -145,6 +152,7 @@ public class PersonasController extends AppController
 			ModelAndView modelo=new ModelAndView("redirect:/personas/index");
 			try
 			{
+				log.trace("Voy a grabar la persona de id "+persona.getId()+" que se llama "+persona.getNombre());
 				personaService.grabarPersona(persona);
 				redirectAttributes.addFlashAttribute("message","Persona editada exitosamente");
 			}

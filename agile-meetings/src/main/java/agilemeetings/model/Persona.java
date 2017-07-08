@@ -18,7 +18,7 @@ public class Persona
 	private int id;
 	
 	// La persona puede tener cero o un usuario en el sistema.
-	@OneToOne
+	@OneToOne(targetEntity=User.class,cascade={CascadeType.ALL})
 	@NotFound(action=NotFoundAction.IGNORE)
 	@JoinColumn(name="user_id")
 	private User user;

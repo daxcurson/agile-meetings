@@ -54,4 +54,10 @@ public class ReunionDAOImpl implements ReunionDAO
 	{
 		sessionFactory.getCurrentSession().delete(id);
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Reunion> listarReunionesParticipadasPersona(int personaId) 
+	{
+		return (List<Reunion>) sessionFactory.getCurrentSession().createQuery("select r from Reunion r,PersonaReunion rp where r.id=rp.reunion.id and rp.persona.id="+personaId).getResultList();
+	}
 }

@@ -95,4 +95,9 @@ public class ReunionServiceImpl implements ReunionService
 	{
 		reunionDAO.borrar(id);
 	}
+	@Override
+	public List<Reunion> listarReunionesParticipadasPersona(int personaId) 
+	{
+		return reunionDAO.listarReunionesParticipadasPersona(personaId);
+	}
 }

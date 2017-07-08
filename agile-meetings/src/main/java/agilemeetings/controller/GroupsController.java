@@ -26,6 +26,7 @@ import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.GrupoExistenteException;
 import agilemeetings.model.Group;
 import agilemeetings.service.GroupService;
+import agilemeetings.service.PermissionService;
 
 @Controller
 @RequestMapping("groups")
@@ -36,13 +37,17 @@ public class GroupsController extends AppController
 	private static Logger log=LogManager.getLogger(GroupsController.class);
 	@Autowired
 	private GroupService groupService;
+	@Autowired
+	private PermissionService permissionService;
 
 	@RequestMapping({"/","/index"})
 	@Descripcion(value="Listar grupos",permission="ROLE_GROUPS_MOSTRAR_MENU")
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_GROUPS_MOSTRAR_MENU')")
 	public ModelAndView mostrarMenu()
 	{
-		return new ModelAndView("users_index");
+		ModelAndView modelo=new ModelAndView("groups_index");
+		modelo.addObject("groups",groupService.listGroups());
+		return modelo;
 	}
 	private ModelAndView cargarFormGrupo(Group group)
 	{
@@ -77,10 +82,12 @@ public class GroupsController extends AppController
 		}
 		else
 		{
-			ModelAndView modelo=new ModelAndView("groups_index");
+			ModelAndView modelo=new ModelAndView("redirect:/groups/index");
 			try
 			{
 				groupService.save(group);
+				// Todo grupo tiene que tener el permiso de ROLE_USER.
+				permissionService.grantOrRevokePermission(group, "ROLE_USER");
 				redirectAttributes.addFlashAttribute("message","Grupo agregado exitosamente");
 			}
 			catch(GrupoExistenteException e)

@@ -26,7 +26,7 @@ public class Group
 	private int id;
 	
 	@Column(name="group_name")
-	private String groupName;
+	private String group_name;
 	
 	@Column(name="created")
 	private Date created;
@@ -38,7 +38,9 @@ public class Group
     @Cascade({CascadeType.SAVE_UPDATE,CascadeType.DELETE})
     private Set<Permission> permissions=new HashSet<Permission>();
 
-	
+	@Column(name="vista_principal")
+	private String vista_principal;
+    
 	public int getId()
 	{
 		return id;
@@ -47,13 +49,13 @@ public class Group
 	{
 		id=i;
 	}
-	public String getGroupName()
+	public String getGroup_name()
 	{
-		return this.groupName;
+		return this.group_name;
 	}
-	public void setGroupName(String g)
+	public void setGroup_name(String g)
 	{
-		groupName=g;
+		group_name=g;
 	}
 	public Date getCreated()
 	{
@@ -82,5 +84,11 @@ public class Group
 	 */
 	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
+	}
+	public String getVista_principal() {
+		return vista_principal;
+	}
+	public void setVista_principal(String vista_principal) {
+		this.vista_principal = vista_principal;
 	}
 }
