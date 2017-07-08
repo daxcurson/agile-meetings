@@ -48,6 +48,7 @@ public class InstalacionServiceImpl implements InstalacionService
 		// permisos!!!
 		Group adminGroup=new Group();
 		adminGroup.setGroup_name("Administradores");
+		adminGroup.setVista_principal("menu");
 		groupService.save(adminGroup);
 		permissionService.grantOrRevokePermission(adminGroup, "ROLE_ADMIN");
 		permissionService.grantOrRevokePermission(adminGroup, "ROLE_USER");
