@@ -42,7 +42,7 @@ public class PersonaServiceImpl implements PersonaService
 		{
 			// Si es usuario del sistema, hay que grabar un usuario.
 			User user=p.getUser();
-			user.setEnabled(1);
+			user.setEnabled(true);
 	        BCryptPasswordEncoder pwe=new BCryptPasswordEncoder();
 	        user.setPassword(pwe.encode(user.getPassword()));
 	        user.setConfirm_password(user.getPassword());

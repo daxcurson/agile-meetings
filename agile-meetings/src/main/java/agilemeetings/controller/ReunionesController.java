@@ -205,4 +205,12 @@ public class ReunionesController extends AppController
 		modelo.addObject("reunion",reunionService.getReunionById(reunionId));
 		return modelo;
 	}
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_REUNIONES_PARTICIPAR')")
+	@Descripcion(value="Participar en una reunion",permission="ROLE_REUNIONES_PARTICIPAR")
+	@RequestMapping(value="/participar/{reunionId}",method=RequestMethod.GET)
+	public ModelAndView participarEnReunion(@PathVariable("reunionId") Integer reunionId)
+	{
+		ModelAndView modelo=new ModelAndView("reuniones_participar");
+		return modelo;
+	}
 }

@@ -27,7 +27,7 @@ public class User
 	private String password;
 	@Transient
 	private String confirm_password;
-	private int enabled;
+	private boolean enabled;
 
 	@OneToOne
 	private Group group;
@@ -64,22 +64,16 @@ public class User
 	{
 		this.group=s;
 	}
-	/**
-	 * @return the enabled
-	 */
-	public int getEnabled() {
-		return enabled;
-	}
-	/**
-	 * @param enabled the enabled to set
-	 */
-	public void setEnabled(int enabled) {
-		this.enabled = enabled;
-	}
 	public String getConfirm_password() {
 		return confirm_password;
 	}
 	public void setConfirm_password(String confirm_password) {
 		this.confirm_password = confirm_password;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 }

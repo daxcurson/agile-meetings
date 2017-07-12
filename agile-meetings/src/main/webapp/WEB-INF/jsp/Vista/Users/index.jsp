@@ -13,7 +13,7 @@ A continuaci&oacute;n se listan los usuarios del sistema y a qu&eacute; grupo
 pertenecen. Para definir los permisos de los grupos, haga click <a href="${pageContext.request.contextPath}/permisos/listar_permisos">aqu&iacute;</a>.
 </p>
 
-<table>
+<table class="table">
 <tr>
 <th>Id</th>
 <th>Nombre</th>
@@ -26,7 +26,7 @@ pertenecen. Para definir los permisos de los grupos, haga click <a href="${pageC
 <td><c:out value="${user.id}"/></td>
 <td>${user.username}</td>
 <td>${user.group.group_name}</td>
-<td>${user.enabled==1 ? "S&iacute;":"No"}</td>
+<td>${user.enabled==true ? "S&iacute;":"No"}</td>
 <td><a href="${pageContext.request.contextPath}/users/edit/${user.id}">Editar</a></td>
 </tr>
 </c:forEach>

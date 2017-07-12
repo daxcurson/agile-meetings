@@ -133,6 +133,9 @@
     <definition name="reuniones_index" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Reuniones/index.jsp"/>
     </definition>
+    <definition name="reuniones_participar" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Reuniones/participar.jsp"/>
+    </definition>
     <definition name="reuniones_view" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Reuniones/view.jsp"/>
     </definition>

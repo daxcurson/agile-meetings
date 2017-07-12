@@ -22,6 +22,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +31,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.UsuarioExistenteException;
+import agilemeetings.model.Group;
 import agilemeetings.model.User;
+import agilemeetings.model.propertyeditor.GroupEditor;
 import agilemeetings.service.GroupService;
 import agilemeetings.service.UserDetailsService;
 import agilemeetings.documentation.Descripcion;
@@ -48,6 +53,12 @@ public class UsersController extends AppController
 	private UserDetailsService userService;
 	@Autowired
 	private GroupService groupService;
+
+	@InitBinder
+    public void initBinder(WebDataBinder binder) 
+	{
+		binder.registerCustomEditor(Group.class, new GroupEditor(groupService));
+	}
 
 	@RequestMapping({"/","/index"})
 	@Descripcion(value="Listar usuarios",permission="ROLE_USERS_MOSTRAR_MENU")
@@ -168,7 +179,7 @@ public class UsersController extends AppController
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView addUser(@Valid @ModelAttribute("user")
 	User user,
-	BindingResult result,ModelMap model)
+	BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -187,7 +198,7 @@ public class UsersController extends AppController
 			try
 			{
 				userService.save(user);
-				model.addAttribute("message","Usuario agregado exitosamente");
+				redirectAttributes.addFlashAttribute("message","Usuario agregado exitosamente");
 			}
 			catch(UsuarioExistenteException e)
 			{
@@ -212,7 +223,7 @@ public class UsersController extends AppController
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_USERS_EDIT')")
 	public ModelAndView editarUser(@PathVariable("userId") Integer userId,
 			@Valid @ModelAttribute("user") User user,
-			BindingResult result,ModelMap model)
+			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -231,7 +242,7 @@ public class UsersController extends AppController
 			try
 			{
 				userService.save(user);
-				model.addAttribute("message","Usuario editado exitosamente");
+				redirectAttributes.addFlashAttribute("message","Usuario editado exitosamente");
 			}
 			catch(UsuarioExistenteException e)
 			{

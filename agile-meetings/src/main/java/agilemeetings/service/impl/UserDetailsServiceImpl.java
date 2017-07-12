@@ -54,7 +54,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	{
 		// Vamos a grabar aqui algunos datos que
 		// no se graban de la interfaz
-		user.setEnabled(1);
+		user.setEnabled(true);
 		// Hay que encriptar el password antes de grabarlo!!!
         BCryptPasswordEncoder pwe=new BCryptPasswordEncoder();
         user.setPassword(pwe.encode(user.getPassword()));

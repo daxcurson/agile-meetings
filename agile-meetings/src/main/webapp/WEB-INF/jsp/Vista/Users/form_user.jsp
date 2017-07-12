@@ -23,4 +23,7 @@
 <form:label path="confirm_password">Confirmar Clave</form:label>
 <form:input type="password" id="UserConfirmPassword" class="form-control" path="confirm_password"/>
 </div>
+<div class="form-group">
+<form:checkbox id="UserEnabled" class="form-control" path="enabled" label="Habilitado"/>
+</div>
 </fieldset>

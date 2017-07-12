@@ -31,7 +31,7 @@ public class AuthenticationUserDetails implements org.springframework.security.c
     	log.trace("Estoy en AuthenticationUserDetails (constructor)");
         this.login = user.getUsername();
         this.passwordHash = user.getPassword();
-        this.enabled = (user.getEnabled()==1 ? true:false);
+        this.enabled = user.isEnabled();
         // Convierto los permisos leidos de la base, para el grupo al que pertenece el usuario, en Authorities.
         Group g=user.getGroup();
         this.group=g;
