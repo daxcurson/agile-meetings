@@ -96,9 +96,6 @@
     <definition name="personas_index" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Personas/index.jsp"/>
     </definition>
-    <definition name="personas_mis_reuniones" extends="base.definition">
-    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Personas/mis_reuniones.jsp"/>
-    </definition>
     <definition name="proyectos_add" extends="base.definition">
     	<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Proyectos/add.jsp">
@@ -132,6 +129,9 @@
    	</definition>
     <definition name="reuniones_index" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Reuniones/index.jsp"/>
+    </definition>
+    <definition name="reuniones_mis_reuniones" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Reuniones/mis_reuniones.jsp"/>
     </definition>
     <definition name="reuniones_participar" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Reuniones/participar.jsp"/>

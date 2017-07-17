@@ -213,4 +213,12 @@ public class ReunionesController extends AppController
 		ModelAndView modelo=new ModelAndView("reuniones_participar");
 		return modelo;
 	}
+	@RequestMapping("/mis_reuniones")
+	@Descripcion(value="Mostrar la lista de reuniones donde participa la persona",permission="ROLE_REUNIONES_MIS_REUNIONES")
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_REUNIONES_MIS_REUNIONES')")
+	public ModelAndView mostrarListaReuniones()
+	{
+		ModelAndView modelo=new ModelAndView("reuniones_mis_reuniones");
+		return modelo;
+	}
 }
