@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import agilemeetings.model.Group;
+import agilemeetings.model.Persona;
 
 public interface UserDetails extends Serializable 
 {
@@ -12,6 +13,7 @@ public interface UserDetails extends Serializable
     String getPassword();
     String getUsername();
     Group getGroup();
+    Persona getPersona();
     boolean isAccountNonExpired();
     boolean isAccountNonLocked();
     boolean isCredentialsNonExpired();

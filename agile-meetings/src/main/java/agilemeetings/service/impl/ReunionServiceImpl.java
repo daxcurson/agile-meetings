@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import agilemeetings.dao.ReunionDAO;
 import agilemeetings.dao.TipoReunionDAO;
 import agilemeetings.exceptions.ReunionExistenteException;
+import agilemeetings.model.Juego;
+import agilemeetings.model.JuegoReunion;
 import agilemeetings.model.PersonaReunion;
 import agilemeetings.model.Reunion;
 import agilemeetings.model.TipoReunion;
@@ -99,5 +101,14 @@ public class ReunionServiceImpl implements ReunionService
 	public List<Reunion> listarReunionesParticipadasPersona(int personaId) 
 	{
 		return reunionDAO.listarReunionesParticipadasPersona(personaId);
+	}
+	@Override
+	public void grabarJuego(Reunion reunion, Juego juego) throws ReunionExistenteException 
+	{
+		JuegoReunion jr=new JuegoReunion();
+		jr.setJuego(juego);
+		jr.setReunion(reunion);
+		reunion.getJuegos().add(jr);
+		this.grabar(reunion);
 	}
 }

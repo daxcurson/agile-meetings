@@ -5,6 +5,10 @@
 
 <h1>Ver Reuni&oacute;n</h1>
 
+<table>
+<tr><td><a href="${pageContext.request.contextPath}/juegos/add/${reunion.id}">Agregar juego</a></td></tr>
+</table>
+
 <table class="table">
 <tr><td>Proyecto</td><td><c:out value="${reunion.proyecto.nombre}"/></td>
 </tr>

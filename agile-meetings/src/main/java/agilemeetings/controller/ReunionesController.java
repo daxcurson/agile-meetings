@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -30,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.ReunionExistenteException;
+import agilemeetings.model.Persona;
 import agilemeetings.model.PersonaReunion;
 import agilemeetings.model.Proyecto;
 import agilemeetings.model.Reunion;
@@ -40,6 +43,7 @@ import agilemeetings.model.propertyeditor.TipoReunionEditor;
 import agilemeetings.service.PersonaService;
 import agilemeetings.service.ProyectoService;
 import agilemeetings.service.ReunionService;
+import agilemeetings.service.UserDetails;
 
 @Controller
 @RequestMapping("reuniones")
@@ -219,6 +223,11 @@ public class ReunionesController extends AppController
 	public ModelAndView mostrarListaReuniones()
 	{
 		ModelAndView modelo=new ModelAndView("reuniones_mis_reuniones");
+		// Busco el usuario que esta registrado en el sistema.
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails u=(UserDetails) auth.getPrincipal();
+		Persona p=u.getPersona();
+		modelo.addObject("mis_reuniones",reunionService.listarReunionesParticipadasPersona(p.getId()));
 		return modelo;
 	}
 }

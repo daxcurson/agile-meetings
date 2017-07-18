@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import agilemeetings.model.Group;
 import agilemeetings.model.Permission;
 import agilemeetings.model.PermissionGranted;
+import agilemeetings.model.Persona;
 import agilemeetings.model.User;
 
 
@@ -23,6 +24,7 @@ public class AuthenticationUserDetails implements org.springframework.security.c
     private final String passwordHash;
     private final boolean enabled;
     private Group group;
+    private Persona persona;
     private HashSet<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
     private static Logger log=LogManager.getLogger(AuthenticationUserDetails.class);
 
@@ -34,6 +36,7 @@ public class AuthenticationUserDetails implements org.springframework.security.c
         this.enabled = user.isEnabled();
         // Convierto los permisos leidos de la base, para el grupo al que pertenece el usuario, en Authorities.
         Group g=user.getGroup();
+        this.setPersona(user.getPersona());
         this.group=g;
         for(Permission p:g.getPermissions())
         {
@@ -99,5 +102,14 @@ public class AuthenticationUserDetails implements org.springframework.security.c
 	public Group getGroup() 
 	{
 		return this.group;
+	}
+
+	@Override
+	public Persona getPersona() {
+		return this.persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 }

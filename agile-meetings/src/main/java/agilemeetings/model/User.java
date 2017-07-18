@@ -28,6 +28,8 @@ public class User
 	@Transient
 	private String confirm_password;
 	private boolean enabled;
+	@OneToOne(targetEntity=Persona.class,cascade={CascadeType.ALL},mappedBy="user")
+	private Persona persona;
 
 	@OneToOne
 	private Group group;
@@ -75,5 +77,11 @@ public class User
 	}
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	public Persona getPersona() {
+		return persona;
+	}
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 }

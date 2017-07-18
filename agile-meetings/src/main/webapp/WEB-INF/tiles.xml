@@ -73,6 +73,13 @@
     <definition name="instalacion_user_add" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Instalacion/user_add.jsp" />
     </definition>
+    <definition name="juego_add_reunion" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Juegos/add.jsp">
+	    		<put-attribute name="form_juego" value="/WEB-INF/jsp/Vista/Juegos/form_juego.jsp"/>
+    		</definition>
+   		</put-attribute>
+    </definition>
     <definition name="permisos_index" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/index.jsp"/>
     </definition>
