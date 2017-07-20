@@ -25,9 +25,9 @@ public class Reunion
 	@ManyToOne
 	@JoinColumn(name="proyecto_id")
 	private Proyecto proyecto;
-	@OneToMany(targetEntity=JuegoReunion.class,cascade={CascadeType.ALL},
+	@OneToMany(targetEntity=Juego.class,cascade={CascadeType.ALL},
 	mappedBy="reunion",fetch=FetchType.LAZY)
-	private List<JuegoReunion> juegos;
+	private List<Juego> juegos;
 	@ManyToOne
 	@JoinColumn(name="tipo_reunion_id")
 	private TipoReunion tipo_reunion;
@@ -66,10 +66,10 @@ public class Reunion
 	public void setProyecto(Proyecto proyecto) {
 		this.proyecto = proyecto;
 	}
-	public List<JuegoReunion> getJuegos() {
+	public List<Juego> getJuegos() {
 		return juegos;
 	}
-	public void setJuegos(List<JuegoReunion> juegos) {
+	public void setJuegos(List<Juego> juegos) {
 		this.juegos = juegos;
 	}
 	public TipoReunion getTipo_reunion() {

@@ -12,7 +12,6 @@ import agilemeetings.dao.ReunionDAO;
 import agilemeetings.dao.TipoReunionDAO;
 import agilemeetings.exceptions.ReunionExistenteException;
 import agilemeetings.model.Juego;
-import agilemeetings.model.JuegoReunion;
 import agilemeetings.model.PersonaReunion;
 import agilemeetings.model.Reunion;
 import agilemeetings.model.TipoReunion;
@@ -105,10 +104,7 @@ public class ReunionServiceImpl implements ReunionService
 	@Override
 	public void grabarJuego(Reunion reunion, Juego juego) throws ReunionExistenteException 
 	{
-		JuegoReunion jr=new JuegoReunion();
-		jr.setJuego(juego);
-		jr.setReunion(reunion);
-		reunion.getJuegos().add(jr);
+		reunion.getJuegos().add(juego);
 		this.grabar(reunion);
 	}
 }
