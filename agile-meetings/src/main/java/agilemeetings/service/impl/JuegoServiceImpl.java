@@ -48,5 +48,9 @@ public class JuegoServiceImpl implements JuegoService
 	{
 		return estadoJuegoDAO.getById(parseInt);
 	}
-
+	@Override
+	public List<EstadoJuego> listarEstadosJuego() 
+	{
+		return estadoJuegoDAO.listar();
+	}
 }

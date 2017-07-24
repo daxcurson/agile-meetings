@@ -6,6 +6,7 @@
 
 <on-start>
 <evaluate expression="juegoComponent.listarTiposJuego()" result="flowScope.tipos_juego"/>
+<evaluate expression="juegoComponent.listarEstadosJuego()" result="flowScope.estados_juego"/>
 </on-start>
 <view-state id="welcome" view="reuniones_agregar_juego_flow" model="flowScope.tipos_juego">
 <transition on="continue" to="finish"/>

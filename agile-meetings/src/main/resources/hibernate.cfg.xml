@@ -7,6 +7,7 @@
 <hibernate-configuration>
     <session-factory>
     	<mapping class="agilemeetings.model.EstadoBacklogItem" />
+    	<mapping class="agilemeetings.model.EstadoJuego" />
         <mapping class="agilemeetings.model.EstadoProyecto" />
         <mapping class="agilemeetings.model.Group" />
         <mapping class="agilemeetings.model.ItemSprint" />

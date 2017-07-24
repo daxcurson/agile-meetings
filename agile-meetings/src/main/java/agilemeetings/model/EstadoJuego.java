@@ -1,5 +1,7 @@
 package agilemeetings.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +11,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="estados_juego")
-public class EstadoJuego 
+public class EstadoJuego implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1817753368663021845L;
+
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

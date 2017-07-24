@@ -5,13 +5,8 @@
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 
 <h1>Agregar juego</h1>
-<form method="post" action="${flowExecutionUrl}">
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-<select name="tipo_juego">
-<c:forEach items="${tipos_juego}" var="tipo">
-<option value="${tipo.id}">${tipo.nombre}</option>
-</c:forEach>
-</select>
-<input type="submit" name="_eventId_continue" value="continue" />
-<input type="submit" name="_eventId_cancel" value="cancel" />
-</form>
+<form:form method="post" action="${flowExecutionUrl}" commandName="juego">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	<tiles:insertAttribute name="form_juego"/>
+	<input type="submit" name="_eventId_continue" value="Agregar Juego">
+</form:form>
