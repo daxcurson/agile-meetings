@@ -134,6 +134,9 @@
 	    	</definition>
     	</put-attribute>
     </definition>
+        <definition name="reuniones_agregar_juego_flow" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Reuniones/agregar_juego_flow.jsp"/>
+    </definition>
     <definition name="reuniones_edit" extends="base.definition">
  		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Reuniones/edit.jsp">

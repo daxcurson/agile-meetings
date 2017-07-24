@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow 
+	xmlns="http://www.springframework.org/schema/webflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow 
+		http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+
+<on-start>
+<evaluate expression="juegoComponent.listarTiposJuego()" result="flowScope.tipos_juego"/>
+</on-start>
+<view-state id="welcome" view="reuniones_agregar_juego_flow" model="flowScope.tipos_juego">
+<transition on="continue" to="finish"/>
+<transition on="cancel" to="cancelled"/>
+</view-state>
+
+<end-state id="cancelled" view="reuniones_index"/>
+
+<end-state id="finish" view="reuniones_index"/>
+
+</flow>
