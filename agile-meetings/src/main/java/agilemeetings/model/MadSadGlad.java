@@ -13,7 +13,7 @@ import org.hibernate.annotations.Cascade;
 @DiscriminatorValue("MAD")
 public class MadSadGlad extends Juego
 {
-	@OneToMany(targetEntity=MadSadGlad.class,
+	@OneToMany(targetEntity=Tarjeta.class,
 	mappedBy="juego",fetch=FetchType.LAZY,orphanRemoval=true)
 	@Cascade(value={org.hibernate.annotations.CascadeType.ALL})
 	private List<Tarjeta> tarjetas;
