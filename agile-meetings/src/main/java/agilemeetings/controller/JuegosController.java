@@ -43,6 +43,7 @@ public class JuegosController extends AppController
 		// De acuerdo al juego leido, realizo acciones.
 		Juego j=juegoService.getJuegoById(juegoId);
 		ModelAndView v=new ModelAndView(j.getTipo_juego().getVista());
+		v.addObject("juego",j);
 		return v;
 	}
 }
