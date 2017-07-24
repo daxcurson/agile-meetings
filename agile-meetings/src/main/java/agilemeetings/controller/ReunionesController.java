@@ -32,14 +32,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.ReunionExistenteException;
+import agilemeetings.model.EstadoJuego;
 import agilemeetings.model.Persona;
 import agilemeetings.model.PersonaReunion;
 import agilemeetings.model.Proyecto;
 import agilemeetings.model.Reunion;
+import agilemeetings.model.TipoJuego;
 import agilemeetings.model.TipoReunion;
+import agilemeetings.model.propertyeditor.EstadoJuegoEditor;
 import agilemeetings.model.propertyeditor.PersonaReunionEditor;
 import agilemeetings.model.propertyeditor.ProyectoEditor;
+import agilemeetings.model.propertyeditor.TipoJuegoEditor;
 import agilemeetings.model.propertyeditor.TipoReunionEditor;
+import agilemeetings.service.JuegoService;
 import agilemeetings.service.PersonaService;
 import agilemeetings.service.ProyectoService;
 import agilemeetings.service.ReunionService;
@@ -58,6 +63,8 @@ public class ReunionesController extends AppController
 	private ProyectoService proyectoService;
 	@Autowired
 	private PersonaService personaService;
+	@Autowired
+	private JuegoService juegoService;
 	
 	
 	@InitBinder
@@ -69,6 +76,8 @@ public class ReunionesController extends AppController
 		binder.registerCustomEditor(Proyecto.class, new ProyectoEditor(proyectoService));
 		binder.registerCustomEditor(TipoReunion.class, new TipoReunionEditor(reunionService));
 		binder.registerCustomEditor(PersonaReunion.class, new PersonaReunionEditor(personaService));
+		binder.registerCustomEditor(TipoJuego.class, new TipoJuegoEditor(juegoService));
+		binder.registerCustomEditor(EstadoJuego.class, new EstadoJuegoEditor(juegoService));
 	}
 	
 	@RequestMapping({"/","/index"})
@@ -215,6 +224,7 @@ public class ReunionesController extends AppController
 	public ModelAndView participarEnReunion(@PathVariable("reunionId") Integer reunionId)
 	{
 		ModelAndView modelo=new ModelAndView("reuniones_participar");
+		modelo.addObject("reunion",reunionService.getReunionById(reunionId));
 		return modelo;
 	}
 	@RequestMapping("/mis_reuniones")
@@ -228,6 +238,16 @@ public class ReunionesController extends AppController
 		UserDetails u=(UserDetails) auth.getPrincipal();
 		Persona p=u.getPersona();
 		modelo.addObject("mis_reuniones",reunionService.listarReunionesParticipadasPersona(p.getId()));
+		return modelo;
+	}
+	@RequestMapping("/agregar_juego/{reunionId}")
+	@Descripcion(value="Agregar juego a la reunion",permission="ROLE_REUNIONES_AGREGAR_JUEGO")
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_REUNIONES_AGREGAR_JUEGO')")
+	public ModelAndView agregarJuego(@PathVariable("reunionId") Integer reunionId)
+	{
+		ModelAndView modelo=new ModelAndView("reuniones_agregar_juego");
+		modelo.addObject("reunion",this.reunionService.getReunionById(reunionId));
+		modelo.addObject("tipos_juego",juegoService.listarTiposJuego());
 		return modelo;
 	}
 }

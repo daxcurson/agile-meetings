@@ -1,5 +1,7 @@
 package agilemeetings.dao.hibernate;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,4 +20,10 @@ public class TipoJuegoDAOImpl implements TipoJuegoDAO
 	{
 		return (TipoJuego) sessionFactory.getCurrentSession().createQuery("from TipoJuego where id="+parseInt).getSingleResult();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TipoJuego> listar() 
+	{
+		return sessionFactory.getCurrentSession().createQuery("from TipoJuego").getResultList();	}
 }
