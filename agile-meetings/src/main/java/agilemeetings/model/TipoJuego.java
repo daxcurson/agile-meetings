@@ -23,6 +23,7 @@ public class TipoJuego implements Serializable
 	private int id;
 	private String nombre;
 	private String codigo;
+	private String vista;
 
 	public int getId() 
 	{
@@ -48,5 +49,13 @@ public class TipoJuego implements Serializable
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+
+	public String getVista() {
+		return vista;
+	}
+
+	public void setVista(String vista) {
+		this.vista = vista;
 	}
 }

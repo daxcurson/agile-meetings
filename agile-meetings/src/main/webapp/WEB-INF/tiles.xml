@@ -80,6 +80,9 @@
     		</definition>
    		</put-attribute>
     </definition>
+    <definition name="juego_mad_sad_glad" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/participar.jsp" />
+    </definition>
     <definition name="permisos_index" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/index.jsp"/>
     </definition>

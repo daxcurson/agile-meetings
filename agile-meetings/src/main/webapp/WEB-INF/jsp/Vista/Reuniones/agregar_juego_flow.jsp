@@ -5,8 +5,8 @@
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 
 <h1>Agregar juego</h1>
-<form:form method="post" action="${flowExecutionUrl}" commandName="juego">
+<form:form method="post" action="${flowExecutionUrl}" commandName="juegoData">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	<tiles:insertAttribute name="form_juego"/>
-	<input type="submit" name="_eventId_continue" value="Agregar Juego">
+	<input type="submit" name="_eventId_agregar_juego" value="Agregar Juego">
 </form:form>

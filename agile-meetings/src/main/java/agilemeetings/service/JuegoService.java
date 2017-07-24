@@ -14,4 +14,5 @@ public interface JuegoService
 	List<Juego> listarJuegosReunion(Integer reunionId);
 	EstadoJuego getEstadoJuegoById(int parseInt);
 	List<EstadoJuego> listarEstadosJuego();
+	Juego getJuegoById(int juegoId);
 }

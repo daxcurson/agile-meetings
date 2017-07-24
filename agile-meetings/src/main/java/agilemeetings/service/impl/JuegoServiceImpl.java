@@ -2,8 +2,11 @@ package agilemeetings.service.impl;
 
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import agilemeetings.dao.EstadoJuegoDAO;
 import agilemeetings.dao.JuegoDAO;
@@ -16,6 +19,7 @@ import agilemeetings.service.JuegoService;
 @Service
 public class JuegoServiceImpl implements JuegoService
 {
+	private static Logger log=LogManager.getLogger(JuegoServiceImpl.class);
 	@Autowired
 	private TipoJuegoDAO tipoJuegoDAO;
 	@Autowired
@@ -34,8 +38,10 @@ public class JuegoServiceImpl implements JuegoService
 		return tipoJuegoDAO.listar();
 	}
 	@Override
+	@Transactional
 	public void agregar(Juego juego, Integer reunionId) 
 	{
+		log.trace("Agregando juego");
 		juegoDAO.add(juego);
 	}
 	@Override
@@ -52,5 +58,10 @@ public class JuegoServiceImpl implements JuegoService
 	public List<EstadoJuego> listarEstadosJuego() 
 	{
 		return estadoJuegoDAO.listar();
+	}
+	@Override
+	public Juego getJuegoById(int juegoId) 
+	{
+		return juegoDAO.getById(juegoId);
 	}
 }

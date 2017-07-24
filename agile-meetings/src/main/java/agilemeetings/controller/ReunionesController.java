@@ -33,7 +33,6 @@ import agilemeetings.documentation.Descripcion;
 import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.exceptions.ReunionExistenteException;
 import agilemeetings.model.EstadoJuego;
-import agilemeetings.model.Juego;
 import agilemeetings.model.Persona;
 import agilemeetings.model.PersonaReunion;
 import agilemeetings.model.Proyecto;
@@ -240,24 +239,5 @@ public class ReunionesController extends AppController
 		Persona p=u.getPersona();
 		modelo.addObject("mis_reuniones",reunionService.listarReunionesParticipadasPersona(p.getId()));
 		return modelo;
-	}
-	@RequestMapping(value="/agregar_juego/{reunionId}",method=RequestMethod.GET)
-	@Descripcion(value="Agregar juego a la reunion",permission="ROLE_REUNIONES_AGREGAR_JUEGO")
-	@PreAuthorize("isAuthenticated() and hasRole('ROLE_REUNIONES_AGREGAR_JUEGO')")
-	public ModelAndView mostrarFormAgregarJuego(@PathVariable("reunionId") Integer reunionId)
-	{
-		ModelAndView modelo=new ModelAndView("reuniones_agregar_juego");
-		modelo.addObject("reunion",this.reunionService.getReunionById(reunionId));
-		modelo.addObject("tipos_juego",juegoService.listarTiposJuego());
-		return modelo;
-	}
-	@RequestMapping(value="/agregar_juego/{reunionId}",method=RequestMethod.POST)
-	@PreAuthorize("isAuthenticated() and hasRole('ROLE_REUNIONES_AGREGAR_JUEGO')")
-	public ModelAndView agregarJuego(@PathVariable("reunionId") Integer reunionId,
-			@Valid Juego juego,
-			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes
-			)
-	{
-		return null;
 	}
 }

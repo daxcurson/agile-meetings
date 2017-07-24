@@ -12,6 +12,7 @@
         <mapping class="agilemeetings.model.Group" />
         <mapping class="agilemeetings.model.ItemSprint" />
         <mapping class="agilemeetings.model.Juego" />
+        <mapping class="agilemeetings.model.MadSadGlad" />
         <mapping class="agilemeetings.model.Permission" />
         <mapping class="agilemeetings.model.PermissionGranted" />
         <mapping class="agilemeetings.model.Persona" />

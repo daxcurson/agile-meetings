@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow 
+	xmlns="http://www.springframework.org/schema/webflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow 
+		http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+
+<var name="juegoData" class="agilemeetings.model.JuegoData"/>
+<input name="reunionId" type="int" required="true"/>
+<on-start>
+<evaluate expression="juegoComponent.listarTiposJuego()" result="flowScope.tipos_juego"/>
+<evaluate expression="juegoComponent.listarEstadosJuego()" result="flowScope.estados_juego"/>
+</on-start>
+<view-state id="welcome" view="reuniones_agregar_juego_flow" model="juegoData">
+<secured attributes="ROLE_REUNIONES_PARTICIPAR" />
+<transition on="agregar_juego" to="crear_juego"/>
+<transition on="cancel" to="cancelled"/>
+</view-state>
+
+<action-state id="crear_juego">
+<secured attributes="ROLE_REUNIONES_PARTICIPAR" />
+<evaluate expression="juegoComponent.crearJuego(juegoData.tipo_juego,juegoData.estado_juego,reunionId)" result="flowScope.juego"/>
+<transition to="finish"/>
+</action-state>
+
+<end-state id="cancelled" view="reuniones_index"/>
+
+<end-state id="finish" view="externalRedirect:/reuniones/index">
+<output name="message" value="juegoComponent.mensajeExitoso()" />
+</end-state>
+
+</flow>

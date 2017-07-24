@@ -5,3 +5,4 @@ CREATE TABLE `agilemeetings`.`tipos_juego`
 	`codigo` VARCHAR(30) NOT NULL , 
 	PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
+ALTER TABLE `tipos_juego` ADD `vista` VARCHAR(100) NOT NULL AFTER `codigo`;
