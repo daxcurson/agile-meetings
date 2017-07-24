@@ -23,6 +23,7 @@
         <mapping class="agilemeetings.model.Rol" />
         <mapping class="agilemeetings.model.RolPersona" />
         <mapping class="agilemeetings.model.Sprint" />
+        <mapping class="agilemeetings.model.Tarjeta" />
         <mapping class="agilemeetings.model.TipoJuego" />
         <mapping class="agilemeetings.model.TipoReunion" />
         <mapping class="agilemeetings.model.User" />
