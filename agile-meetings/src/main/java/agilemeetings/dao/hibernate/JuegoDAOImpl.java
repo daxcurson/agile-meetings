@@ -40,4 +40,10 @@ public class JuegoDAOImpl implements JuegoDAO
 	{
 		return (Juego) sessionFactory.getCurrentSession().createQuery("from Juego where id="+juegoId).getSingleResult();
 	}
+
+	@Override
+	public void grabar(Juego juego) 
+	{
+		sessionFactory.getCurrentSession().saveOrUpdate(juego);
+	}
 }

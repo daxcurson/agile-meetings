@@ -367,6 +367,12 @@
 			<url>http://repo.maven.apache.org/maven2/</url>
 			<layout>default</layout>
 		</repository>
+		<repository>
+			<id>mvnrepository.com</id>
+			<name>MVN Repository</name>
+			<url>http://mvnrepository.com</url>
+			<layout>default</layout>
+		</repository>
 	</repositories>
 	<organization>
 		<name>Strellis.com.ar projects</name>

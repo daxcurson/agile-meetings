@@ -83,6 +83,13 @@
     <definition name="juego_mad_sad_glad" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/participar.jsp" />
     </definition>
+    <definition name="juego_mad_sad_glad_agregar_tarjeta" extends="base.definition">
+    	<put-attribute name="content">
+    		<definition template="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/agregar_tarjeta.jsp">
+    			<put-attribute name="form_tarjeta" value="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/form_tarjeta.jsp"/>
+    		</definition>
+    	</put-attribute>
+    </definition>
     <definition name="permisos_index" extends="base.definition">
     	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/index.jsp"/>
     </definition>

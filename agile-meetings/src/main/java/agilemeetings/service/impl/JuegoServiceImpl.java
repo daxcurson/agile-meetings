@@ -13,6 +13,8 @@ import agilemeetings.dao.JuegoDAO;
 import agilemeetings.dao.TipoJuegoDAO;
 import agilemeetings.model.EstadoJuego;
 import agilemeetings.model.Juego;
+import agilemeetings.model.MadSadGlad;
+import agilemeetings.model.Tarjeta;
 import agilemeetings.model.TipoJuego;
 import agilemeetings.service.JuegoService;
 
@@ -63,5 +65,12 @@ public class JuegoServiceImpl implements JuegoService
 	public Juego getJuegoById(int juegoId) 
 	{
 		return juegoDAO.getById(juegoId);
+	}
+	@Override
+	public void agregarTarjeta(Tarjeta tarjeta,MadSadGlad juego) 
+	{
+		juego.getTarjetas().add(tarjeta);
+		tarjeta.setJuego(juego);
+		juegoDAO.grabar(juego);
 	}
 }

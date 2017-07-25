@@ -9,4 +9,5 @@ public interface JuegoDAO
 	void add(Juego juego);
 	List<Juego> listarJuegosReunion(Integer reunionId);
 	Juego getById(int juegoId);
+	void grabar(Juego juego);
 }
