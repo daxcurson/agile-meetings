@@ -4,6 +4,8 @@ import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import agilemeetings.model.validacion.PasswordsEqualConstraint;
 
 @Entity
@@ -29,6 +31,7 @@ public class User
 	private String confirm_password;
 	private boolean enabled;
 	@OneToOne(targetEntity=Persona.class,cascade={CascadeType.ALL},mappedBy="user")
+	@JsonBackReference
 	private Persona persona;
 
 	@OneToOne

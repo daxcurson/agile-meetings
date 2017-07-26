@@ -1,5 +1,6 @@
 package agilemeetings.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
@@ -16,7 +17,7 @@ public class MadSadGlad extends Juego
 	@OneToMany(targetEntity=Tarjeta.class,
 	mappedBy="juego",fetch=FetchType.LAZY,orphanRemoval=true)
 	@Cascade(value={org.hibernate.annotations.CascadeType.ALL})
-	private List<Tarjeta> tarjetas;
+	private List<Tarjeta> tarjetas=new LinkedList<Tarjeta>();
 
 	public List<Tarjeta> getTarjetas() {
 		return tarjetas;

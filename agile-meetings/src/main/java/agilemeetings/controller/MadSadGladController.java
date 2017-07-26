@@ -37,7 +37,7 @@ import agilemeetings.service.JuegoService;
 @DescripcionClase("Juego: Mad, Sad, Glad")
 public class MadSadGladController extends AppController
 {
-	private static Logger log=LogManager.getLogger(JuegosController.class);
+	private static Logger log=LogManager.getLogger(MadSadGladController.class);
 	@Autowired
 	private JuegoService juegoService;
 	
@@ -54,7 +54,7 @@ public class MadSadGladController extends AppController
 	}
 	
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_JUEGOS_PARTICIPAR')")
-	@RequestMapping(value="/add_tarjeta/{juegoId}",method=RequestMethod.GET)
+	@RequestMapping(value="/agregar_tarjeta/{juegoId}",method=RequestMethod.GET)
 	public ModelAndView mostrarFormAgregarTarjeta(@PathVariable("juegoId") int juegoId,Model model)
 	{
 		ModelAndView modelo=this.cargarFormTarjeta("juego_mad_sad_glad_agregar_tarjeta",new Tarjeta());
@@ -62,7 +62,7 @@ public class MadSadGladController extends AppController
 		return modelo;
 	}
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_JUEGOS_PARTICIPAR')")
-	@RequestMapping(value = "/add_tarjeta/{juegoId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/agregar_tarjeta/{juegoId}", method = RequestMethod.POST)
 	public ModelAndView agregarTarjeta(@PathVariable("juegoId") int juegoId,
 			@Valid @ModelAttribute("tarjeta")
 	Tarjeta tarjeta,
@@ -82,7 +82,7 @@ public class MadSadGladController extends AppController
 		}
 		else
 		{
-			ModelAndView modelo=new ModelAndView("redirect:/proyectos/index");
+			ModelAndView modelo=new ModelAndView("redirect:/juegos/participar/"+juego.getId());
 			try
 			{
 				juegoService.agregarTarjeta(tarjeta,juego);
@@ -91,6 +91,7 @@ public class MadSadGladController extends AppController
 			catch(Exception e)
 			{
 				model.addAttribute("message","Algo horrible ha ocurrido...");
+				log.trace("Error: "+e.getMessage());
 				modelo=this.cargarFormTarjeta("juego_mad_sad_glad_agregar_tarjeta",tarjeta);
 			}
 			return modelo;

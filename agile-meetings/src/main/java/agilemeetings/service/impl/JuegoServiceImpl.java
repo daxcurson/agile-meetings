@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import agilemeetings.dao.EstadoJuegoDAO;
 import agilemeetings.dao.JuegoDAO;
+import agilemeetings.dao.TarjetaDAO;
 import agilemeetings.dao.TipoJuegoDAO;
 import agilemeetings.model.EstadoJuego;
 import agilemeetings.model.Juego;
@@ -28,6 +29,8 @@ public class JuegoServiceImpl implements JuegoService
 	private JuegoDAO juegoDAO;
 	@Autowired
 	private EstadoJuegoDAO estadoJuegoDAO;
+	@Autowired
+	private TarjetaDAO tarjetaDAO;
 	
 	@Override
 	public TipoJuego getTipoJuegoById(int parseInt) 
@@ -69,8 +72,7 @@ public class JuegoServiceImpl implements JuegoService
 	@Override
 	public void agregarTarjeta(Tarjeta tarjeta,MadSadGlad juego) 
 	{
-		juego.getTarjetas().add(tarjeta);
 		tarjeta.setJuego(juego);
-		juegoDAO.grabar(juego);
+		tarjetaDAO.grabar(tarjeta);
 	}
 }

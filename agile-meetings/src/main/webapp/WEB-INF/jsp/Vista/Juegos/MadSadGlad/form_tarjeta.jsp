@@ -11,11 +11,11 @@
 	</div>
 	<div class="form-group">
 		<label for="estado">Mad, glad, o sad???</label>
-		<form:select path="proyecto" id="ReunionProyecto" class="form-control">
+		<form:select path="estado" id="ReunionProyecto" class="form-control">
 		<form:option value="MAD">Mad</form:option>
 		<form:option value="SAD">Sad</form:option>
 		<form:option value="GLAD">Glad</form:option>
-		<form:errors path="proyecto"/>
+		<form:errors path="estado"/>
 		</form:select>
 		
 	</div>
