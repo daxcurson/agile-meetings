@@ -1,6 +1,3 @@
-<%
-agilemeetings.model.Tarjeta t=iterator.next();
-%>
 <div class="card horizontal">
 	<div class="card-image">
 		<img src="https://lorempixel.com/100/190/nature/6">
@@ -9,7 +6,7 @@ agilemeetings.model.Tarjeta t=iterator.next();
 		<div class="card-content">
 			<p>
 			<%
-			
+			out.println(request.getParameter("texto"));
 			%>
 			</p>
 		</div>

@@ -19,13 +19,13 @@ cosas te hicieron sentir triste (Sad) o te enloquecieron (Mad) en este proyecto.
 <div class="container-fluid cards-row">
 <%
 java.util.List<agilemeetings.model.Tarjeta> mad=new java.util.LinkedList<agilemeetings.model.Tarjeta>();
-if(pageContext.getAttribute("mad") != null)
+if(pageContext.getRequest().getAttribute("mad") != null)
 	mad=(java.util.List<agilemeetings.model.Tarjeta>) request.getAttribute("mad");
 java.util.List<agilemeetings.model.Tarjeta> sad=new java.util.LinkedList<agilemeetings.model.Tarjeta>();
-if(pageContext.getAttribute("sad") != null)
+if(pageContext.getRequest().getAttribute("sad") != null)
 	sad=(java.util.List<agilemeetings.model.Tarjeta>) request.getAttribute("sad");
 java.util.List<agilemeetings.model.Tarjeta> glad=new java.util.LinkedList<agilemeetings.model.Tarjeta>();
-if(pageContext.getAttribute("glad") != null)
+if(pageContext.getRequest().getAttribute("glad") != null)
 	glad=(java.util.List<agilemeetings.model.Tarjeta>) request.getAttribute("glad");
 // Ahora construyo iteradores para los 3.
 java.util.Iterator<agilemeetings.model.Tarjeta> iteratorMad=mad.iterator();
@@ -52,9 +52,10 @@ while(iteratorMad.hasNext() || iteratorSad.hasNext() || iteratorGlad.hasNext())
 			<%
 			if(iteratorMad.hasNext())
 			{
+				agilemeetings.model.Tarjeta t=iteratorMad.next();
 			%>
 			<jsp:include page="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/tarjeta_view.jsp">
-				<jsp:param name="iterator" value="iteratorMad"/>
+				<jsp:param name="texto" value="<%=t.getTexto() %>"/>
 			</jsp:include>
 			<%
 			}
@@ -64,9 +65,10 @@ while(iteratorMad.hasNext() || iteratorSad.hasNext() || iteratorGlad.hasNext())
 			<%
 			if(iteratorSad.hasNext())
 			{
+				agilemeetings.model.Tarjeta t=iteratorSad.next();
 			%>
 			<jsp:include page="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/tarjeta_view.jsp">
-				<jsp:param name="iterator" value="iteratorMad"/>
+				<jsp:param name="texto" value="<%=t.getTexto() %>"/>
 			</jsp:include>
 			<%
 			}
@@ -76,9 +78,10 @@ while(iteratorMad.hasNext() || iteratorSad.hasNext() || iteratorGlad.hasNext())
 			<%
 			if(iteratorGlad.hasNext())
 			{
+				agilemeetings.model.Tarjeta t=iteratorGlad.next();
 			%>
 			<jsp:include page="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/tarjeta_view.jsp">
-				<jsp:param name="iterator" value="iteratorMad"/>
+				<jsp:param name="texto" value="<%=t.getTexto() %>"/>
 			</jsp:include>
 			<%
 			}

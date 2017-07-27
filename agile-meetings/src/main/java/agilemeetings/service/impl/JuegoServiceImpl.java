@@ -73,8 +73,6 @@ public class JuegoServiceImpl implements JuegoService
 	@Override
 	public void agregarTarjeta(Tarjeta tarjeta,MadSadGlad juego) 
 	{
-		Iterator<Tarjeta> t=juego.getTarjetas().iterator();
-		t.hasNext();
 		tarjeta.setJuego(juego);
 		tarjetaDAO.grabar(tarjeta);
 	}
