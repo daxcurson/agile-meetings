@@ -1,5 +1,6 @@
 package agilemeetings.service.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -72,6 +73,8 @@ public class JuegoServiceImpl implements JuegoService
 	@Override
 	public void agregarTarjeta(Tarjeta tarjeta,MadSadGlad juego) 
 	{
+		Iterator<Tarjeta> t=juego.getTarjetas().iterator();
+		t.hasNext();
 		tarjeta.setJuego(juego);
 		tarjetaDAO.grabar(tarjeta);
 	}

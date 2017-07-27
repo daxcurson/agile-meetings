@@ -17,6 +17,21 @@ cosas te hicieron sentir triste (Sad) o te enloquecieron (Mad) en este proyecto.
 <a href="${pageContext.request.contextPath}/mad_sad_glad/agregar_tarjeta/${juego.id}">Agregar Tarjeta</a>
 
 <div class="container-fluid cards-row">
+<%
+java.util.List<agilemeetings.model.Tarjeta> mad=new java.util.LinkedList<agilemeetings.model.Tarjeta>();
+if(pageContext.getAttribute("mad") != null)
+	mad=(java.util.List<agilemeetings.model.Tarjeta>) request.getAttribute("mad");
+java.util.List<agilemeetings.model.Tarjeta> sad=new java.util.LinkedList<agilemeetings.model.Tarjeta>();
+if(pageContext.getAttribute("sad") != null)
+	sad=(java.util.List<agilemeetings.model.Tarjeta>) request.getAttribute("sad");
+java.util.List<agilemeetings.model.Tarjeta> glad=new java.util.LinkedList<agilemeetings.model.Tarjeta>();
+if(pageContext.getAttribute("glad") != null)
+	glad=(java.util.List<agilemeetings.model.Tarjeta>) request.getAttribute("glad");
+// Ahora construyo iteradores para los 3.
+java.util.Iterator<agilemeetings.model.Tarjeta> iteratorMad=mad.iterator();
+java.util.Iterator<agilemeetings.model.Tarjeta> iteratorSad=mad.iterator();
+java.util.Iterator<agilemeetings.model.Tarjeta> iteratorGlad=mad.iterator();
+%>
 		<div class="row">
 			<div class="col-md-4">
 				<img src="${pageContext.request.contextPath}/img/mad-sad-glad/mad.jpg" height="300" width="300">
@@ -28,13 +43,49 @@ cosas te hicieron sentir triste (Sad) o te enloquecieron (Mad) en este proyecto.
 				<img src="${pageContext.request.contextPath}/img/mad-sad-glad/glad.jpg" height="300" width="300">
 			</div>
 		</div>
+<%
+while(iteratorMad.hasNext() || iteratorSad.hasNext() || iteratorGlad.hasNext())
+{
+%>
 		<div class="row">
 			<div class="col-md-4">
-			<%@include file="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/tarjeta_view.jsp" %>
+			<%
+			if(iteratorMad.hasNext())
+			{
+			%>
+			<jsp:include page="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/tarjeta_view.jsp">
+				<jsp:param name="iterator" value="iteratorMad"/>
+			</jsp:include>
+			<%
+			}
+			%>
 			</div>
 			<div class="col-md-4">
+			<%
+			if(iteratorSad.hasNext())
+			{
+			%>
+			<jsp:include page="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/tarjeta_view.jsp">
+				<jsp:param name="iterator" value="iteratorMad"/>
+			</jsp:include>
+			<%
+			}
+			%>
 			</div>
 			<div class="col-md-4">
+			<%
+			if(iteratorGlad.hasNext())
+			{
+			%>
+			<jsp:include page="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/tarjeta_view.jsp">
+				<jsp:param name="iterator" value="iteratorMad"/>
+			</jsp:include>
+			<%
+			}
+			%>
 			</div>
 		</div>
+<%
+}
+%>
 </div>

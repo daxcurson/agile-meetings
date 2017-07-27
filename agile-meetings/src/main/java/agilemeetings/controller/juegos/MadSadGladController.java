@@ -1,4 +1,4 @@
-package agilemeetings.controller;
+package agilemeetings.controller.juegos;
 
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import agilemeetings.controller.AppController;
 import agilemeetings.documentation.DescripcionClase;
 import agilemeetings.model.MadSadGlad;
 import agilemeetings.model.Tarjeta;

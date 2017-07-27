@@ -41,4 +41,25 @@ public class TarjetaDAOImpl implements TarjetaDAO
 	{
 		sessionFactory.getCurrentSession().saveOrUpdate(t);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Tarjeta> getTarjetasMad(int juegoId) 
+	{
+		return sessionFactory.getCurrentSession().createQuery("from Tarjeta where estado='MAD' and juego.id="+juegoId).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Tarjeta> getTarjetasSad(int juegoId) 
+	{
+		return sessionFactory.getCurrentSession().createQuery("from Tarjeta where estado='SAD' and juego.id="+juegoId).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Tarjeta> getTarjetasGlad(int juegoId) 
+	{
+		return sessionFactory.getCurrentSession().createQuery("from Tarjeta where estado='GLAD' and juego.id="+juegoId).getResultList();
+	}
 }
