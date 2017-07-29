@@ -1,6 +1,5 @@
 package agilemeetings.service.impl;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
