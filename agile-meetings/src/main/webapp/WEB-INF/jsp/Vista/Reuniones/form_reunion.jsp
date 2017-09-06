@@ -30,7 +30,7 @@
 		<form:errors path="participantes"/>
 	</div>	
 	<div class="form-group">
-		<label for="fecha_comienzo">Fecha de Comienzo</label>
+		<label for="fecha_comienzo">Fecha de Reuni&oacute;n</label>
 		<form:input path="fecha_comienzo" id="ReunionFechaComienzo" class="form-control" />
 		<form:errors path="fecha_comienzo"/>
 	</div>
