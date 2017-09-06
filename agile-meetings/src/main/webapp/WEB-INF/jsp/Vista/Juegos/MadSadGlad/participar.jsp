@@ -29,8 +29,8 @@ if(pageContext.getRequest().getAttribute("glad") != null)
 	glad=(java.util.List<agilemeetings.model.Tarjeta>) request.getAttribute("glad");
 // Ahora construyo iteradores para los 3.
 java.util.Iterator<agilemeetings.model.Tarjeta> iteratorMad=mad.iterator();
-java.util.Iterator<agilemeetings.model.Tarjeta> iteratorSad=mad.iterator();
-java.util.Iterator<agilemeetings.model.Tarjeta> iteratorGlad=mad.iterator();
+java.util.Iterator<agilemeetings.model.Tarjeta> iteratorSad=sad.iterator();
+java.util.Iterator<agilemeetings.model.Tarjeta> iteratorGlad=glad.iterator();
 %>
 		<div class="row">
 			<div class="col-md-4">
