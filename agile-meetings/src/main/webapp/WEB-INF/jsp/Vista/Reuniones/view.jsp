@@ -18,6 +18,7 @@
 </c:forEach></td></tr>
 <tr><td>Tipo de Reuni&oacute;n</td><td><c:out value="${reunion.tipo_reunion.nombre}"/></td></tr>
 <tr><td>Fecha</td><td><c:out value="${reunion.fecha_comienzo}"/></td></tr>
+<tr><td>Sprint</td><td><c:out value="${reunion.sprint.descripcion}"/></td></tr>
 <tr><td>Asunto</td><td><c:out value="${reunion.asunto}"/></td></tr>
 <tr><td>Resumen de la Reuni&oacute;n</td><td><c:out value="${reunion.resumen}"/></td></tr>
 <tr><td>Acciones a realizar luego de la reuni&oacute;n</td><td><c:out value="${reunion.acciones}"/></td></tr>

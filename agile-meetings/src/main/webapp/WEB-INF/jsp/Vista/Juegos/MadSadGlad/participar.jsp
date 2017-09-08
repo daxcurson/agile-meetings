@@ -56,6 +56,7 @@ while(iteratorMad.hasNext() || iteratorSad.hasNext() || iteratorGlad.hasNext())
 			%>
 			<jsp:include page="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/tarjeta_view.jsp">
 				<jsp:param name="texto" value="<%=t.getTexto() %>"/>
+				<jsp:param name="imagen" value="${pageContext.request.contextPath}/img/mad-sad-glad/m.png"/>
 			</jsp:include>
 			<%
 			}
@@ -69,6 +70,7 @@ while(iteratorMad.hasNext() || iteratorSad.hasNext() || iteratorGlad.hasNext())
 			%>
 			<jsp:include page="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/tarjeta_view.jsp">
 				<jsp:param name="texto" value="<%=t.getTexto() %>"/>
+				<jsp:param name="imagen" value="${pageContext.request.contextPath}/img/mad-sad-glad/s.png"/>
 			</jsp:include>
 			<%
 			}
@@ -82,6 +84,7 @@ while(iteratorMad.hasNext() || iteratorSad.hasNext() || iteratorGlad.hasNext())
 			%>
 			<jsp:include page="/WEB-INF/jsp/Vista/Juegos/MadSadGlad/tarjeta_view.jsp">
 				<jsp:param name="texto" value="<%=t.getTexto() %>"/>
+				<jsp:param name="imagen" value="${pageContext.request.contextPath}/img/mad-sad-glad/g.png"/>
 			</jsp:include>
 			<%
 			}

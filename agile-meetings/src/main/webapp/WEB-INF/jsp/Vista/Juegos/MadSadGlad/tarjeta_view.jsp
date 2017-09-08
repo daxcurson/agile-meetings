@@ -1,6 +1,6 @@
 <div class="card horizontal">
 	<div class="card-image">
-		<img src="https://lorempixel.com/100/190/nature/6">
+		<img src="<% out.print(request.getParameter("imagen")); %>">
 	</div>
 	<div class="card-stacked">
 		<div class="card-content">
