@@ -18,6 +18,8 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="sprints")
 public class Sprint 
@@ -74,6 +76,7 @@ public class Sprint
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	@JsonBackReference
 	public Proyecto getProyecto() {
 		return proyecto;
 	}

@@ -37,17 +37,20 @@ import agilemeetings.model.Persona;
 import agilemeetings.model.PersonaReunion;
 import agilemeetings.model.Proyecto;
 import agilemeetings.model.Reunion;
+import agilemeetings.model.Sprint;
 import agilemeetings.model.TipoJuego;
 import agilemeetings.model.TipoReunion;
 import agilemeetings.model.propertyeditor.EstadoJuegoEditor;
 import agilemeetings.model.propertyeditor.PersonaReunionEditor;
 import agilemeetings.model.propertyeditor.ProyectoEditor;
+import agilemeetings.model.propertyeditor.SprintEditor;
 import agilemeetings.model.propertyeditor.TipoJuegoEditor;
 import agilemeetings.model.propertyeditor.TipoReunionEditor;
 import agilemeetings.service.JuegoService;
 import agilemeetings.service.PersonaService;
 import agilemeetings.service.ProyectoService;
 import agilemeetings.service.ReunionService;
+import agilemeetings.service.SprintService;
 import agilemeetings.service.UserDetails;
 
 @Controller
@@ -65,6 +68,8 @@ public class ReunionesController extends AppController
 	private PersonaService personaService;
 	@Autowired
 	private JuegoService juegoService;
+	@Autowired
+	private SprintService sprintService;
 	
 	
 	@InitBinder
@@ -78,6 +83,7 @@ public class ReunionesController extends AppController
 		binder.registerCustomEditor(PersonaReunion.class, new PersonaReunionEditor(personaService));
 		binder.registerCustomEditor(TipoJuego.class, new TipoJuegoEditor(juegoService));
 		binder.registerCustomEditor(EstadoJuego.class, new EstadoJuegoEditor(juegoService));
+		binder.registerCustomEditor(Sprint.class, new SprintEditor(sprintService));
 	}
 	
 	@RequestMapping({"/","/index"})
@@ -106,6 +112,7 @@ public class ReunionesController extends AppController
 		ModelAndView modelo=new ModelAndView(vista);
 		List<Proyecto> proyectos=proyectoService.listarProyectos();
 		List<TipoReunion> tipos_reunion=reunionService.listarTiposReunion();
+		
 		modelo.addObject("proyectos",proyectos);
 		modelo.addObject("tipos_reunion",tipos_reunion);
 		modelo.addObject("reunion",reunion);

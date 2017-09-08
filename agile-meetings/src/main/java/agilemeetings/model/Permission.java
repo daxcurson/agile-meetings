@@ -1,13 +1,20 @@
 package agilemeetings.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="group_permission")
-public class Permission 
+public class Permission implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9085594739925477386L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")

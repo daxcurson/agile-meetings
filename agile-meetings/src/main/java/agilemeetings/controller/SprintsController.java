@@ -97,6 +97,14 @@ public class SprintsController extends AppController
 		modelo.addObject("sprints",sprintService.listarSprints(p));
 		return modelo;
 	}
+	@RequestMapping("/listar_ajax/{proyectoId}")
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_SPRINTS_MOSTRAR_MENU')")
+	public @ResponseBody List<Sprint> listarSprintsAjax(@PathVariable("proyectoId") Integer proyectoId)
+	{
+		return sprintService.listarSprints(proyectoService.getProyectoById(proyectoId));
+	}
+	
+	
 	private ModelAndView cargarFormSprint(String vista,Sprint sprint)
 	{
 		ModelAndView modelo=new ModelAndView(vista);

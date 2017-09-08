@@ -2,6 +2,8 @@ package agilemeetings.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="personas_reuniones")
 public class PersonaReunion 
@@ -29,6 +31,7 @@ public class PersonaReunion
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
+	@JsonBackReference
 	public Reunion getReunion() {
 		return reunion;
 	}

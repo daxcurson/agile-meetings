@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="reuniones")
 public class Reunion 
@@ -25,6 +27,9 @@ public class Reunion
 	@ManyToOne
 	@JoinColumn(name="proyecto_id")
 	private Proyecto proyecto;
+	@ManyToOne
+	@JoinColumn(name="sprint_id")
+	private Sprint sprint;
 	@OneToMany(targetEntity=Juego.class,cascade={CascadeType.ALL},
 	mappedBy="reunion",fetch=FetchType.LAZY)
 	private List<Juego> juegos;
@@ -60,6 +65,7 @@ public class Reunion
 	public void setParticipantes(List<PersonaReunion> participantes) {
 		this.participantes = participantes;
 	}
+	@JsonBackReference
 	public Proyecto getProyecto() {
 		return proyecto;
 	}
@@ -95,5 +101,12 @@ public class Reunion
 	}
 	public void setAcciones(String acciones) {
 		this.acciones = acciones;
+	}
+	@JsonBackReference
+	public Sprint getSprint() {
+		return sprint;
+	}
+	public void setSprint(Sprint sprint) {
+		this.sprint = sprint;
 	}
 }

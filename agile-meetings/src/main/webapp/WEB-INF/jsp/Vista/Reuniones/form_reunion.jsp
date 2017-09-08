@@ -28,7 +28,13 @@
 		<form:select data-placeholder="Elija miembros..." path="participantes" id="ReunionParticipantes" class="form-control" multiple="true">
 		</form:select>
 		<form:errors path="participantes"/>
-	</div>	
+	</div>
+	<div class="form-group">
+		<label for="sprint">Sprint</label>
+		<form:select path="sprint" id="ReunionSprint" class="form-control">
+		</form:select>
+		<form:errors path="tipo_reunion"/>
+	</div>
 	<div class="form-group">
 		<label for="fecha_comienzo">Fecha de Reuni&oacute;n</label>
 		<form:input path="fecha_comienzo" id="ReunionFechaComienzo" class="form-control" />
